@@ -436,3 +436,12 @@ footer .brand strong{color:#fff}
 
 .contact-wa-button{display:inline-block;margin-top:22px;text-decoration:none}
 @media(max-width:600px){.contact-wa-button{width:100%;text-align:center}}
+
+/* Compact contact section */
+.contact{padding-top:42px;padding-bottom:42px}
+.contact h2{margin-bottom:10px}
+.contact p{margin-bottom:0}
+@media(max-width:600px){
+ .contact{padding:38px 18px}
+ .contact-wa-button{margin-top:18px}
+}
