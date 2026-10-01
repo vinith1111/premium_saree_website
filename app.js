@@ -115,58 +115,46 @@ function setSiteTheme(theme){
  }).catch(e=>console.warn("Theme sync unavailable",e));
 }
 function applyTheme(){
- const theme=settings.theme==="light"?"light":"dark";
+ const theme="light";
  const root=document.documentElement;
- root.dataset.theme=theme;
- root.style.backgroundColor=theme==="light"?"#ffffff":"#171310";
- root.style.colorScheme=theme;
- document.body?.setAttribute("data-theme",theme);
- document.body?.classList.toggle("theme-light",theme==="light");
- document.body?.classList.toggle("theme-dark",theme==="dark");
+ root.dataset.theme="light";
+ root.style.backgroundColor="#ffffff";
+ root.style.colorScheme="light";
+ document.body?.setAttribute("data-theme","light");
+ document.body?.classList.add("theme-light");
+ document.body?.classList.remove("theme-dark");
 
- // Explicit variables make the theme deterministic even if a cached stylesheet is present.
- const vars=theme==="light" ? {
-   "--bg":"#ffffff","--surface":"#ffffff","--surface-2":"#faf8f6",
-   "--text":"#211b1d","--muted":"#6f6668","--wine":"#74152f",
-   "--wine-2":"#8e304b","--rose":"#a65c72","--line":"#e3ddda",
-   "--gold":"#967546","--green":"#25d366","--white":"#ffffff"
- } : {
-   "--bg":"#171310","--surface":"#211a18","--surface-2":"#281e1d",
-   "--text":"#f3e9e8","--muted":"#b9abad","--wine":"#680018",
-   "--wine-2":"#8a2340","--rose":"#d9a9b7","--line":"#4b403d",
-   "--gold":"#b99a6a","--green":"#25d366","--white":"#ffffff"
+ const vars={
+   "--bg":"#ffffff","--surface":"#ffffff","--surface-2":"#f7f1ea",
+   "--text":"#241d1b","--muted":"#6b625e","--wine":"#6b1020",
+   "--wine-2":"#4e0714","--rose":"#9b6874","--line":"#ded5cc",
+   "--gold":"#b08a57","--green":"#25d366","--white":"#ffffff"
  };
  Object.entries(vars).forEach(([key,value])=>root.style.setProperty(key,value));
 
- // Hard-apply the public theme to the actual storefront surfaces.
- const light=theme==="light";
- const bg=light?"#ffffff":"#171310";
- const surface=light?"#ffffff":"#211a18";
- const soft=light?"#faf7f4":"#281e1d";
- const text=light?"#211b1d":"#f3e9e8";
- const muted=light?"#6f6668":"#b9abad";
- const line=light?"#e3ddda":"#4b403d";
- const wine=light?"#74152f":"#680018";
- const surfaces=[
+ const elements=[
    document.body,document.querySelector(".header"),document.querySelector("main"),
    document.querySelector(".hero"),document.querySelector(".hero-simple"),
    document.querySelector(".products"),document.querySelector(".location-section"),
-   document.querySelector(".contact"),document.querySelector("footer"),
-   document.querySelector("#mainNav.mobile-open")
+   document.querySelector(".contact"),document.querySelector("footer")
  ].filter(Boolean);
- surfaces.forEach(el=>{el.style.setProperty("background-color",light && (el===document.querySelector(".location-section")||el===document.querySelector(".contact"))?soft:bg,"important");el.style.setProperty("color",text,"important");});
- document.querySelectorAll(".product-card,.product-image,.product-body,.location-card,.premium-search").forEach(el=>{
-   el.style.setProperty("background-color",surface,"important");
-   el.style.setProperty("color",text,"important");
-   el.style.setProperty("border-color",line,"important");
+ elements.forEach(el=>{
+   el.style.setProperty("background-color","#ffffff","important");
+   el.style.setProperty("color","#241d1b","important");
  });
- document.querySelectorAll(".hero-simple h1,.section-title h2,.location-card h2,.contact h2,.product-body h3,.price,.brand,.brand strong").forEach(el=>el.style.setProperty("color",text,"important"));
- document.querySelectorAll(".hero-simple p,.subline,.location-card p,.contact p,.footer-links a,.muted").forEach(el=>el.style.setProperty("color",muted,"important"));
- document.querySelectorAll(".primary,.catalog-category-tabs button.active").forEach(el=>{el.style.setProperty("background-color",wine,"important");el.style.setProperty("color","#fff","important");});
-
+ document.querySelectorAll(".product-card,.product-image,.product-body,.location-card,.premium-search").forEach(el=>{
+   el.style.setProperty("background-color","#ffffff","important");
+   el.style.setProperty("color","#241d1b","important");
+   el.style.setProperty("border-color","#ded5cc","important");
+ });
+ document.querySelectorAll(".hero-simple h1,.section-title h2,.location-card h2,.contact h2,.product-body h3,.price,.brand,.brand strong").forEach(el=>el.style.setProperty("color","#241d1b","important"));
+ document.querySelectorAll(".hero-simple p,.subline,.location-card p,.contact p,.footer-links a,.muted").forEach(el=>el.style.setProperty("color","#6b625e","important"));
+ document.querySelectorAll(".primary,.catalog-category-tabs button.active").forEach(el=>{
+   el.style.setProperty("background-color","#6b1020","important");
+   el.style.setProperty("color","#ffffff","important");
+ });
  const siteTheme=document.getElementById("siteTheme");
-
- if(siteTheme)siteTheme.value=theme;
+ if(siteTheme)siteTheme.value="light";
 }
 function render(){
  applyTheme();
