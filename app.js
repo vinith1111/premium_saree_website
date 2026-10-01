@@ -32,7 +32,7 @@ render();
 let catalogPage=1;
 function catalogPageSize(){return window.innerWidth<=600?12:24}
 function render(){
- const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const searchEl=document.getElementById("search"); const q=(searchEl?.value||"").toLowerCase(); const clearBtn=document.getElementById("searchClear"); if(clearBtn)clearBtn.classList.toggle("hidden",!q);
  const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];
  const current=window.selectedCategory||"";
  const filtered=sarees.filter(s=>(!current||String(s.category||"").toLowerCase()===current.toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
@@ -144,3 +144,5 @@ if(status){status.textContent="Could not save online. Please try again.";status.
 }
 loadCatalog();syncSharedSettings();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}
+
+function clearCatalogSearch(){const el=document.getElementById("search");if(el){el.value="";catalogPage=1;render();el.focus()}}
