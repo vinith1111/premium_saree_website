@@ -1,11 +1,11 @@
 /* Footer */
 /* Footer */
-footer{background:#10070a;border-top:1px solid #2f2224;padding:34px max(24px,6vw);display:flex;justify-content:space-between;align-items:center;gap:24px}
+footer{background:var(--surface-2);border-top:1px solid var(--line);padding:34px max(24px,6vw);display:flex;justify-content:space-between;align-items:center;gap:24px}
 .footer-brand{flex:0 1 auto}
-footer .brand strong{color:#e9dfe0}
+footer .brand strong{color:var(--text)}
 .footer-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
-.footer-links a{color:#9d9294;text-decoration:none;font-size:13px}
-.footer-links a:hover{color:#f0e7e8}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:13px}
+.footer-links a:hover{color:var(--text)}
 .instagram-link{display:inline-flex!important;align-items:center;gap:7px}
 .instagram-icon{width:18px;height:18px}
 
