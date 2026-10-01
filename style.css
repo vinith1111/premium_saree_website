@@ -84,3 +84,37 @@
 #adminModal .field-help{font-size:12px;line-height:1.35}
 #adminModal .settings-heading p{font-size:13px;line-height:1.4;margin:4px 0 10px}
 #adminModal .btn{cursor:pointer}
+
+/* Mobile-friendly catalogue and top-level categories */
+.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}
+.category-grid button{min-height:210px}
+.category-grid .category-sarees{background:linear-gradient(145deg,#b9868f,#704b56)}
+.category-grid .category-dresses{background:linear-gradient(145deg,#d5ad8d,#9b6857)}
+@media(max-width:600px){
+  .nav{gap:8px}
+  .brand strong{font-size:18px}
+  .brand-mark{width:34px;height:34px;font-size:16px}
+  .search-btn{font-size:20px}
+  .hero-simple .hero-content h1{font-size:42px}
+  .hero-simple .hero-content p{font-size:13px}
+  .category-grid{grid-template-columns:1fr;gap:10px;margin-top:20px}
+  .category-grid button{height:145px;min-height:145px;padding:18px}
+  .category-grid span{font-size:27px}
+  .section-title{align-items:flex-start;gap:12px}
+  .section-title h2{font-size:34px}
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .product-image{height:230px}
+  .product-body{padding:11px}
+  .product-body h3{font-size:17px;line-height:1.2}
+  .subline{font-size:9px}
+  .price{font-size:12px}
+  .toolbar{gap:10px}
+  .searchbox{min-height:44px}
+  .toolbar select{height:44px}
+  .contact{padding:55px 20px}
+  footer{padding:35px 20px}
+}
+@media(max-width:380px){
+  .product-grid{grid-template-columns:1fr}
+  .product-image{height:300px}
+}
