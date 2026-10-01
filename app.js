@@ -75,7 +75,7 @@ wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:existing;
 settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,about:settings.about||"",footer:""};
-if(!save()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
+if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
 try{
@@ -85,7 +85,7 @@ const remote=await r.json();
 if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
 if(status){status.textContent="✓ Changes saved successfully.";status.className="settings-status success"}
 }catch(e){
-if(status){status.textContent="✓ Saved on this device. Online sync is unavailable.";status.className="settings-status error"}
+if(status){status.textContent="Could not save online. Please try again.";status.className="settings-status error"}
 }
 }
 loadCatalog();syncSharedSettings();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
