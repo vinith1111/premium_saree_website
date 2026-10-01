@@ -1,126 +1,41 @@
-/* Admin */
-.modal{position:fixed;inset:0;z-index:300;background:rgba(8,5,5,.78);padding:16px;overflow:auto}
-.panel{width:min(820px,100%);margin:20px auto;background:#f8f4f1;color:#302a2d;padding:22px;border-radius:8px;box-shadow:0 25px 70px rgba(0,0,0,.45)}
-.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;border-bottom:1px solid #ddd2cd;padding-bottom:14px;margin-bottom:14px}
+/* Admin layout and component structure. Colors live in light-theme.css. */
+.modal{position:fixed;inset:0;z-index:300;padding:16px;overflow:auto}
+.panel{width:min(820px,100%);margin:20px auto;padding:22px;border-radius:8px;box-shadow:0 25px 70px rgba(0,0,0,.45)}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;padding-bottom:14px;margin-bottom:14px}
 .panel h2{font:500 32px/1.1 "Playfair Display";margin:5px 0}
-.close{width:40px;height:40px;border:0;background:transparent;font-size:28px;color:#4c4042;cursor:pointer}
-.panel input,.panel textarea,.panel select{width:100%;padding:10px;border:1px solid #d9cfca;background:#fff;color:#302a2d;margin-top:6px;outline:none}
+.close{width:40px;height:40px;border:0;background:transparent;font-size:28px;cursor:pointer}
+.panel input,.panel textarea,.panel select{width:100%;padding:10px;margin-top:6px;outline:none}
 .panel textarea{min-height:80px}
 .admin-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
-.admin-tabs button{border:1px solid #d5c9c4;background:#fff;padding:9px 12px;cursor:pointer;color:#493d40}
-.admin-item{display:flex;align-items:center;gap:10px;border:1px solid #ddd3ce;background:#fff;padding:9px;margin:7px 0}
+.admin-tabs button{padding:9px 12px;cursor:pointer}
+.admin-item{display:flex;align-items:center;gap:10px;padding:9px;margin:7px 0}
 .admin-item img{width:52px;height:62px;object-fit:cover}
 .admin-item .grow{flex:1;font-size:13px;line-height:1.5}
-.admin-item button{border:1px solid #d5c9c4;background:#fff;padding:7px 9px;cursor:pointer}
-.admin-item .danger{color:#9a2438}
-.admin-pagination{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0;font-size:12px;color:#6f6365}
+.admin-item button{padding:7px 9px;cursor:pointer}
+.admin-item .danger{cursor:pointer}
+.admin-pagination{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0;font-size:12px}
 .form{display:grid;gap:9px}
 .form label{font-size:12px;font-weight:700}
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .preview{width:90px;height:110px;object-fit:cover}
-.settings-card{background:#fff;border:1px solid #ddd3ce;padding:20px}
-.settings-heading{border-bottom:1px solid #ddd3ce;padding-bottom:12px;margin-bottom:16px}
+.settings-card{padding:20px}
+.settings-heading{padding-bottom:12px;margin-bottom:16px}
 .settings-heading h3{font:500 26px "Playfair Display";margin:6px 0}
-.settings-heading p,.field-help{font-size:12px;line-height:1.5;color:#766a6d}
+.settings-heading p,.field-help{font-size:12px;line-height:1.5}
 .settings-form input,.settings-form select{height:42px}
 .phone-field{display:flex}
 .phone-field select{width:82px;margin-right:6px}
 .phone-field input{flex:1}
 .settings-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 .settings-status{min-height:18px;margin-top:10px;font-size:12px}
-.settings-status.success{color:#277548}.settings-status.error{color:#a32d3d}
-
-
 .admin-arrival-status{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
-.admin-arrival-status.is-new{color:#8a2340}
-.admin-arrival-status.is-old{color:#766a6d}
-.arrival-toggle{border:1px solid #cdbfc0;background:#faf7f5;color:#493d40;padding:7px 9px;cursor:pointer;font-size:11px}
-
-/* Admin is intentionally light and isolated from the public dark theme */
-#adminModal{color-scheme:light}
-#adminModal .panel{color:#302a2d}
-#adminModal button{font-family:"DM Sans",sans-serif}
-#adminModal .admin-item button,
-#adminModal .arrival-toggle,
-#adminModal .admin-tabs button,
-#adminModal .admin-pagination .btn{
-  appearance:none!important;
-  -webkit-appearance:none!important;
-  background:#fff!important;
-  color:#493d40!important;
-  border:1px solid #d5c9c4!important;
-  box-shadow:none!important;
-  text-shadow:none!important;
-}
-#adminModal .admin-item button:hover,
-#adminModal .arrival-toggle:hover,
-#adminModal .admin-tabs button:hover{
-  background:#f3ece8!important;
-  color:#302a2d!important;
-  border-color:#bcaeaa!important;
-}
-#adminModal .admin-item .danger{
-  color:#9a2438!important;
-}
-#adminModal .arrival-toggle{
-  white-space:nowrap;
-  font-size:11px;
-  font-weight:600;
-}
-#adminModal .admin-item{
-  color:#302a2d;
-}
-#adminModal .admin-item b{color:#302a2d}
-#adminModal .btn.dark{
-  background:#680018!important;
-  color:#fff!important;
-  border-color:#680018!important;
-}
+.arrival-toggle{padding:7px 9px;cursor:pointer;font-size:11px}
 @media(max-width:600px){
-  #adminModal .admin-item{
-    display:grid;
-    grid-template-columns:46px minmax(0,1fr);
-    align-items:start;
-  }
-  #adminModal .admin-item img{grid-row:1 / span 2}
-  #adminModal .admin-item .grow{min-width:0}
-  #adminModal .admin-item button{
-    min-height:40px;
-    font-size:11px;
-  }
-  #adminModal .arrival-toggle{grid-column:2}
-  #adminModal .admin-item .danger{grid-column:2}
-  #adminModal .admin-item button:not(.arrival-toggle):not(.danger){grid-column:2}
+ #adminModal .admin-item{display:grid;grid-template-columns:46px minmax(0,1fr);align-items:start}
+ #adminModal .admin-item img{grid-row:1 / span 2}
+ #adminModal .admin-item .grow{min-width:0}
+ #adminModal .admin-item button{min-height:40px;font-size:11px}
+ #adminModal .arrival-toggle{grid-column:2}
+ #adminModal .admin-item .danger{grid-column:2}
+ #adminModal .admin-item button:not(.arrival-toggle):not(.danger){grid-column:2}
 }
-
-/* Final admin isolation: never inherit public dark-theme surfaces */
-#adminModal .panel{
-  background:#f8f4f1!important;
-  color:#302a2d!important;
-}
-#adminModal .panel-head{border-color:#ddd2cd!important}
-#adminModal .admin-tabs button{
-  background:#ffffff!important;
-  color:#493d40!important;
-}
-#adminModal .admin-item{
-  background:#ffffff!important;
-  color:#302a2d!important;
-  border-color:#ddd3ce!important;
-}
-#adminModal .admin-item button{
-  background:#ffffff!important;
-  color:#493d40!important;
-}
-#adminModal .admin-item .danger{
-  background:#ffffff!important;
-  color:#9a2438!important;
-}
-#adminModal .arrival-toggle{
-  background:#ffffff!important;
-  color:#493d40!important;
-}
-#adminModal .admin-arrival-status.is-new{color:#8a2340!important}
-#adminModal .admin-arrival-status.is-old{color:#766a6d!important}
-
-
