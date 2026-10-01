@@ -75,4 +75,6 @@
    color:var(--text);
  }
  .header #mainNav.mobile-open a:last-child{border-bottom:0}
+ .header #mainNav.mobile-open .mobile-theme-control{display:flex}
+ .header #mainNav.mobile-open .mobile-admin{display:block!important}
 }
