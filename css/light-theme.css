@@ -1,128 +1,20 @@
-/* Light theme: warm white luxury storefront */
-html[data-theme="light"]{
+/* SRI SAI VANI COLLECTIONS | LIGHT THEME */
+:root,[data-theme="light"]{
   color-scheme:light;
+  --bg:#fffdf9;
+  --surface:#ffffff;
+  --surface-2:#f7f1ea;
+  --text:#241d1b;
+  --muted:#6b625e;
+  --wine:#6b1020;
+  --wine-2:#4e0714;
+  --rose:#9b6874;
+  --line:#ded5cc;
+  --gold:#b08a57;
+  --green:#25d366;
+  --white:#ffffff;
+}
+html[data-theme="light"],html[data-theme="light"] body{
   background:#fffdf9;
-}
-
-html[data-theme="light"] body{
-  background:#fffdf9;
   color:#241d1b;
-}
-
-html[data-theme="light"] .header,
-html[data-theme="light"] main,
-html[data-theme="light"] .hero,
-html[data-theme="light"] .hero-simple,
-html[data-theme="light"] .products,
-html[data-theme="light"] .section,
-html[data-theme="light"] .contact{
-  background:#fffdf9;
-  color:#241d1b;
-}
-
-html[data-theme="light"] footer{
-  background:#f7f1ea;
-  color:#241d1b;
-  border-color:#ded5cc;
-}
-
-html[data-theme="light"] .brand,
-html[data-theme="light"] .brand strong,
-html[data-theme="light"] #mainNav a,
-html[data-theme="light"] h1,
-html[data-theme="light"] h2,
-html[data-theme="light"] h3,
-html[data-theme="light"] .section-title h2,
-html[data-theme="light"] .product-body h3,
-html[data-theme="light"] .price{
-  color:#241d1b;
-}
-
-html[data-theme="light"] p,
-html[data-theme="light"] .subline,
-html[data-theme="light"] .muted,
-html[data-theme="light"] .location-card p,
-html[data-theme="light"] .contact p{
-  color:#6b625e;
-}
-
-html[data-theme="light"] .brand-mark{
-  color:#6b1020;
-  border-color:#b08a57;
-}
-
-html[data-theme="light"] .mobile-menu span{
-  background:#241d1b;
-}
-
-html[data-theme="light"] #mainNav.mobile-open{
-  background:#fffdf9;
-  border-color:#ded5cc;
-  box-shadow:0 18px 45px rgba(36,29,27,.10);
-}
-
-html[data-theme="light"] .premium-search,
-html[data-theme="light"] .premium-search input{
-  background:#ffffff;
-  color:#241d1b;
-}
-
-html[data-theme="light"] .premium-search{
-  border-color:#ded5cc;
-  box-shadow:none;
-}
-
-html[data-theme="light"] .catalog-category-tabs button,
-html[data-theme="light"] .category-btn,
-html[data-theme="light"] .catalog-pagination .btn{
-  background:#ffffff;
-  color:#4d4541;
-  border-color:#ded5cc;
-}
-
-html[data-theme="light"] .catalog-category-tabs button.active,
-html[data-theme="light"] .category-btn.active,
-html[data-theme="light"] .btn.dark,
-html[data-theme="light"] .primary{
-  background:#6b1020;
-  color:#ffffff;
-  border-color:#6b1020;
-}
-
-html[data-theme="light"] .product-card,
-html[data-theme="light"] .product-image,
-html[data-theme="light"] .product-body{
-  background:#ffffff;
-}
-
-html[data-theme="light"] .product-card,
-html[data-theme="light"] .location-card{
-  border-color:#e4ddd7;
-  box-shadow:0 8px 26px rgba(36,29,27,.06);
-}
-
-html[data-theme="light"] .badge{
-  background:#6b1020;
-  color:#ffffff;
-}
-
-html[data-theme="light"] .location-section{
-  background:#f7f1ea;
-}
-
-html[data-theme="light"] .location-card{
-  background:#ffffff;
-}
-
-html[data-theme="light"] footer a{
-  color:#5e5652;
-}
-
-html[data-theme="light"] footer a:hover{
-  color:#6b1020;
-}
-
-/* Keep image viewing focused on the image itself. */
-html[data-theme="light"] .image-modal{
-  background:rgba(15,12,13,.90);
 }
