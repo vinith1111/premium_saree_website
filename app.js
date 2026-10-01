@@ -55,7 +55,7 @@ let sarees=[
 ...EXTRA_DEMO_ITEMS
 ]
 
-let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:"",theme:"dark"};
+let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:"",theme:"light"};
 // Theme has one authoritative browser preference. This prevents an older cached/cloud setting
 // from putting the storefront back into Dark after Light was selected.
 try{
@@ -108,11 +108,9 @@ function setSiteTheme(selected){
 function applyTheme(){
  const theme=settings.theme==="dark"?"dark":"light";
  const root=document.documentElement;
- root.dataset.theme=theme;
- const themeSheet=document.getElementById("themeStylesheet");
- if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v="+(theme==="light"?"8":"2");
+ if(root.dataset.theme!==theme) root.dataset.theme=theme;
  const siteTheme=document.getElementById("siteTheme");
- if(siteTheme) siteTheme.value=theme;
+ if(siteTheme && siteTheme.value!==theme) siteTheme.value=theme;
 }
 function render(){
  applyTheme();
