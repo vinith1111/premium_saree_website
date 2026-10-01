@@ -193,3 +193,63 @@
   .header .brand strong{font-size:14px}
   .header .brand-mark{flex-basis:34px;width:34px;height:34px}
 }
+
+/* Force full shop name on phone screens */
+@media screen and (max-width:600px){
+  .header .nav{
+    display:flex !important;
+    width:100%;
+    box-sizing:border-box;
+    min-height:74px !important;
+    height:auto !important;
+    padding:8px 10px !important;
+    gap:7px !important;
+  }
+  .header .mobile-menu{
+    display:block !important;
+    flex:0 0 40px !important;
+    width:40px !important;
+    font-size:28px !important;
+    line-height:1 !important;
+  }
+  .header .brand{
+    flex:1 1 0 !important;
+    min-width:0 !important;
+    width:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+  }
+  .header .brand-mark{
+    flex:0 0 38px !important;
+    width:38px !important;
+    height:38px !important;
+  }
+  .header .brand > span:last-child{
+    display:block !important;
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    width:auto !important;
+  }
+  .header .brand strong{
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    font-size:14px !important;
+    line-height:1.15 !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+    word-break:normal !important;
+    overflow-wrap:break-word !important;
+  }
+  .header .search-btn{
+    display:block !important;
+    flex:0 0 38px !important;
+    width:38px !important;
+    min-width:38px !important;
+    height:40px !important;
+    padding:0 !important;
+  }
+  .header .admin-link{display:none !important}
+}
