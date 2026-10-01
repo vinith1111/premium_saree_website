@@ -1,3 +1,4 @@
+html[data-theme="light"]{color-scheme:only light!important;forced-color-adjust:none!important;background:#fff!important}html[data-theme="light"] body{color-scheme:only light!important;forced-color-adjust:none!important;background:#fff!important;filter:none!important;opacity:1!important}
 /* FINAL LIGHT MODE OVERRIDES */
 html[data-theme="light"],
 html[data-theme="light"] body,
