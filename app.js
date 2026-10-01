@@ -35,15 +35,15 @@ function render(){
  const searchEl=document.getElementById("search"); const q=(searchEl?.value||"").toLowerCase(); const clearBtn=document.getElementById("searchClear"); if(clearBtn)clearBtn.classList.toggle("hidden",!q);
  const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];
  const current=window.selectedCategory||"";
- const filtered=sarees.filter(s=>(!current||String(s.category||"").toLowerCase()===current.toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
+ const filtered=sarees.filter(s=>(!current||String(s.category||"").trim().toLowerCase()===current.trim().toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
  const list=[...filtered].sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
  const totalPages=Math.max(1,Math.ceil(list.length/catalogPageSize()));
  if(catalogPage>totalPages)catalogPage=totalPages;
  const pageItems=list.slice((catalogPage-1)*catalogPageSize(),catalogPage*catalogPageSize());
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
-   const all='<button class="'+(!current?'active':'')+'" onclick="selectCatalogCategory(\'\')">All</button>';
-   tabs.innerHTML=all+cats.map(c=>'<button class="'+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" onclick="selectCatalogCategory('+JSON.stringify(c)+')">'+esc(c)+'</button>').join("");
+   tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+cats.map(c=>'<button type="button" class="category-btn '+(current.trim().toLowerCase()===String(c).trim().toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
+   tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>selectCatalogCategory(btn.dataset.category)));
  }
  const grid=document.getElementById("catalogGrid");
  if(grid)grid.innerHTML=pageItems.map(card).join("");
@@ -60,7 +60,7 @@ function render(){
  document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");
 }
 
-function selectCatalogCategory(category){window.selectedCategory=category||"";catalogPage=1;document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+function escAttr(value){return String(value??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}\n\nfunction selectCatalogCategory(category){window.selectedCategory=String(category||"").trim();catalogPage=1;document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
 function changeCatalogPage(page){catalogPage=Math.max(1,Number(page)||1);render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
 
 function focusSearch(){document.getElementById("search").focus();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
