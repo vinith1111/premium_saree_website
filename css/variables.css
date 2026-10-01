@@ -1,0 +1,14 @@
+/* Design system */
+:root{
+  --bg:#171310;--surface:#211a18;--surface-2:#281e1d;--text:#f3e9e8;--muted:#b9abad;
+  --wine:#680018;--wine-2:#8a2340;--rose:#d9a9b7;--line:#4b403d;--gold:#b99a6a;
+  --green:#25d366;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}
+body.menu-open{overflow:hidden}
+a{color:inherit}
+button,input,textarea,select{font:inherit}
+.hidden{display:none!important}
+
