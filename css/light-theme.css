@@ -1,3 +1,30 @@
+/* WHITE THEME TEST OVERRIDE: all storefront surfaces */
+html[data-theme="light"] body,
+html[data-theme="light"] body::before,
+html[data-theme="light"] main,
+html[data-theme="light"] .header,
+html[data-theme="light"] .hero,
+html[data-theme="light"] .hero-simple,
+html[data-theme="light"] .products,
+html[data-theme="light"] .section,
+html[data-theme="light"] .location-section,
+html[data-theme="light"] .contact,
+html[data-theme="light"] footer,
+html[data-theme="light"] #mainNav.mobile-open,
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .product-image,
+html[data-theme="light"] .product-body,
+html[data-theme="light"] .location-card,
+html[data-theme="light"] .premium-search{
+ background:#fff!important;
+ background-color:#fff!important;
+ color:#241d1b!important;
+}
+html[data-theme="light"] body .mobile-menu span{background:#241d1b!important}
+html[data-theme="light"] body .product-card,
+html[data-theme="light"] body .location-card,
+html[data-theme="light"] body .premium-search{border-color:#ded5cc!important}
+
 html[data-theme="light"]{color-scheme:only light!important;forced-color-adjust:none!important;background:#fff!important}html[data-theme="light"] body{color-scheme:only light!important;forced-color-adjust:none!important;background:#fff!important;filter:none!important;opacity:1!important}
 /* FINAL LIGHT MODE OVERRIDES */
 html[data-theme="light"],
