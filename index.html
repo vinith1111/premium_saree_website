@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title id="pageTitle">SRI SAI VANI</title><meta name="description" content="Discover beautiful fashion and enquire directly on WhatsApp.">
-<script>(function(){try{var t=localStorage.getItem("srisai_vani_theme");if(t!=="light"&&t!=="dark"){var raw=localStorage.getItem("srisai_vani_settings_v2");var s=raw?JSON.parse(raw):null;t=s&&s.theme==="light"?"light":"dark"}document.documentElement.setAttribute("data-theme",t||"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}})();</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script>document.documentElement.setAttribute("data-theme","light");</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/variables.css?v=4">
 <link rel="stylesheet" href="css/base.css">
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="css/admin.css?v=4">
 <link rel="stylesheet" href="css/modal.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link id="theme-dark" rel="stylesheet" href="css/theme-dark.css?v=2"><link id="theme-light" rel="stylesheet" href="css/theme-light.css?v=3">
+<link id="theme-light" rel="stylesheet" href="css/theme-light.css?v=4">
 <script>
 (function(){
  try{
@@ -32,7 +32,7 @@
 <header class="header"><div class="nav">
 <button id="menuToggle" class="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 <a class="brand" href="#top"><span class="brand-mark">VS</span><span><strong id="shopName">SRI SAI VANI</strong></span></a>
-<nav id="mainNav"><a href="#catalog">Collections</a><a href="#location">Visit Us</a><div class="mobile-theme-control"><label for="siteTheme">Theme</label><select id="siteTheme" aria-label="Website theme" onchange="setSiteTheme(this.value)"><option value="dark">Dark</option><option value="light">Light</option></select></div><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav>
+<nav id="mainNav"><a href="#catalog">Collections</a><a href="#location">Visit Us</a><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav>
 <button class="admin-link" onclick="showAdmin()">Admin</button>
 </div></header>
 
