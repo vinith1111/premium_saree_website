@@ -109,7 +109,9 @@ function setSiteTheme(theme){
  render();
 }
 function applyTheme(){
- const theme=settings.theme==="light"?"light":"dark";
+ // DIAGNOSTIC: Dark theme is disabled while we verify the white storefront.
+ const theme="light";
+ settings.theme="light";
  document.documentElement.dataset.theme=theme;
  document.documentElement.style.colorScheme=theme;
  const siteTheme=document.getElementById("siteTheme");
