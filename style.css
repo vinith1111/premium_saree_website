@@ -253,3 +253,5 @@
   }
   .header .admin-link{display:none !important}
 }
+
+.catalog-category-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 18px;scrollbar-width:none}.catalog-category-tabs::-webkit-scrollbar{display:none}.catalog-category-tabs button{border:1px solid var(--line);background:#fff;padding:10px 15px;border-radius:20px;white-space:nowrap;cursor:pointer;color:var(--text);font:12px "DM Sans"}.catalog-category-tabs button.active{background:var(--wine);border-color:var(--wine);color:#fff}@media(max-width:600px){.catalog-category-tabs{margin:0 -2px;padding-bottom:14px}.catalog-category-tabs button{padding:9px 13px;font-size:11px}}
