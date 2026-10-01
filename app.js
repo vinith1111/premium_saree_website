@@ -21,7 +21,7 @@ localStorage.setItem(SETTINGS,JSON.stringify(settings));
 }
 }
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
-syncSharedSettings();
+render();
 }
 function render(){const q=(document.getElementById("search")?.value||"").toLowerCase(),cat=document.getElementById("category")?.value||"";const list=sarees.filter(s=>(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q))&&(!cat||String(s.category||"").toLowerCase()===String(cat).toLowerCase()));document.getElementById("catalogGrid").innerHTML=list.map(card).join("");const featured=sarees.filter(s=>s.featured).slice(0,4);document.getElementById("featuredGrid").innerHTML=featured.map(card).join("");document.getElementById("empty").classList.toggle("hidden",list.length>0);const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];const current=cat;document.getElementById("category").innerHTML='<option value="">All categories</option>'+cats.map(c=>'<option value="'+esc(c)+'">'+esc(c)+"</option>").join("");document.getElementById("category").value=current;document.getElementById("shopName").textContent=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("aboutInfo").textContent=settings.about;document.getElementById("footerInfo").textContent=settings.footer;document.getElementById("mainWa").href="https://web.whatsapp.com/send?phone="+settings.whatsapp+"&text="+encodeURIComponent("Hi, I'd like to see your saree collection.");}
 function focusSearch(){document.getElementById("search").focus();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
@@ -48,4 +48,4 @@ render();
 document.getElementById("settingsStatus").textContent="Settings saved successfully.";
 document.getElementById("settingsStatus").className="settings-status success";
 }
-render();
+syncSharedSettings();
