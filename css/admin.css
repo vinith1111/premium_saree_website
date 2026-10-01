@@ -31,3 +31,8 @@
 .settings-status{min-height:18px;margin-top:10px;font-size:12px}
 .settings-status.success{color:#277548}.settings-status.error{color:#a32d3d}
 
+
+.admin-arrival-status{font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.admin-arrival-status.is-new{color:#8a2340}
+.admin-arrival-status.is-old{color:#766a6d}
+.arrival-toggle{border:1px solid #cdbfc0;background:#faf7f5;color:#493d40;padding:7px 9px;cursor:pointer;font-size:11px}
