@@ -15,3 +15,4 @@
 .hero-card small{font-size:10px;color:var(--muted)}
 .hero-line{display:block;width:45px;height:1px;background:var(--gold);margin:16px auto}
 @media(max-width:900px){.hero-simple{grid-template-columns:1fr;min-height:auto}.hero-side{min-height:230px}.hero-simple .hero-content{padding:48px 22px}.hero-card{padding:22px}.hero-card strong{font-size:28px}}
+.wa-brand-logo{width:22px;height:22px;object-fit:contain;display:block}.whatsapp-icon .wa-brand-logo{width:27px;height:27px}.whatsapp-mini .wa-brand-logo{width:21px;height:21px}
