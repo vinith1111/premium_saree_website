@@ -1,301 +1,130 @@
-/* Hard override: Light mode is driven by the root theme attribute.
-   This avoids any dependency on body class timing or cached theme state. */
-html[data-theme="light"] body,
-html[data-theme="light"] body main,
-html[data-theme="light"] body .hero,
-html[data-theme="light"] body .products,
-html[data-theme="light"] body .section,
-html[data-theme="light"] body .location-section,
-html[data-theme="light"] body .contact,
-html[data-theme="light"] body footer{
-  background:#ffffff!important;
-  color:#211b1d!important;
+/* SRI SAI VANI COLLECTIONS - LIGHT LUXURY THEME */
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#fffdf9;
+  --surface:#ffffff;
+  --surface-2:#f7f1ea;
+  --text:#241d1b;
+  --muted:#6b625e;
+  --wine:#6b1020;
+  --wine-2:#4e0714;
+  --rose:#9b6874;
+  --line:#ded5cc;
+  --gold:#b08a57;
+  --green:#25d366;
+  --white:#ffffff;
+}
+html[data-theme="light"] body{
+  background:#fffdf9!important;
+  color:#241d1b!important;
+}
+html[data-theme="light"] body *{
+  border-color:var(--line);
 }
 html[data-theme="light"] body .header,
-html[data-theme="light"] body #mainNav.mobile-open,
-html[data-theme="light"] body .premium-search,
-html[data-theme="light"] body .product-card,
-html[data-theme="light"] body .product-image,
-html[data-theme="light"] body .product-body,
-html[data-theme="light"] body .location-card,
-html[data-theme="light"] body .contact,
-html[data-theme="light"] body footer{
-  background:#ffffff!important;
-}
-html[data-theme="light"] body .section-title h2,
-html[data-theme="light"] body .location-card h2,
-html[data-theme="light"] body .contact h2,
-html[data-theme="light"] body .product-body h3,
-html[data-theme="light"] body .price{
-  color:#211b1d!important;
-}
-html[data-theme="light"] body .subline,
-html[data-theme="light"] body .location-card p,
-html[data-theme="light"] body .contact p,
-html[data-theme="light"] body .footer-links a{
-  color:#6c6466!important;
-}
-
-/* =========================================================
-   PURE WHITE THEME
-   The Light option is intentionally a true white theme.
-   ========================================================= */
-
-html[data-theme="light"],
-html[data-theme="light"] body{
-  background:#ffffff!important;
-  color:#211b1d!important;
-  color-scheme:light;
-}
-
-/* Global page surfaces */
-html[data-theme="light"] body,
 html[data-theme="light"] body main,
 html[data-theme="light"] body .hero,
+html[data-theme="light"] body .hero-simple,
 html[data-theme="light"] body .products,
 html[data-theme="light"] body .section,
 html[data-theme="light"] body .location-section,
 html[data-theme="light"] body .contact,
 html[data-theme="light"] body footer{
-  background:#ffffff!important;
-  color:#211b1d!important;
+  background:#fffdf9!important;
+  color:#241d1b!important;
 }
-
-/* Header / navigation */
 html[data-theme="light"] body .header{
-  background:#ffffff!important;
-  border-bottom:1px solid #e5e0de!important;
-  box-shadow:0 2px 14px rgba(33,27,29,.05)!important;
-  backdrop-filter:blur(10px);
+  box-shadow:0 2px 16px rgba(36,29,27,.06)!important;
 }
 html[data-theme="light"] body .brand,
 html[data-theme="light"] body .brand strong,
 html[data-theme="light"] body #mainNav a,
-html[data-theme="light"] body .admin-link{
-  color:#211b1d!important;
+html[data-theme="light"] body h1,
+html[data-theme="light"] body h2,
+html[data-theme="light"] body h3,
+html[data-theme="light"] body .section-title h2,
+html[data-theme="light"] body .product-body h3,
+html[data-theme="light"] body .price{
+  color:#241d1b!important;
+}
+html[data-theme="light"] body p,
+html[data-theme="light"] body .subline,
+html[data-theme="light"] body .muted,
+html[data-theme="light"] body .location-card p,
+html[data-theme="light"] body .contact p{
+  color:#6b625e!important;
 }
 html[data-theme="light"] body .brand-mark{
-  border-color:#8f5267!important;
-  color:#74152f!important;
-}
-html[data-theme="light"] body .mobile-menu{
-  color:#211b1d!important;
+  color:#6b1020!important;
+  border-color:#b08a57!important;
 }
 html[data-theme="light"] body .mobile-menu span{
-  background:#211b1d!important;
+  background:#241d1b!important;
 }
-
-/* Mobile menu */
 html[data-theme="light"] body #mainNav.mobile-open{
-  background:#ffffff!important;
-  border-color:#e5e0de!important;
-  box-shadow:0 18px 45px rgba(33,27,29,.10)!important;
+  background:#fffdf9!important;
+  box-shadow:0 18px 45px rgba(36,29,27,.12)!important;
 }
-html[data-theme="light"] body #mainNav.mobile-open a{
-  color:#211b1d!important;
-  border-color:#e5e0de!important;
+html[data-theme="light"] body .premium-search,
+html[data-theme="light"] body .premium-search input{
+  background:#fff!important;
+  color:#241d1b!important;
 }
-html[data-theme="light"] body .mobile-theme-control{
-  color:#5e5658!important;
-  border-color:#e5e0de!important;
-}
-html[data-theme="light"] body .mobile-theme-control select,
-html[data-theme="light"] body #siteTheme{
-  background:#ffffff!important;
-  color:#211b1d!important;
-  border:1px solid #d6cecb!important;
-}
-
-/* Hero */
-html[data-theme="light"] body .hero-simple{
-  background:#ffffff!important;
-  border-bottom:1px solid #e5e0de!important;
-}
-html[data-theme="light"] body .hero-simple h1,
-html[data-theme="light"] body .hero-simple p{
-  color:#211b1d!important;
-}
-html[data-theme="light"] body .hero-simple p{
-  color:#6c6466!important;
-}
-html[data-theme="light"] body .eyebrow{
-  color:#8f5267!important;
-}
-
-/* Section headings */
-html[data-theme="light"] body .section-title h2,
-html[data-theme="light"] body .location-card h2,
-html[data-theme="light"] body .contact h2{
-  color:#211b1d!important;
-}
-
-/* Category tabs */
-html[data-theme="light"] body .catalog-category-tabs button{
-  background:#ffffff!important;
-  color:#4e4749!important;
-  border-color:#d8d1ce!important;
-}
-html[data-theme="light"] body .catalog-category-tabs button:hover{
-  background:#fafafa!important;
-  color:#74152f!important;
-  border-color:#a66b7d!important;
-}
-html[data-theme="light"] body .catalog-category-tabs button.active{
-  background:#74152f!important;
-  color:#ffffff!important;
-  border-color:#74152f!important;
-}
-
-/* Search */
 html[data-theme="light"] body .premium-search{
-  background:#ffffff!important;
-  border-color:#d8d1ce!important;
+  border:1px solid #ded5cc!important;
   box-shadow:none!important;
 }
-html[data-theme="light"] body .premium-search:focus-within{
-  background:#ffffff!important;
-  border-color:#8f5267!important;
-  box-shadow:0 0 0 2px rgba(143,82,103,.10)!important;
+html[data-theme="light"] body .catalog-category-tabs button,
+html[data-theme="light"] body .category-btn{
+  background:#fff!important;
+  color:#4d4541!important;
+  border:1px solid #ded5cc!important;
 }
-html[data-theme="light"] body .premium-search input{
-  background:#ffffff!important;
-  color:#211b1d!important;
+html[data-theme="light"] body .catalog-category-tabs button.active,
+html[data-theme="light"] body .category-btn.active{
+  background:#6b1020!important;
+  color:#fff!important;
+  border-color:#6b1020!important;
 }
-html[data-theme="light"] body .premium-search input::placeholder{
-  color:#8a8284!important;
-}
-
-/* Product cards */
 html[data-theme="light"] body .product-card{
-  background:#ffffff!important;
-  border-color:#e1dbd8!important;
-  box-shadow:0 5px 20px rgba(33,27,29,.045)!important;
+  background:#fff!important;
+  border:1px solid #e4ddd7!important;
+  box-shadow:0 8px 26px rgba(36,29,27,.06)!important;
 }
 html[data-theme="light"] body .product-image,
 html[data-theme="light"] body .product-body{
-  background:#ffffff!important;
-}
-html[data-theme="light"] body .product-body h3,
-html[data-theme="light"] body .price{
-  color:#211b1d!important;
-}
-html[data-theme="light"] body .subline,
-html[data-theme="light"] body .empty,
-html[data-theme="light"] body .catalog-pagination span{
-  color:#71696b!important;
+  background:#fff!important;
 }
 html[data-theme="light"] body .badge{
-  background:#211b1d!important;
-  color:#ffffff!important;
+  background:#6b1020!important;
+  color:#fff!important;
 }
-
-/* Location */
 html[data-theme="light"] body .location-section{
-  background:#ffffff!important;
+  background:#f7f1ea!important;
 }
 html[data-theme="light"] body .location-card{
-  background:#ffffff!important;
-  border-color:#ded7d4!important;
-  box-shadow:0 5px 22px rgba(33,27,29,.045)!important;
+  background:#fff!important;
+  border:1px solid #ded5cc!important;
+  box-shadow:0 8px 26px rgba(36,29,27,.05)!important;
 }
-html[data-theme="light"] body .location-card p{
-  color:#6c6466!important;
-}
-
-/* WhatsApp/contact */
-html[data-theme="light"] body .contact{
-  background:#ffffff!important;
-  border-top:1px solid #e5e0de!important;
-}
-html[data-theme="light"] body .contact p{
-  color:#6c6466!important;
-}
-
-/* Brand buttons */
 html[data-theme="light"] body .primary{
-  background:#74152f!important;
-  color:#ffffff!important;
-  border-color:#74152f!important;
+  background:#6b1020!important;
+  color:#fff!important;
+  border-color:#6b1020!important;
 }
 html[data-theme="light"] body .primary:hover{
-  background:#8e304b!important;
-  border-color:#8e304b!important;
+  background:#4e0714!important;
 }
-
-/* Footer */
 html[data-theme="light"] body footer{
-  background:#ffffff!important;
-  border-top:1px solid #e5e0de!important;
+  background:#f7f1ea!important;
+  border-top:1px solid #ded5cc!important;
 }
-html[data-theme="light"] body footer .brand strong,
-html[data-theme="light"] body .footer-links a{
-  color:#5f5759!important;
+html[data-theme="light"] body footer a{
+  color:#5e5652!important;
 }
-html[data-theme="light"] body .footer-links a:hover{
-  color:#74152f!important;
+html[data-theme="light"] body footer a:hover{
+  color:#6b1020!important;
 }
-html[data-theme="light"] body .instagram-link{
-  color:#5f5759!important;
-}
-
-/* Pagination */
-html[data-theme="light"] body .catalog-pagination .btn{
-  background:#ffffff!important;
-  color:#493d40!important;
-  border-color:#d8d1ce!important;
-}
-html[data-theme="light"] body .catalog-pagination .btn:hover:not(:disabled){
-  border-color:#8f5267!important;
-  color:#74152f!important;
-}
-
-/* Admin */
-html[data-theme="light"] body #adminModal{
-  background:rgba(33,27,29,.32)!important;
-}
-html[data-theme="light"] body #adminModal .panel{
-  background:#ffffff!important;
-  color:#211b1d!important;
-  border:1px solid #ded7d4!important;
-}
-html[data-theme="light"] body #adminModal .panel-head,
-html[data-theme="light"] body #adminModal .settings-heading{
-  border-color:#e1dbd8!important;
-}
-html[data-theme="light"] body #adminModal input,
-html[data-theme="light"] body #adminModal textarea,
-html[data-theme="light"] body #adminModal select{
-  background:#ffffff!important;
-  color:#211b1d!important;
-  border-color:#d8d1ce!important;
-}
-html[data-theme="light"] body #adminModal .admin-tabs button,
-html[data-theme="light"] body #adminModal .admin-item,
-html[data-theme="light"] body #adminModal .admin-item button,
-html[data-theme="light"] body #adminModal .arrival-toggle,
-html[data-theme="light"] body #adminModal .admin-pagination .btn{
-  background:#ffffff!important;
-  color:#493d40!important;
-  border-color:#d8d1ce!important;
-}
-html[data-theme="light"] body #adminModal .admin-item,
-html[data-theme="light"] body #adminModal .settings-card{
-  background:#fafafa!important;
-}
-html[data-theme="light"] body #adminModal .admin-item b,
-html[data-theme="light"] body #adminModal .settings-heading h3{
-  color:#211b1d!important;
-}
-html[data-theme="light"] body #adminModal .admin-item .danger{
-  color:#9a2438!important;
-}
-html[data-theme="light"] body #adminModal .admin-theme-control{
-  background:#ffffff!important;
-  color:#211b1d!important;
-  border-color:#d8d1ce!important;
-}
-
-/* Image viewer stays dark intentionally for image focus */
 html[data-theme="light"] body .image-modal{
-  background:rgba(15,12,13,.88)!important;
+  background:rgba(15,12,13,.9)!important;
 }
