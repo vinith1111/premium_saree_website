@@ -29,28 +29,42 @@ try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
 render();
 }
+let catalogPage=1;
+function catalogPageSize(){return window.innerWidth<=600?12:24}
 function render(){
  const q=(document.getElementById("search")?.value||"").toLowerCase();
  const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];
  const current=window.selectedCategory||"";
  const filtered=sarees.filter(s=>(!current||String(s.category||"").toLowerCase()===current.toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
  const list=[...filtered].sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
+ const totalPages=Math.max(1,Math.ceil(list.length/catalogPageSize()));
+ if(catalogPage>totalPages)catalogPage=totalPages;
+ const pageItems=list.slice((catalogPage-1)*catalogPageSize(),catalogPage*catalogPageSize());
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
    const all='<button class="'+(!current?'active':'')+'" onclick="selectCatalogCategory(\'\')">All</button>';
-   tabs.innerHTML=all+cats.map(c=>'<button class="'+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" onclick="selectCatalogCategory('+JSON.stringify(c)+')">'+esc(c.replace(/\s*Sarees?\s*/i,' Sarees').trim())+'</button>').join("");
+   tabs.innerHTML=all+cats.map(c=>'<button class="'+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" onclick="selectCatalogCategory('+JSON.stringify(c)+')">'+esc(c)+'</button>').join("");
  }
- document.getElementById("catalogGrid").innerHTML=list.map(card).join("");
- document.getElementById("empty").classList.toggle("hidden",list.length>0);
+ const grid=document.getElementById("catalogGrid");
+ if(grid)grid.innerHTML=pageItems.map(card).join("");
+ const empty=document.getElementById("empty");
+ if(empty)empty.classList.toggle("hidden",list.length>0);
+ const pager=document.getElementById("catalogPagination");
+ if(pager){
+   pager.innerHTML=totalPages>1?'<button class="btn" '+(catalogPage===1?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage-1)+')">Previous</button><span>Page '+catalogPage+' of '+totalPages+'</span><button class="btn" '+(catalogPage===totalPages?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage+1)+')">Next</button>':'';
+   pager.classList.toggle("hidden",totalPages<=1);
+ }
  const categoryCards=document.getElementById("categoryCards");
  if(categoryCards){
-   categoryCards.innerHTML=cats.slice(0,4).map(c=>'<button type="button" onclick="selectCatalogCategory('+JSON.stringify(c)+');document.getElementById("catalog").scrollIntoView({behavior:"smooth"})"><span>'+esc(c)+'</span><small>Shop '+esc(c)+' →</small></button>').join("");
+   categoryCards.innerHTML=cats.slice(0,6).map(c=>'<button type="button" onclick="selectCatalogCategory('+JSON.stringify(c)+');document.getElementById("catalog").scrollIntoView({behavior:"smooth"})"><span>'+esc(c)+'</span><small>Shop '+esc(c)+' →</small></button>').join("");
  }
  document.getElementById("shopName").textContent=settings.shopName;document.title=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("heroShopName").textContent=settings.shopName;
  const aboutInfo=document.getElementById("aboutInfo");if(aboutInfo)aboutInfo.textContent=settings.about||"";
  document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");
 }
-function selectCatalogCategory(category){window.selectedCategory=category||"";document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+
+function selectCatalogCategory(category){window.selectedCategory=category||"";catalogPage=1;document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+function changeCatalogPage(page){catalogPage=Math.max(1,Number(page)||1);render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
 
 function focusSearch(){document.getElementById("search").focus();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
 function setCategoryType(type){const select=document.getElementById("category");select.value="";document.getElementById("search").value=type==="Sarees"?"saree":"dress";document.getElementById("catalog").scrollIntoView({behavior:"smooth"});render()}
