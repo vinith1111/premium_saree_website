@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vastraa Sarees</title><meta name="description" content="Discover beautiful sarees and enquire directly on WhatsApp.">
+<title>SRI SAVI SAREE COLLECTIONS</title><meta name="description" content="Discover beautiful sarees and enquire directly on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -11,7 +11,7 @@
 <div class="topbar">WhatsApp us for availability & enquiries</div>
 <header class="header"><div class="nav">
 <button class="mobile-menu" onclick="toggleMenu()">☰</button>
-<a class="brand" href="#top"><span class="brand-mark">VS</span><span><strong id="shopName">Vastraa</strong><small>SAREES</small></span></a>
+<a class="brand" href="#top"><span class="brand-mark">VS</span><span><strong id="shopName">SRI SAVIstrong><small>SAREES</small></span></a>
 <nav id="mainNav"><a href="#new">New Arrivals</a><a href="#collections">Collections</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
 <button class="search-btn" onclick="focusSearch()">⌕</button><button class="admin-link" onclick="showAdmin()">Admin</button>
 </div></header>
@@ -33,12 +33,12 @@
 <div class="toolbar"><div class="searchbox">⌕ <input id="search" type="search" placeholder="Search sarees..." oninput="render()"></div><select id="category" onchange="render()"><option value="">All categories</option></select></div>
 <div id="catalogGrid" class="product-grid"></div><div id="empty" class="empty hidden">No items found.</div></section>
 
-<section class="about" id="about"><div><span class="eyebrow">ABOUT US</span><h2>Personal service.<br>Beautiful choices.</h2><p id="aboutInfo">Vastraa Sarees brings together elegant Indian drapes, thoughtfully selected for every occasion.</p><a class="text-button" href="#contact">Talk to us →</a></div><div class="about-mark">VS</div></section>
+<section class="about" id="about"><div><span class="eyebrow">ABOUT US</span><h2>Personal service.<br>Beautiful choices.</h2><p id="aboutInfo">SRI SAVI SAREE COLLECTIONS brings together elegant Indian drapes, thoughtfully selected for every occasion.</p><a class="text-button" href="#contact">Talk to us →</a></div><div class="about-mark">VS</div></section>
 
 <section class="contact" id="contact"><div><span class="eyebrow">NEED HELP?</span><h2>Ask us on WhatsApp.</h2><p>Want more photos, fabric details or availability? We're just a message away.</p></div><a id="mainWa" class="whatsapp" target="_blank">WhatsApp us <span>↗</span></a></section>
 </main>
 
-<footer><div><a class="brand footer-brand" href="#top"><span class="brand-mark">VS</span><span><strong id="footerName">Vastraa</strong><small>SAREES</small></span></a><p id="footerInfo">Beautiful sarees, personal service.</p></div><div class="footer-links"><a href="#new">New Arrivals</a><a href="#collections">Collections</a><a href="#contact">Contact</a></div></footer>
+<footer><div><a class="brand footer-brand" href="#top"><span class="brand-mark">VS</span><span><strong id="footerName">SRI SAVIstrong><small>SAREES</small></span></a><p id="footerInfo">Beautiful sarees, personal service.</p></div><div class="footer-links"><a href="#new">New Arrivals</a><a href="#collections">Collections</a><a href="#contact">Contact</a></div></footer>
 
 <div id="adminModal" class="modal hidden"><div class="panel"><div class="panel-head"><div><span class="eyebrow">PRIVATE AREA</span><h2>Admin Studio</h2></div><button class="close" onclick="hideAdmin()">×</button></div><div id="loginBox"><p class="muted">Demo password: <b>admin123</b></p><input id="adminPassword" type="password" placeholder="Password"><button class="primary dark full" onclick="login()">Enter</button></div><div id="adminBox" class="hidden"><div class="admin-tabs"><button onclick="openSareeForm()">+ Add Item</button><button onclick="openSareeList()">Manage Items</button><button onclick="openSettings()">Shop settings</button></div><div id="adminContent"></div></div></div></div>
 <script src="app.js"></script>
