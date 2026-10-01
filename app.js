@@ -32,43 +32,51 @@ render();
 let catalogPage=1;
 function catalogPageSize(){return window.innerWidth<=600?12:24}
 function render(){
- const searchEl=document.getElementById("search"); const q=(searchEl?.value||"").toLowerCase(); const clearBtn=document.getElementById("searchClear"); if(clearBtn)clearBtn.classList.toggle("hidden",!q);
- const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];
- const current=window.selectedCategory||"";
- const filtered=sarees.filter(s=>(!current||String(s.category||"").trim().toLowerCase()===current.trim().toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
+ const searchEl=document.getElementById("search");
+ const q=(searchEl?.value||"").trim().toLowerCase();
+ const clearBtn=document.getElementById("searchClear");
+ if(clearBtn) clearBtn.classList.toggle("hidden",!q);
+ const cats=[...new Set((sarees||[]).map(s=>String(s.category||"").trim()).filter(Boolean))];
+ const current=String(window.selectedCategory||"").trim();
+ const filtered=(sarees||[]).filter(s=>{
+   const category=String(s.category||"").trim();
+   const text=[s.name,s.category,s.color,s.description].map(v=>String(v||"")).join(" ").toLowerCase();
+   return (!current||category.toLowerCase()===current.toLowerCase())&&(!q||text.includes(q));
+ });
  const list=[...filtered].sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
- const totalPages=Math.max(1,Math.ceil(list.length/catalogPageSize()));
- if(catalogPage>totalPages)catalogPage=totalPages;
- const pageItems=list.slice((catalogPage-1)*catalogPageSize(),catalogPage*catalogPageSize());
+ const size=catalogPageSize();
+ const totalPages=Math.max(1,Math.ceil(list.length/size));
+ if(catalogPage>totalPages) catalogPage=totalPages;
+ const pageItems=list.slice((catalogPage-1)*size,catalogPage*size);
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
-   tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+cats.map(c=>'<button type="button" class="category-btn '+(current.trim().toLowerCase()===String(c).trim().toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
+   tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+
+     cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>selectCatalogCategory(btn.dataset.category)));
  }
  const grid=document.getElementById("catalogGrid");
- if(grid)grid.innerHTML=pageItems.map(card).join("");
+ if(grid) grid.innerHTML=pageItems.map(card).join("");
  const empty=document.getElementById("empty");
- if(empty)empty.classList.toggle("hidden",list.length>0);
+ if(empty){
+   empty.textContent=q||current?"No items found. Try another search or category.":"No products available yet.";
+   empty.classList.toggle("hidden",list.length>0);
+ }
  const pager=document.getElementById("catalogPagination");
  if(pager){
-   pager.innerHTML=totalPages>1?'<button class="btn" '+(catalogPage===1?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage-1)+')">Previous</button><span>Page '+catalogPage+' of '+totalPages+'</span><button class="btn" '+(catalogPage===totalPages?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage+1)+')">Next</button>':'';
+   pager.innerHTML=totalPages>1?
+     '<button type="button" class="btn" '+(catalogPage===1?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage-1)+')">Previous</button><span>Page '+catalogPage+' of '+totalPages+'</span><button type="button" class="btn" '+(catalogPage===totalPages?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage+1)+')">Next</button>':'';
    pager.classList.toggle("hidden",totalPages<=1);
  }
- 
- document.getElementById("shopName").textContent=settings.shopName;document.title=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("heroShopName").textContent=settings.shopName;
- const aboutInfo=document.getElementById("aboutInfo");if(aboutInfo)aboutInfo.textContent=settings.about||"";
- document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");
+ const shopName=settings.shopName||"SRI SAI VANI";
+ ["shopName","footerName","heroShopName"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopName});
+ document.title=shopName;
+ const aboutInfo=document.getElementById("aboutInfo"); if(aboutInfo) aboutInfo.textContent=settings.about||"";
+ const mainWa=document.getElementById("mainWa"); if(mainWa) mainWa.href=whatsappLink("Hi, I'd like to see your collection.");
 }
+function escAttr(value){return String(value??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function selectCatalogCategory(category){window.selectedCategory=String(category||"").trim();catalogPage=1;const search=document.getElementById("search");if(search)search.value="";render()}
+function changeCatalogPage(page){catalogPage=Math.max(1,Number(page)||1);render();document.getElementById("catalog")?.scrollIntoView({behavior:"smooth",block:"start"})}
 
-function escAttr(value){return String(value??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}\n\nfunction selectCatalogCategory(category){window.selectedCategory=String(category||"").trim();catalogPage=1;document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
-function changeCatalogPage(page){catalogPage=Math.max(1,Number(page)||1);render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
-
-function focusSearch(){document.getElementById("search").focus();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
-function setCategoryType(type){const select=document.getElementById("category");select.value="";document.getElementById("search").value=type==="Sarees"?"saree":"dress";document.getElementById("catalog").scrollIntoView({behavior:"smooth"});render()}
-function setCategory(c){const select=document.getElementById("category");const exists=[...select.options].some(o=>o.value.toLowerCase()===c.toLowerCase());select.value=exists?c:"";document.getElementById("catalog").scrollIntoView({behavior:"smooth"});render()}
-function toggleMenu(){const n=document.getElementById("mainNav");n.style.display=n.style.display==="flex"?"none":"flex";n.style.flexDirection="column";n.style.position="absolute";n.style.top="73px";n.style.left="0";n.style.right="0";n.style.background="#fffdfb";n.style.padding="20px 24px";n.style.borderBottom="1px solid #eee"}
-function showAdmin(){document.getElementById("adminModal").classList.remove("hidden");document.getElementById("loginBox").classList.remove("hidden");document.getElementById("adminBox").classList.add("hidden");document.getElementById("adminPassword").value=""}
-function hideAdmin(){document.getElementById("adminModal").classList.add("hidden")}
 async function login(){
  const p=document.getElementById("adminPassword"),status=document.getElementById("loginStatus");
  try{const r=await fetch("/.netlify/functions/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:p.value})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not sign in");p.value="";document.getElementById("loginBox").classList.add("hidden");document.getElementById("adminBox").classList.remove("hidden");await loadCatalog();openSareeList()}catch(e){p.value="";p.focus();if(status)status.textContent=e.message}}
