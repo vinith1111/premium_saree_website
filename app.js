@@ -23,6 +23,15 @@ function initMobileMenu(){
  const btn=document.getElementById("menuToggle");
  if(!btn)return;
  btn.addEventListener("click",toggleMenu);
+ window.addEventListener("resize",()=>{
+   if(window.innerWidth>900){
+     const nav=document.getElementById("mainNav");
+     if(nav)nav.classList.remove("mobile-open");
+     document.body.classList.remove("menu-open");
+     btn.setAttribute("aria-expanded","false");
+     btn.setAttribute("aria-label","Open menu");
+   }
+ });
 }
 function setupAnchorLinks(){
  document.querySelectorAll('a[href^="#"]').forEach(link=>{
