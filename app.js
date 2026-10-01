@@ -33,5 +33,4 @@ save();render();
 document.getElementById("settingsStatus").textContent="Settings saved successfully.";
 document.getElementById("settingsStatus").className="settings-status success";
 }
-render();alert("Settings saved")}
 render();
