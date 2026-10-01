@@ -1,4 +1,4 @@
-/* SRI SAI VANI COLLECTIONS | DARK THEME */
+/* DARK THEME | single source of theme colors */
 html[data-theme="dark"]{
   color-scheme:dark;
   --bg:#171310;
@@ -12,9 +12,9 @@ html[data-theme="dark"]{
   --line:#4b403d;
   --gold:#b99a6a;
   --green:#25d366;
-  --white:#ffffff;
+  --white:#fff;
+  background:var(--bg);
+  color:var(--text);
 }
-html[data-theme="dark"],html[data-theme="dark"] body{
-  background:#171310;
-  color:#f3e9e8;
-}
+html[data-theme="dark"] body{background:var(--bg);color:var(--text)}
+html[data-theme="dark"] .image-modal{background:rgba(0,0,0,.82)}
