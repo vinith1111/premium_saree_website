@@ -98,69 +98,22 @@ function catalogPageSize(){return 10}
 function setSiteTheme(theme){
  const selected=theme==="light"?"light":"dark";
  settings={...settings,theme:selected};
- document.documentElement.setAttribute("data-theme",selected);
- document.documentElement.style.setProperty("background-color",selected==="light"?"#ffffff":"#171310","important");
- document.body?.classList.toggle("theme-light",selected==="light");
- document.body?.classList.toggle("theme-dark",selected==="dark");
- try{localStorage.setItem("srisai_vani_theme",selected)}catch(e){}
- window.__themeChangedLocally=true;
- try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
- applyTheme();
+ const dark=document.getElementById("theme-dark");
+ const light=document.getElementById("theme-light");
+ if(dark&&light){dark.disabled=selected==="light";light.disabled=selected!=="light";}
+ document.documentElement.dataset.theme=selected;
+ try{localStorage.setItem("srisai_vani_theme",selected);localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme)siteTheme.value=selected;
- fetch("/.netlify/functions/settings",{
-   method:"PUT",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify(settings)
- }).catch(e=>console.warn("Theme sync unavailable",e));
+ fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)}).catch(e=>console.warn("Theme sync unavailable",e));
+ render();
 }
 function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
- const root=document.documentElement;
- root.dataset.theme=theme;
- root.style.backgroundColor=theme==="light"?"#ffffff":"#171310";
- root.style.colorScheme=theme;
- document.body?.setAttribute("data-theme",theme);
- document.body?.classList.toggle("theme-light",theme==="light");
- document.body?.classList.toggle("theme-dark",theme==="dark");
-
- const vars=theme==="light" ? {
-   "--bg":"#fffdf9","--surface":"#ffffff","--surface-2":"#f7f1ea",
-   "--text":"#241d1b","--muted":"#6b625e","--wine":"#6b1020",
-   "--wine-2":"#4e0714","--rose":"#9b6874","--line":"#ded5cc",
-   "--gold":"#b08a57","--green":"#25d366","--white":"#ffffff"
- } : {
-   "--bg":"#171310","--surface":"#211a18","--surface-2":"#281e1d",
-   "--text":"#f3e9e8","--muted":"#b9abad","--wine":"#680018",
-   "--wine-2":"#8a2340","--rose":"#d9a9b7","--line":"#4b403d",
-   "--gold":"#b99a6a","--green":"#25d366","--white":"#ffffff"
- };
- Object.entries(vars).forEach(([key,value])=>root.style.setProperty(key,value));
-
- const palette=theme==="light"
-   ? {bg:"#fffdf9",surface:"#ffffff",text:"#241d1b",muted:"#6b625e",line:"#ded5cc",wine:"#6b1020"}
-   : {bg:"#171310",surface:"#211a18",text:"#f3e9e8",muted:"#b9abad",line:"#4b403d",wine:"#680018"};
- const elements=[
-   document.body,document.querySelector(".header"),document.querySelector("main"),
-   document.querySelector(".hero"),document.querySelector(".hero-simple"),
-   document.querySelector(".products"),document.querySelector(".location-section"),
-   document.querySelector(".contact"),document.querySelector("footer")
- ].filter(Boolean);
- elements.forEach(el=>{
-   el.style.setProperty("background-color",palette.bg,"important");
-   el.style.setProperty("color",palette.text,"important");
- });
- document.querySelectorAll(".product-card,.product-image,.product-body,.location-card,.premium-search").forEach(el=>{
-   el.style.setProperty("background-color",palette.surface,"important");
-   el.style.setProperty("color",palette.text,"important");
-   el.style.setProperty("border-color",palette.line,"important");
- });
- document.querySelectorAll(".hero-simple h1,.section-title h2,.location-card h2,.contact h2,.product-body h3,.price,.brand,.brand strong").forEach(el=>el.style.setProperty("color",palette.text,"important"));
- document.querySelectorAll(".hero-simple p,.subline,.location-card p,.contact p,.footer-links a,.muted").forEach(el=>el.style.setProperty("color",palette.muted,"important"));
- document.querySelectorAll(".primary,.catalog-category-tabs button.active").forEach(el=>{
-   el.style.setProperty("background-color",palette.wine,"important");
-   el.style.setProperty("color","#ffffff","important");
- });
+ const dark=document.getElementById("theme-dark"),light=document.getElementById("theme-light");
+ if(dark&&light){dark.disabled=theme==="light";light.disabled=theme!=="light";}
+ document.documentElement.dataset.theme=theme;
+ document.documentElement.style.colorScheme=theme;
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme)siteTheme.value=theme;
 }
