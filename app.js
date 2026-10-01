@@ -184,9 +184,10 @@ try{
 const remote=await apiCatalog();
 if(Array.isArray(remote)){
   const existingIds=new Set(remote.map(x=>Number(x.id)));
-  const extras=EXTRA_DEMO_ITEMS.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
-  // Keep the temporary 20-item test catalogue available until real products replace it.
-  sarees=[...remote,...extras];
+  const fallback=DEMO_ITEMS.map((x,i)=>({id:1001+i,name:x[0],price:x[1],category:x[2],color:x[3],description:"TEST ITEM - temporary product for catalogue testing.",image:"",featured:i<6}));
+  const extras=fallback.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
+  // Always keep a complete test catalogue visible when the cloud catalogue has fewer than 20 items.
+  sarees=[...remote,...extras].slice(0,20);
   saveLocal();
   if(extras.length){
     try{
