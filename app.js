@@ -163,9 +163,9 @@ function applyTheme(){
  document.querySelectorAll(".hero-simple h1,.section-title h2,.location-card h2,.contact h2,.product-body h3,.price,.brand,.brand strong").forEach(el=>el.style.setProperty("color",text,"important"));
  document.querySelectorAll(".hero-simple p,.subline,.location-card p,.contact p,.footer-links a,.muted").forEach(el=>el.style.setProperty("color",muted,"important"));
  document.querySelectorAll(".primary,.catalog-category-tabs button.active").forEach(el=>{el.style.setProperty("background-color",wine,"important");el.style.setProperty("color","#fff","important");});
- const adminTheme=document.getElementById("adminTheme");
+
  const siteTheme=document.getElementById("siteTheme");
- if(adminTheme)adminTheme.value=theme;
+
  if(siteTheme)siteTheme.value=theme;
 }
 function render(){
