@@ -248,6 +248,7 @@ async function saveItem(id){
  if(!Number.isFinite(price)||price<=0)return alert("Please enter a valid price greater than 0.");
  if(!d.category)return alert("Please enter a category, for example Sarees or Dresses.");
  if(!d.image)return alert("Please add an image URL or upload an image.");
+ if(d.image.length>2_500_000)return alert("Image is too large. Please choose a smaller image.");
  if(id){
   const existing=sarees.find(x=>x.id===id);
   if(!existing)return alert("This item could not be found. Please refresh and try again.");
