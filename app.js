@@ -1,8 +1,28 @@
 function toggleMenu(){
  const nav=document.getElementById("mainNav");
- if(!nav) return;
- nav.classList.toggle("mobile-open");
- document.body.classList.toggle("menu-open",nav.classList.contains("mobile-open"));
+ const btn=document.getElementById("menuToggle");
+ if(!nav)return;
+ const open=nav.classList.toggle("mobile-open");
+ document.body.classList.toggle("menu-open",open);
+ if(btn){btn.setAttribute("aria-expanded",String(open));btn.setAttribute("aria-label",open?"Close menu":"Open menu")}
+}
+function showAdmin(){
+ const modal=document.getElementById("adminModal");
+ if(!modal)return;
+ modal.classList.remove("hidden");
+ document.body.style.overflow="hidden";
+ const loginBox=document.getElementById("loginBox"),adminBox=document.getElementById("adminBox");
+ loginBox?.classList.remove("hidden");adminBox?.classList.add("hidden");
+ const p=document.getElementById("adminPassword");if(p){p.value="";setTimeout(()=>p.focus(),50)}
+}
+function hideAdmin(){
+ document.getElementById("adminModal")?.classList.add("hidden");
+ document.body.style.overflow="";
+}
+function initMobileMenu(){
+ const btn=document.getElementById("menuToggle");
+ if(!btn)return;
+ btn.addEventListener("click",toggleMenu);
 }
 function setupAnchorLinks(){
  document.querySelectorAll('a[href^="#"]').forEach(link=>{
@@ -200,7 +220,7 @@ if(status){status.textContent="✓ Changes saved successfully.";status.className
 if(status){status.textContent="Could not save online. Please try again.";status.className="settings-status error"}
 }
 }
-render();loadCatalog();syncSharedSettings();setupAnchorLinks();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
+render();loadCatalog();syncSharedSettings();setupAnchorLinks();initMobileMenu();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}
 
 function clearCatalogSearch(){const el=document.getElementById("search");if(el){el.value="";catalogPage=1;render();el.focus()}}
