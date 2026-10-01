@@ -32,3 +32,4 @@
 .settings-actions .secondary{background:#f2eeeb;color:var(--text)}
 .settings-status{margin-top:12px;text-align:right;font-size:11px;min-height:16px}
 .settings-status.success{color:#2d7a4b}.settings-status.error{color:#b33a3a}
+.phone-field select{height:42px;margin:7px 0 0;width:88px;border:1px solid #ddd8d4;background:#f5f1ee;padding:0 10px;font:13px inherit;outline:none;cursor:pointer}.phone-field select:focus{border-color:var(--wine)}.phone-field input{height:42px}
