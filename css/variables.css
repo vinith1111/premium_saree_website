@@ -1,10 +1,11 @@
-/* Design system */
+/* Design system - Dark temporarily disabled for diagnostic */
 :root{
-  --bg:#171310;--surface:#211a18;--surface-2:#281e1d;--text:#f3e9e8;--muted:#b9abad;
-  --wine:#680018;--wine-2:#8a2340;--rose:#d9a9b7;--line:#4b403d;--gold:#b99a6a;
-  --green:#25d366;--white:#fff;
+  --bg:#ffffff;--surface:#ffffff;--surface-2:#f7f1ea;--text:#241d1b;--muted:#6b625e;
+  --wine:#6b1020;--wine-2:#4e0714;--rose:#9b6874;--line:#ded5cc;--gold:#b08a57;
+  --green:#25d366;--white:#ffffff;
 }
 
+/* TEMP DIAGNOSTIC: dark theme disabled */
 /* Optional warm colour theme selected from Admin */
 :root[data-theme="color"]{
   --bg:#f6efe9;
