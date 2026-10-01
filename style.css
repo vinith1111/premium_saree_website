@@ -306,3 +306,25 @@
   .premium-search input{height:50px;font-size:13px}
   .premium-search .search-icon{font-size:22px}
 }
+
+/* Simple catalogue search */
+.premium-search{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  padding:0 10px;
+  border:1px solid var(--line);
+  border-radius:2px;
+  background:#fff;
+  box-shadow:none;
+}
+.premium-search:focus-within{border-color:var(--text);box-shadow:none}
+.premium-search .search-icon{font-size:20px;color:var(--text);width:20px}
+.premium-search input{height:42px;font-size:14px}
+.search-clear{width:26px;height:26px;font-size:20px;color:var(--muted)}
+@media(max-width:600px){
+  .premium-search{min-height:44px;padding:0 9px}
+  .premium-search input{height:42px;font-size:14px}
+}
