@@ -110,7 +110,7 @@ function applyTheme(){
  const root=document.documentElement;
  root.dataset.theme=theme;
  const themeSheet=document.getElementById("themeStylesheet");
- if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v="+(theme==="light"?"7":"1")";
+ if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v="+(theme==="light"?"7":"1");
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme) siteTheme.value=theme;
 }
