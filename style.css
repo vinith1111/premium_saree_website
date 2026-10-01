@@ -146,3 +146,50 @@
   .site-header .brand strong{font-size:14px;line-height:1.12}
   .site-header .header-actions{gap:4px}
 }
+
+/* Final mobile shop-name fix: use the actual header structure */
+@media(max-width:600px){
+  .header .nav{
+    height:auto;
+    min-height:68px;
+    padding:8px 12px;
+    gap:8px;
+  }
+  .header .brand{
+    flex:1 1 auto;
+    min-width:0;
+    width:auto;
+    gap:8px;
+    align-items:center;
+  }
+  .header .brand-mark{
+    flex:0 0 36px;
+    width:36px;
+    height:36px;
+  }
+  .header .brand > span:last-child{
+    flex:1 1 auto;
+    min-width:0;
+    overflow:visible;
+  }
+  .header .brand strong{
+    display:block;
+    font-size:15px;
+    line-height:1.12;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    word-break:normal;
+    overflow-wrap:normal;
+  }
+  .header .search-btn{
+    flex:0 0 38px;
+    width:38px;
+    min-width:38px;
+    padding:0;
+  }
+}
+@media(max-width:380px){
+  .header .brand strong{font-size:14px}
+  .header .brand-mark{flex-basis:34px;width:34px;height:34px}
+}
