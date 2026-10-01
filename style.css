@@ -77,3 +77,10 @@
  .header nav a,.admin-link{font-size:13px}
  .header nav{gap:12px}
 }
+
+#adminModal .settings-status{margin-top:10px;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:600;min-height:18px}
+#adminModal .settings-status.success{background:#e9f7ef}
+#adminModal .settings-status.error{background:#fff0f0}
+#adminModal .field-help{font-size:12px;line-height:1.35}
+#adminModal .settings-heading p{font-size:13px;line-height:1.4;margin:4px 0 10px}
+#adminModal .btn{cursor:pointer}
