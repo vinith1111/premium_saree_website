@@ -159,7 +159,7 @@ function render(){
    pager.classList.toggle("hidden",totalPages<=1);
  }
  const rawShopName=String(settings.shopName||"SRI SAI VANI").trim();
- const shopName=/\\bcollections\\b/i.test(rawShopName)?rawShopName:rawShopName+" COLLECTIONS";
+ const shopName=/\bcollections\b/i.test(rawShopName)?rawShopName:rawShopName+" COLLECTIONS";
  ["shopName","footerName","heroShopName"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopName});
  document.title=shopName;
  const aboutInfo=document.getElementById("aboutInfo"); if(aboutInfo) aboutInfo.textContent=settings.about||"";
