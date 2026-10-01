@@ -1,3 +1,9 @@
+function toggleMenu(){
+ const nav=document.getElementById("mainNav");
+ if(!nav) return;
+ nav.classList.toggle("mobile-open");
+ document.body.classList.toggle("menu-open",nav.classList.contains("mobile-open"));
+}
 function setupAnchorLinks(){
  document.querySelectorAll('a[href^="#"]').forEach(link=>{
    if(link.dataset.anchorBound) return;
@@ -9,6 +15,9 @@ function setupAnchorLinks(){
      if(!target) return;
      e.preventDefault();
      target.scrollIntoView({behavior:"smooth",block:"start"});
+     const nav=document.getElementById("mainNav");
+     if(nav) nav.classList.remove("mobile-open");
+     document.body.classList.remove("menu-open");
      history.replaceState(null,"","#"+id);
    });
  });
