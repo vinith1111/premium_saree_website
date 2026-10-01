@@ -78,4 +78,5 @@ try{
 }catch(e){
  if(status){status.textContent="Saved on this device. Shared sync is unavailable.";status.className="settings-status error"}
 }
+}
 syncSharedSettings();
