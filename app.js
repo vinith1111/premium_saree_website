@@ -100,6 +100,7 @@ function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
  const root=document.documentElement;
  root.dataset.theme=theme;
+ root.style.backgroundColor=theme==="light"?"#ffffff":"#171310";
  root.style.colorScheme=theme;
  document.body?.setAttribute("data-theme",theme);
  document.body?.classList.toggle("theme-light",theme==="light");
