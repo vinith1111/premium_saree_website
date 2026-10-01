@@ -1,0 +1,264 @@
+/* =========================================================
+   LIGHT THEME
+   Loaded after the core component styles.
+   Activated only when body has .theme-light.
+   ========================================================= */
+
+body.theme-light{
+  background:#ffffff;
+  color:#211b1d;
+}
+
+/* Page surfaces */
+body.theme-light .header,
+body.theme-light main,
+body.theme-light .hero,
+body.theme-light .products,
+body.theme-light .location-section,
+body.theme-light .contact,
+body.theme-light footer{
+  background:#ffffff;
+  color:#211b1d;
+}
+
+body.theme-light .hero{
+  background:#ffffff;
+}
+
+body.theme-light .location-section{
+  background:#faf8f6;
+}
+
+body.theme-light .contact{
+  background:#ffffff;
+}
+
+body.theme-light footer{
+  background:#f8f5f3;
+  border-top:1px solid #e3ddda;
+}
+
+/* Typography */
+body.theme-light h1,
+body.theme-light h2,
+body.theme-light h3,
+body.theme-light p,
+body.theme-light .section-title,
+body.theme-light .subline{
+  color:#211b1d;
+}
+
+body.theme-light p,
+body.theme-light .subline,
+body.theme-light .muted,
+body.theme-light .field-help{
+  color:#6f6668;
+}
+
+/* Header and navigation */
+body.theme-light .header{
+  border-bottom:1px solid #e3ddda;
+  box-shadow:0 2px 12px rgba(33,27,29,.04);
+}
+
+body.theme-light .brand,
+body.theme-light .brand strong,
+body.theme-light #mainNav a{
+  color:#211b1d;
+}
+
+body.theme-light .brand-mark{
+  border-color:#a65c72;
+  color:#74152f;
+}
+
+body.theme-light .mobile-menu span{
+  background:#211b1d;
+}
+
+/* Mobile menu */
+body.theme-light #mainNav.mobile-open{
+  background:#ffffff;
+  border-color:#e3ddda;
+  box-shadow:0 18px 45px rgba(33,27,29,.10);
+}
+
+body.theme-light #mainNav.mobile-open a{
+  color:#211b1d;
+  border-color:#e3ddda;
+}
+
+body.theme-light #mainNav.mobile-open .mobile-theme-control{
+  color:#6f6668;
+  border-color:#e3ddda;
+}
+
+/* Theme selector */
+body.theme-light select,
+body.theme-light .mobile-theme-control select,
+body.theme-light #siteTheme{
+  background:#ffffff;
+  color:#211b1d;
+  border:1px solid #d8d0cc;
+}
+
+/* Category controls */
+body.theme-light .category-btn{
+  background:#ffffff;
+  color:#4d4547;
+  border-color:#d8d0cc;
+}
+
+body.theme-light .category-btn:hover{
+  background:#faf8f6;
+  border-color:#a65c72;
+}
+
+body.theme-light .category-btn.active{
+  background:#74152f;
+  color:#ffffff;
+  border-color:#74152f;
+}
+
+/* Search */
+body.theme-light .premium-search,
+body.theme-light .premium-search input,
+body.theme-light #search{
+  background:#ffffff;
+  color:#211b1d;
+  border-color:#d8d0cc;
+}
+
+body.theme-light #search::placeholder{
+  color:#8a8082;
+}
+
+/* Product cards */
+body.theme-light .product-card{
+  background:#ffffff;
+  border-color:#e0d9d5;
+  box-shadow:0 8px 28px rgba(33,27,29,.05);
+}
+
+body.theme-light .product-body{
+  background:#ffffff;
+}
+
+body.theme-light .product-body h3,
+body.theme-light .price{
+  color:#211b1d;
+}
+
+body.theme-light .badge{
+  background:#211b1d;
+  color:#ffffff;
+}
+
+body.theme-light .small-wa{
+  background:#25d366;
+  color:#ffffff;
+}
+
+/* Location / contact cards */
+body.theme-light .location-card{
+  background:#ffffff;
+  border-color:#e0d9d5;
+  box-shadow:0 8px 28px rgba(33,27,29,.04);
+}
+
+body.theme-light .location-card h2,
+body.theme-light .contact h2{
+  color:#211b1d;
+}
+
+/* Primary buttons stay on-brand */
+body.theme-light .primary{
+  background:#74152f;
+  color:#ffffff;
+  border-color:#74152f;
+}
+
+body.theme-light .primary:hover{
+  background:#8e304b;
+  border-color:#8e304b;
+}
+
+/* Footer */
+body.theme-light footer a{
+  color:#5f5658;
+}
+
+body.theme-light footer a:hover{
+  color:#74152f;
+}
+
+body.theme-light .instagram-link{
+  color:#5f5658;
+}
+
+/* Admin modal also follows the selected website theme */
+body.theme-light #adminModal{
+  background:rgba(33,27,29,.38);
+}
+
+body.theme-light #adminModal .panel{
+  background:#ffffff;
+  color:#211b1d;
+  border:1px solid #e0d9d5;
+  box-shadow:0 25px 70px rgba(33,27,29,.20);
+}
+
+body.theme-light #adminModal .panel-head{
+  border-color:#e0d9d5;
+}
+
+body.theme-light #adminModal input,
+body.theme-light #adminModal textarea,
+body.theme-light #adminModal select,
+body.theme-light #adminModal .admin-theme-control select{
+  background:#ffffff;
+  color:#211b1d;
+  border-color:#d8d0cc;
+}
+
+body.theme-light #adminModal .admin-tabs button,
+body.theme-light #adminModal .admin-item button{
+  background:#ffffff;
+  color:#493d40;
+  border-color:#d8d0cc;
+}
+
+body.theme-light #adminModal .admin-item,
+body.theme-light #adminModal .settings-card{
+  background:#faf8f6;
+  border-color:#e0d9d5;
+}
+
+body.theme-light #adminModal .admin-item b,
+body.theme-light #adminModal .settings-heading h3{
+  color:#211b1d;
+}
+
+body.theme-light #adminModal .arrival-toggle{
+  background:#ffffff;
+  color:#493d40;
+  border-color:#d8d0cc;
+}
+
+/* Pagination */
+body.theme-light .catalog-pagination .btn,
+body.theme-light .admin-pagination .btn{
+  background:#ffffff;
+  color:#493d40;
+  border:1px solid #d8d0cc;
+}
+
+body.theme-light .catalog-pagination .btn:disabled,
+body.theme-light .admin-pagination .btn:disabled{
+  opacity:.45;
+}
+
+/* Image viewer remains intentionally dark for image focus */
+body.theme-light .image-modal{
+  background:rgba(20,16,17,.88);
+}
