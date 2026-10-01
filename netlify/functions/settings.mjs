@@ -4,7 +4,7 @@ import crypto from "node:crypto";
 function normalizeShopName(value){
  const raw=String(value||"SRI SAI VANI").trim();
  const base=raw.replace(/(?:\s+collections)+\s*$/i,"").trim();
- return (base||"SRI SAI VANI")+" COLLECTIONS";
+ return (!base||/^collections$/i.test(base)?"SRI SAI VANI":base)+" COLLECTIONS";
 }
 
 function authorized(req){
