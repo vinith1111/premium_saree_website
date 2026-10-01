@@ -78,18 +78,28 @@ render();
 let catalogPage=1;
 function catalogPageSize(){return window.innerWidth<=600?10:24}
 function setAdminTheme(theme){
- settings={...settings,theme:theme==="light"?"light":"dark"};
+ const selected=theme==="light"?"light":"dark";
+ settings={...settings,theme:selected};
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
  applyTheme();
- const select=document.getElementById("adminTheme");
- if(select)select.value=settings.theme;
- try{
-  fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
- }catch(e){}
+ const adminTheme=document.getElementById("adminTheme");
+ const siteTheme=document.getElementById("siteTheme");
+ if(adminTheme)adminTheme.value=selected;
+ if(siteTheme)siteTheme.value=selected;
+ fetch("/.netlify/functions/settings",{
+   method:"PUT",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify(settings)
+ }).catch(e=>console.warn("Theme sync unavailable",e));
 }
 function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
  document.documentElement.dataset.theme=theme;
+ document.documentElement.style.colorScheme=theme;
+ const adminTheme=document.getElementById("adminTheme");
+ const siteTheme=document.getElementById("siteTheme");
+ if(adminTheme)adminTheme.value=theme;
+ if(siteTheme)siteTheme.value=theme;
 }
 function render(){
  applyTheme();
