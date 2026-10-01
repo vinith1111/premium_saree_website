@@ -1,6 +1,12 @@
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 
+function normalizeShopName(value){
+ const raw=String(value||"SRI SAI VANI").trim();
+ const base=raw.replace(/(?:\s+collections)+\s*$/i,"").trim();
+ return (!base||/^collections$/i.test(base)?"SRI SAI VANI":base)+" COLLECTIONS";
+}
+
 function authorized(req){
  const secret=process.env.ADMIN_PASSWORD;if(!secret)return false;
  const cookie=req.headers.get("cookie")||"";const match=cookie.match(/(?:^|;\s*)sri_admin=([^;]+)/);const h=match?match[1]:"";if(!h)return false;
@@ -13,12 +19,23 @@ export default async(req)=>{
  const store=getStore("sri-sai-vani-settings");
  if(req.method==="GET"){
   const data=await store.get("settings",{type:"json",consistency:"strong"});
-  return Response.json(data||{});
+  if(!data)return Response.json({});
+  const clean={
+    ...data,
+    shopName:normalizeShopName(data.shopName),
+    whatsapp:String(data.whatsapp||"").replace(/\D/g,""),
+    about:String(data.about||"").trim(),
+    footer:String(data.footer||"").trim()
+  };
+  if(clean.shopName!==String(data.shopName||"")||clean.whatsapp!==String(data.whatsapp||"")||clean.about!==String(data.about||"")||clean.footer!==String(data.footer||"")){
+    await store.setJSON("settings",clean);
+  }
+  return Response.json(clean);
  }
  if(req.method==="PUT"){
   if(!authorized(req))return Response.json({error:"Admin login required"},{status:401});
   const data=await req.json();
-  const clean={shopName:String(data.shopName||"SRI SAI VANI").trim(),whatsapp:String(data.whatsapp||"").replace(/\D/g,""),about:String(data.about||"").trim(),footer:String(data.footer||"").trim()};
+  const clean={shopName:normalizeShopName(data.shopName),whatsapp:String(data.whatsapp||"").replace(/\D/g,""),about:String(data.about||"").trim(),footer:String(data.footer||"").trim()};
   if(clean.whatsapp && !/^91\d{10}$/.test(clean.whatsapp))return Response.json({error:"Invalid WhatsApp number"},{status:400});
   await store.setJSON("settings",clean);return Response.json(clean);
  }
