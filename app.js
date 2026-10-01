@@ -110,8 +110,6 @@ function setSiteTheme(theme){
 }
 function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
- const dark=document.getElementById("theme-dark"),light=document.getElementById("theme-light");
- if(dark&&light){dark.disabled=theme==="light";light.disabled=theme!=="light";}
  document.documentElement.dataset.theme=theme;
  document.documentElement.style.colorScheme=theme;
  const siteTheme=document.getElementById("siteTheme");
