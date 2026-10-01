@@ -2,10 +2,10 @@ import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 
 const defaults=[
-{id:1,name:"Banarasi Silk Saree",price:"4999",category:"Silk",color:"Ruby & Gold",description:"Lustrous silk with classic zari detailing.",image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:2,name:"Kanchipuram Heritage",price:"6999",category:"Silk",color:"Blush Pink",description:"A festive silk drape with traditional character.",image:"https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:3,name:"Handloom Cotton",price:"1799",category:"Cotton",color:"Indigo Blue",description:"Easy, breathable and beautifully textured.",image:"https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:4,name:"Festive Tissue Saree",price:"3299",category:"Festive",color:"Rose Gold",description:"Light-catching festive texture for evenings.",image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",featured:true}
+{id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Banarasi+Saree",featured:true},
+{id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Cotton+Saree",featured:false},
+{id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Party+Dress",featured:true},
+{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Casual+Dress",featured:false}
 ];
 function authorized(req){
  const secret=process.env.ADMIN_PASSWORD;if(!secret)return false;
