@@ -159,3 +159,37 @@
 #adminModal .settings-heading p,#adminModal .field-help{color:var(--muted)!important}
 .admin-theme-control{color:var(--text)!important}
 .admin-theme-control select{background:var(--bg)!important;color:var(--text)!important;border-color:var(--line)!important}
+
+/* Theme selector is always visible in Admin navigation */
+#adminModal .admin-tabs{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  flex-wrap:wrap!important;
+}
+#adminModal .admin-theme-control{
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  margin-left:auto!important;
+  padding:8px 10px!important;
+  border:1px solid var(--line)!important;
+  border-radius:7px!important;
+  background:var(--surface-2)!important;
+  color:var(--text)!important;
+  white-space:nowrap!important;
+}
+#adminModal .admin-theme-control select{
+  display:block!important;
+  min-width:82px!important;
+  padding:6px 24px 6px 8px!important;
+  background:var(--bg)!important;
+  color:var(--text)!important;
+  border:1px solid var(--line)!important;
+  border-radius:5px!important;
+}
+@media(max-width:600px){
+ #adminModal .admin-tabs{display:grid!important;grid-template-columns:1fr 1fr!important}
+ #adminModal .admin-theme-control{grid-column:1/-1;margin-left:0!important;justify-content:space-between!important}
+ #adminModal .admin-theme-control select{min-width:110px!important}
+}
