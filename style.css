@@ -328,3 +328,92 @@
   .premium-search{min-height:44px;padding:0 9px}
   .premium-search input{height:42px;font-size:14px}
 }
+
+/* Final elegant boutique visual system */
+:root{
+ --wine:#6f3947;--deep:#2d2428;--cream:#fbf8f4;--gold:#b59663;
+ --text:#302a2d;--muted:#7c7074;--line:#e7ded9;--blush:#f4e9e6;
+}
+body{background:var(--cream);color:var(--text);-webkit-font-smoothing:antialiased}
+.header{background:rgba(251,248,244,.94);border-bottom:1px solid rgba(111,57,71,.12)}
+.nav{height:72px}
+.brand{min-width:220px}
+.brand-mark{width:42px;height:42px;border-color:rgba(111,57,71,.65);color:var(--wine)}
+.brand strong{font-size:20px;letter-spacing:.01em}
+nav a{position:relative;padding:8px 0;color:#51464a}
+nav a:after{content:"";position:absolute;left:0;right:100%;bottom:1px;height:1px;background:var(--wine);transition:right .25s ease}
+nav a:hover:after{right:0}
+.search-btn{color:var(--deep)}
+.hero-simple{background:linear-gradient(180deg,#fbf8f4,#f7f0eb);min-height:420px;border-bottom:1px solid var(--line)}
+.hero-simple .hero-content{padding:70px max(25px,8vw)}
+.hero-simple .hero-content h1{font-size:clamp(45px,5vw,68px);letter-spacing:-.025em;color:#30262b}
+.hero-simple .hero-content p{font-size:14px;color:#776c70;max-width:500px}
+.eyebrow{font-size:9px;letter-spacing:.28em;color:var(--wine)}
+.primary{background:var(--wine);padding:14px 24px;letter-spacing:.14em;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+.primary:hover{background:#5d2e3a;transform:translateY(-1px);box-shadow:0 8px 20px rgba(111,57,71,.16)}
+.section{padding-top:78px;padding-bottom:78px}
+.section-title{margin-bottom:26px}
+.section-title h2,.about h2,.contact h2{color:#30262b;letter-spacing:-.015em}
+.section-title p{margin-top:8px}
+.catalog-category-tabs{gap:7px;padding:4px 0 18px}
+.catalog-category-tabs button{border:1px solid #ddd2cd;background:transparent;color:#5b4e53;border-radius:999px;padding:9px 16px;transition:all .2s ease}
+.catalog-category-tabs button:hover{border-color:var(--wine);color:var(--wine)}
+.catalog-category-tabs button.active{background:var(--wine);border-color:var(--wine);box-shadow:0 5px 14px rgba(111,57,71,.12)}
+.premium-search{border:1px solid #ddd3ce;background:#fff;border-radius:3px;min-height:46px}
+.premium-search:focus-within{border-color:var(--wine);box-shadow:0 5px 18px rgba(45,36,40,.05)}
+.product-grid{gap:22px}
+.product-card{border:1px solid #e8dfda;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(45,36,40,.08)}
+.product-image{background:#f1ebe7}
+.product-image img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.badge{top:13px;left:13px;background:rgba(255,255,255,.92);color:var(--wine);letter-spacing:.16em}
+.product-body{padding:16px}
+.product-body h3{font-size:20px;color:#352b2f}
+.subline{color:#8a7c81}
+.price{color:#3c3035}
+.small-wa{color:var(--wine)}
+.whatsapp-mini{box-shadow:0 3px 10px rgba(37,211,102,.18)}
+.about{padding-top:82px;padding-bottom:82px;background:#fff}
+.about h2{font-size:48px}
+.about p{max-width:520px}
+.text-button{color:var(--wine);letter-spacing:.04em}
+.contact{background:#efe1de;border-top:1px solid #e4d5d1}
+.contact h2{font-size:42px}
+.contact p{color:#75696d}
+.whatsapp-icon{box-shadow:0 8px 20px rgba(22,141,75,.16)}
+footer{background:#30262b;padding-top:38px;padding-bottom:38px}
+footer .brand strong{color:#fff}
+.footer-links{gap:28px}
+.footer-links a{transition:color .2s ease}
+.footer-links a:hover{color:#fff}
+.catalog-pagination{margin:28px 0 4px}
+.catalog-pagination .btn{border:1px solid #d9cec9;background:#fff;color:#51464a}
+.catalog-pagination .btn:not(:disabled):hover{border-color:var(--wine);color:var(--wine)}
+@media(max-width:900px){
+ .hero-simple{min-height:360px}
+ .hero-simple .hero-content{padding:58px 28px}
+}
+@media(max-width:600px){
+ .nav{min-height:68px;padding:8px 12px}
+ .brand{min-width:0;max-width:calc(100vw - 96px)}
+ .brand-mark{width:36px;height:36px;font-size:16px}
+ .brand strong{font-size:14px;line-height:1.1;white-space:normal;display:block}
+ .hero-simple{min-height:390px}
+ .hero-simple .hero-content{padding:55px 22px}
+ .hero-simple .hero-content h1{font-size:43px;line-height:1.03}
+ .hero-simple .hero-content p{font-size:13px;line-height:1.75}
+ .section{padding:55px 17px}
+ .section-title h2{font-size:34px}
+ .catalog-category-tabs{padding-bottom:15px}
+ .catalog-category-tabs button{padding:8px 14px;font-size:11px}
+ .product-grid{gap:10px}
+ .product-card:hover{transform:none;box-shadow:none}
+ .product-image{height:245px}
+ .product-body{padding:10px}
+ .product-body h3{font-size:16px}
+ .about{padding:58px 20px}
+ .about h2{font-size:38px}
+ .contact{padding:52px 20px}
+ .contact h2{font-size:35px}
+ footer{padding:32px 20px}
+}
