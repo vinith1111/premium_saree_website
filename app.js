@@ -95,19 +95,24 @@ render();
 }
 let catalogPage=1;
 function catalogPageSize(){return 10}
-function setSiteTheme(){ settings={...settings,theme:"light"}; applyTheme(); }
+function setSiteTheme(selected){
+ const theme=selected==="dark"?"dark":"light";
+ settings={...settings,theme};
+ try{
+   localStorage.setItem("srisai_vani_theme",theme);
+   localStorage.setItem(SETTINGS,JSON.stringify(settings));
+ }catch(e){}
+ applyTheme();
+ render();
+}
 function applyTheme(){
- const theme="light";
- settings={...settings,theme:"light"};
- document.documentElement.dataset.theme="light";
- document.documentElement.style.colorScheme="light";
- document.documentElement.style.backgroundColor="#ffffff";
- const dark=document.getElementById("theme-dark");
- const light=document.getElementById("theme-light");
- if(dark) dark.disabled=true;
- if(light) light.disabled=false;
+ const theme=settings.theme==="dark"?"dark":"light";
+ const root=document.documentElement;
+ root.dataset.theme=theme;
+ root.style.colorScheme=theme;
+ root.style.backgroundColor=theme==="light"?"#fffdf9":"#171310";
  const siteTheme=document.getElementById("siteTheme");
- if(siteTheme) siteTheme.remove();
+ if(siteTheme) siteTheme.value=theme;
 }
 function render(){
  applyTheme();
