@@ -72,6 +72,9 @@ html[data-theme="light"] .mobile-menu span{
   background:#241d1b!important;
 }
 
+
+/* DARK THEME TEMPORARILY DISABLED FOR LIGHT-THEME DEBUGGING */
+/*
 /* Dark */
 html[data-theme="dark"],html[data-theme="dark"] body{
   background:#171310!important;color:#f3e9e8!important;
@@ -92,3 +95,5 @@ html[data-theme="dark"] .premium-search,
 html[data-theme="dark"] #mainNav.mobile-open{
   color:#f3e9e8!important;
 }
+
+*/
