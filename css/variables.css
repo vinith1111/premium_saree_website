@@ -35,39 +35,9 @@
   --white:#fff;
 }
 
+/* DARK THEME DISABLED FOR WHITE-THEME TEST
 :root[data-theme="dark"]{color-scheme:dark}
+*/
 :root[data-theme="light"]{color-scheme:light}
 
-/* Explicit page theme layer */
-body.theme-light{
-  --bg:#ffffff;
-  --surface:#ffffff;
-  --surface-2:#faf8f6;
-  --text:#211b1d;
-  --muted:#6f6668;
-  --wine:#74152f;
-  --wine-2:#8e304b;
-  --rose:#a65c72;
-  --line:#e3ddda;
-  --gold:#967546;
-  --green:#25d366;
-  --white:#ffffff;
-  background:#ffffff;
-  color:#211b1d;
-}
-body.theme-dark{
-  --bg:#171310;
-  --surface:#211a18;
-  --surface-2:#281e1d;
-  --text:#f3e9e8;
-  --muted:#b9abad;
-  --wine:#680018;
-  --wine-2:#8a2340;
-  --rose:#d9a9b7;
-  --line:#4b403d;
-  --gold:#b99a6a;
-  --green:#25d366;
-  --white:#fff;
-  background:#171310;
-  color:#f3e9e8;
-}
+/* Dark theme overrides intentionally disabled during Light-theme validation. */
