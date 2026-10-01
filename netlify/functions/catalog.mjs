@@ -24,10 +24,13 @@ function validateProduct(x,i){
  };
  if(!item.name||item.name.length>100)return null;
  if(!item.price||item.price.length>20)return null;
+ const numericPrice=Number(item.price);
+ if(!Number.isFinite(numericPrice)||numericPrice<=0)return null;
  if(!item.category||item.category.length>50)return null;
  if(item.color.length>50||item.description.length>1000)return null;
  if(!item.image||item.image.length>3_000_000)return null;
  if(/^data:image\//i.test(item.image) && item.image.length>2_500_000)return null;
+ if(!(/^(?:https?:\/\/|\/|data:image\/)/i.test(item.image)))return null;
  return item;
 }
 export default async(req)=>{
@@ -59,6 +62,8 @@ export default async(req)=>{
   if(data.length>500)return Response.json({error:"Catalogue cannot contain more than 500 products."},{status:400});
   const clean=data.map(validateProduct).filter(Boolean);
   if(clean.length!==data.length)return Response.json({error:"One or more products contain invalid or oversized fields."},{status:400});
+  const ids=clean.map(x=>String(x.id));
+  if(new Set(ids).size!==ids.length)return Response.json({error:"Product IDs must be unique."},{status:400});
   await store.setJSON("items",clean);return Response.json(clean);
  }
  return new Response("Method not allowed",{status:405});
