@@ -57,3 +57,13 @@
  #adminModal .form textarea{min-height:45px}
  #adminModal .preview{max-height:65px}
 }
+
+/* Improve header navigation readability */
+.header nav a,.admin-link,.search-btn{font-size:14px}
+.header nav{gap:22px}
+.admin-link{padding:9px 14px;font-weight:600}
+.search-btn{font-size:22px;min-width:38px;min-height:38px}
+@media(max-width:600px){
+ .header nav a,.admin-link{font-size:14px}
+ .header nav{gap:14px}
+}
