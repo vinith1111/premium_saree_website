@@ -29,7 +29,29 @@ try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
 render();
 }
-function render(){const q=(document.getElementById("search")?.value||"").toLowerCase(),cat=document.getElementById("category")?.value||"";const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];const list=sarees.filter(s=>(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q))&&(!cat||String(s.category||"").toLowerCase()===String(cat).toLowerCase()));document.getElementById("catalogGrid").innerHTML=list.map(card).join("");const categoryCards=document.getElementById("categoryCards");if(categoryCards){const hasSarees=sarees.some(s=>/saree|silk|cotton|handloom|banarasi|kanchipuram|festive/i.test(String(s.category||"")+" "+String(s.name||"")));const hasDresses=sarees.some(s=>/dress/i.test(String(s.category||"")+" "+String(s.name||"")));const cards=[];if(hasSarees)cards.push('<button type="button" class="category-sarees" onclick="setCategoryType(\'Sarees\')" aria-label="Shop Sarees"><span>Sarees</span><small>View saree collection →</small></button>');if(hasDresses)cards.push('<button type="button" class="category-dresses" onclick="setCategoryType(\'Dresses\')" aria-label="Shop Dresses"><span>Dresses</span><small>View dress collection →</small></button>');categoryCards.innerHTML=cards.join("");}const featured=sarees.filter(s=>s.featured).slice(0,8);document.getElementById("featuredGrid").innerHTML=featured.map(card).join("");document.getElementById("empty").classList.toggle("hidden",list.length>0);const current=cat;document.getElementById("category").innerHTML='<option value="">All categories</option>'+cats.map(c=>'<option value="'+esc(c)+'">'+esc(c)+"</option>").join("");document.getElementById("category").value=current;document.getElementById("shopName").textContent=settings.shopName;document.title=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("heroShopName").textContent=settings.shopName;const aboutInfo=document.getElementById("aboutInfo");if(aboutInfo)aboutInfo.textContent=settings.about||"";document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");}
+function render(){
+ const q=(document.getElementById("search")?.value||"").toLowerCase();
+ const cats=[...new Set(sarees.map(s=>s.category).filter(Boolean))];
+ const current=window.selectedCategory||"";
+ const filtered=sarees.filter(s=>(!current||String(s.category||"").toLowerCase()===current.toLowerCase())&&(!q||(s.name+" "+s.category+" "+s.color+" "+s.description).toLowerCase().includes(q)));
+ const list=[...filtered].sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
+ const tabs=document.getElementById("catalogCategoryTabs");
+ if(tabs){
+   const all='<button class="'+(!current?'active':'')+'" onclick="selectCatalogCategory(\'\')">All</button>';
+   tabs.innerHTML=all+cats.map(c=>'<button class="'+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" onclick="selectCatalogCategory('+JSON.stringify(c)+')">'+esc(c.replace(/\s*Sarees?\s*/i,' Sarees').trim())+'</button>').join("");
+ }
+ document.getElementById("catalogGrid").innerHTML=list.map(card).join("");
+ document.getElementById("empty").classList.toggle("hidden",list.length>0);
+ const categoryCards=document.getElementById("categoryCards");
+ if(categoryCards){
+   categoryCards.innerHTML=cats.slice(0,4).map(c=>'<button type="button" onclick="selectCatalogCategory('+JSON.stringify(c)+');document.getElementById("catalog").scrollIntoView({behavior:"smooth"})"><span>'+esc(c)+'</span><small>Shop '+esc(c)+' →</small></button>').join("");
+ }
+ document.getElementById("shopName").textContent=settings.shopName;document.title=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("heroShopName").textContent=settings.shopName;
+ const aboutInfo=document.getElementById("aboutInfo");if(aboutInfo)aboutInfo.textContent=settings.about||"";
+ document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");
+}
+function selectCatalogCategory(category){window.selectedCategory=category||"";document.getElementById("search").value="";render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
+
 function focusSearch(){document.getElementById("search").focus();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})}
 function setCategoryType(type){const select=document.getElementById("category");select.value="";document.getElementById("search").value=type==="Sarees"?"saree":"dress";document.getElementById("catalog").scrollIntoView({behavior:"smooth"});render()}
 function setCategory(c){const select=document.getElementById("category");const exists=[...select.options].some(o=>o.value.toLowerCase()===c.toLowerCase());select.value=exists?c:"";document.getElementById("catalog").scrollIntoView({behavior:"smooth"});render()}
