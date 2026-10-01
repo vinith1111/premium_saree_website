@@ -68,8 +68,13 @@ const r=await fetch("/.netlify/functions/settings",{cache:"no-store"});
 if(r.ok){
 const remote=await r.json();
 if(remote && Object.keys(remote).length){
-settings={...settings,...remote};
-try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
+ const localThemeChanged=window.__themeChangedLocally===true;
+ settings={...settings,...remote};
+ if(localThemeChanged){
+   const savedTheme=localStorage.getItem(SETTINGS);
+   try{ if(savedTheme){ const local=JSON.parse(savedTheme); if(local.theme) settings.theme=local.theme; } }catch(e){}
+ }
+ try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 }
 }
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
@@ -80,6 +85,7 @@ function catalogPageSize(){return window.innerWidth<=600?10:24}
 function setAdminTheme(theme){
  const selected=theme==="light"?"light":"dark";
  settings={...settings,theme:selected};
+ window.__themeChangedLocally=true;
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
  applyTheme();
  const adminTheme=document.getElementById("adminTheme");
