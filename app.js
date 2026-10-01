@@ -74,7 +74,7 @@ if(remote && Object.keys(remote).length){
  settings={...settings,...remote};
  // Theme selection is a local UI preference and must not be overwritten by stale cloud settings.
  if(localTheme) settings.theme=localTheme;
- try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
+ try{localStorage.setItem(SETTINGS,JSON.stringify(settings));localStorage.setItem("srisai_vani_theme",selected)}catch(e){}
 }
 }
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
@@ -85,6 +85,7 @@ function catalogPageSize(){return 10}
 function setSiteTheme(theme){
  const selected=theme==="light"?"light":"dark";
  settings={...settings,theme:selected};
+ try{localStorage.setItem("srisai_vani_theme",selected)}catch(e){}
  window.__themeChangedLocally=true;
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
  applyTheme();
