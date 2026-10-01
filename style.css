@@ -135,3 +135,14 @@
  .admin-pagination{gap:8px;flex-wrap:wrap;text-align:center}
  .admin-pagination .btn{min-height:40px;padding:8px 12px}
 }
+/* Mobile shop-name header: keep the full name readable */
+@media(max-width:600px){
+  .site-header .header-inner{min-height:64px;gap:8px}
+  .site-header .brand{flex:1 1 auto;max-width:none;min-width:0;display:flex;align-items:center}
+  .site-header .brand strong{font-size:16px;line-height:1.15;white-space:normal;overflow:visible;text-overflow:clip;word-break:normal}
+  .site-header .header-actions{flex:0 0 auto;gap:6px}
+}
+@media(max-width:380px){
+  .site-header .brand strong{font-size:14px;line-height:1.12}
+  .site-header .header-actions{gap:4px}
+}
