@@ -1,13 +1,16 @@
 const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
-let sarees=JSON.parse(localStorage.getItem(KEY)||"null")||[
+let sarees=(()=>{try{const v=JSON.parse(localStorage.getItem(KEY)||"null");return Array.isArray(v)?v:null}catch(e){console.warn("Invalid saved catalogue; using defaults.",e);return null}})()||[
 {id:1,name:"Banarasi Silk Saree",price:"4999",category:"Silk",color:"Ruby & Gold",description:"Lustrous silk with classic zari detailing.",image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85",featured:true},
 {id:2,name:"Kanchipuram Heritage",price:"6999",category:"Silk",color:"Blush Pink",description:"A festive silk drape with traditional character.",image:"https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85",featured:true},
 {id:3,name:"Handloom Cotton",price:"1799",category:"Cotton",color:"Indigo Blue",description:"Easy, breathable and beautifully textured.",image:"https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85",featured:true},
 {id:4,name:"Festive Tissue Saree",price:"3299",category:"Festive",color:"Rose Gold",description:"Light-catching festive texture for evenings.",image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",featured:true}
 ];
-sarees.forEach((s,i)=>{if(!s.image){s.image=["https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85"][i%4]}});let settings=JSON.parse(localStorage.getItem(SETTINGS)||"null")||{shopName:"SRI SAI VANI",whatsapp:"919999999999",about:"Sri Sai Vani Saree Collections brings together elegant sarees for weddings, celebrations and everyday moments.",footer:"Beautiful sarees, personal service."};
+sarees.forEach((s,i)=>{if(!s.image){s.image=["https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85"][i%4]}});let settings=JSON.parse(localStorage.getItem(SETTINGS)||"null")||{shopName:"SRI SAI VANI",whatsapp:"",about:"Sri Sai Vani Saree Collections brings together elegant sarees for weddings, celebrations and everyday moments.",footer:"Beautiful sarees, personal service."};
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-function save(){localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings))}
+function save(){
+try{localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings));return true}
+catch(e){console.error("Local storage limit/error",e);alert("Could not save this change. Your browser storage is full. Please remove some large images or use cloud image storage.");return false}
+}
 function whatsappNumber(){const raw=String(settings.whatsapp||"").replace(/\D/g,"");return raw.length===10?"91"+raw:(raw.startsWith("91")&&raw.length===12?raw:"")}
 function whatsappLink(message){const phone=whatsappNumber();const text=encodeURIComponent(message);return phone?"https://wa.me/"+phone+"?text="+text:"https://wa.me/?text="+text}
 function wa(s){return whatsappLink("Hi, I'm interested in "+s.name+" - ₹"+s.price+". Is it available?")}
@@ -17,9 +20,9 @@ try{
 const r=await fetch("/.netlify/functions/settings",{cache:"no-store"});
 if(r.ok){
 const remote=await r.json();
-if(remote.whatsapp){
+if(remote && Object.keys(remote).length){
 settings={...settings,...remote};
-localStorage.setItem(SETTINGS,JSON.stringify(settings));
+try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 }
 }
 }catch(e){console.warn("Shared settings unavailable; using local settings.",e)}
@@ -50,7 +53,7 @@ img.src=reader.result;
 };
 reader.readAsDataURL(file);
 }
-function saveItem(id){const d={name:fName.value.trim(),price:fPrice.value,category:fCategory.value.trim(),color:fColor.value.trim(),description:fDesc.value.trim(),image:fImage.value.trim(),featured:fFeatured.checked};if(!d.name||!d.price||!d.image)return alert("Name, price and image are required.");if(id)Object.assign(sarees.find(x=>x.id===id),d);else sarees.unshift({id:Date.now(),...d});save();render();openSareeList()}
+function saveItem(id){const d={name:fName.value.trim(),price:fPrice.value,category:fCategory.value.trim(),color:fColor.value.trim(),description:fDesc.value.trim(),image:fImage.value.trim(),featured:fFeatured.checked};if(!d.name||!d.price||!d.image)return alert("Name, price and image are required.");if(id)Object.assign(sarees.find(x=>x.id===id),d);else sarees.unshift({id:Date.now(),...d});if(save()){render();openSareeList()}}
 function deleteItem(id){if(confirm("Delete this item?")){sarees=sarees.filter(s=>s.id!==id);save();render();openSareeList()}}
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
