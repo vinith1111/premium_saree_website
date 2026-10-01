@@ -291,9 +291,7 @@ if(!saveLocal()){if(status){status.textContent="Could not save this change on th
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
 try{
-const r=await fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
-if(!r.ok)throw new Error("Shared settings unavailable");
-const remote=await r.json();
+const remote=await window.SriSaiApi.settings({method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
 if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
 if(status){status.textContent="✓ Changes saved successfully.";status.className="settings-status success"}
 }catch(e){
