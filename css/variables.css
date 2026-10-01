@@ -1,35 +1,6 @@
-/* Design system */
+/* Shared design tokens and theme-independent utilities.
+   Theme colors live only in dark-theme.css / light-theme.css. */
 :root{
-  --bg:#171310;
-  --surface:#211a18;
-  --surface-2:#281e1d;
-  --text:#f3e9e8;
-  --muted:#b9abad;
-  --wine:#680018;
-  --wine-2:#8a2340;
-  --rose:#d9a9b7;
-  --line:#4b403d;
-  --gold:#b99a6a;
   --green:#25d366;
   --white:#ffffff;
-}
-
-:root[data-theme="light"]{
-  --bg:#fffdf9;
-  --surface:#ffffff;
-  --surface-2:#f7f1ea;
-  --text:#241d1b;
-  --muted:#6b625e;
-  --wine:#6b1020;
-  --wine-2:#4e0714;
-  --rose:#9b6874;
-  --line:#ded5cc;
-  --gold:#b08a57;
-  --green:#25d366;
-  --white:#ffffff;
-  color-scheme:light;
-}
-
-:root[data-theme="dark"]{
-  color-scheme:dark;
 }
