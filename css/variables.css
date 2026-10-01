@@ -4,3 +4,17 @@
   --wine:#680018;--wine-2:#8a2340;--rose:#d9a9b7;--line:#4b403d;--gold:#b99a6a;
   --green:#25d366;--white:#fff;
 }
+
+/* Optional warm colour theme selected from Admin */
+:root[data-theme="color"]{
+  --bg:#f6efe9;
+  --surface:#fffaf7;
+  --surface-2:#f0e3dd;
+  --text:#3b292d;
+  --muted:#6f5f63;
+  --wine:#7a1833;
+  --wine-2:#9b3d58;
+  --rose:#a75d73;
+  --line:#d8c8c0;
+  --gold:#9a7a48;
+}
