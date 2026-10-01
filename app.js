@@ -46,11 +46,13 @@ const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
 const DEMO_ITEMS=[
 ["Demo Banarasi Silk Saree","4999","Silk Sarees","Red & Gold"],["Demo Kanchipuram Silk Saree","6999","Silk Sarees","Royal Blue"],["Demo Cotton Saree","1999","Cotton Sarees","Sky Blue"],["Demo Linen Saree","2499","Linen Sarees","Peach"],["Demo Organza Saree","3299","Organza Sarees","Lavender"],["Demo Printed Saree","1799","Printed Sarees","Green"],["Demo Festive Saree","2899","Festive Sarees","Maroon"],["Demo Soft Silk Saree","3999","Silk Sarees","Wine"],["Demo Anarkali Dress","2999","Dresses","Pink"],["Demo Casual Dress","1799","Dresses","Green"],["Demo Party Dress","3499","Dresses","Black"],["Demo Floral Dress","2199","Dresses","Yellow"],["Demo Maxi Dress","2699","Dresses","Blue"],["Demo Embroidered Dress","3299","Dresses","Peach"],["Demo Straight Kurti","1299","Kurtis","Mustard"],["Demo Printed Kurti","1499","Kurtis","Teal"],["Demo Festive Kurti","1899","Kurtis","Wine"],["Demo Lehenga Set","5499","Lehengas","Pink"],["Demo Bridal Lehenga","8999","Lehengas","Red"],["Demo Palazzo Dress Set","2499","Dress Sets","Beige"]
 ];
+const EXTRA_DEMO_ITEMS=DEMO_ITEMS.slice(4).map((x,i)=>({id:2001+i,name:x[0],price:x[1],category:x[2],color:x[3],description:"TEST ITEM - temporary product for catalogue testing.",image:"/images/demo-"+String(i+5).padStart(2,"0")+".svg",featured:i<6}));
 let sarees=[
 {id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-banarasi-saree.svg",featured:true},
 {id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-cotton-saree.svg",featured:false},
 {id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-party-dress.svg",featured:true},
-{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false}
+{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false},
+...EXTRA_DEMO_ITEMS
 ]
 
 let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:""};
@@ -142,8 +144,12 @@ async function loadCatalog(){
 try{
 const remote=await apiCatalog();
 if(Array.isArray(remote)){
-sarees=remote;
-saveLocal();render();return true
+  const existingIds=new Set(remote.map(x=>Number(x.id)));
+  const extras=EXTRA_DEMO_ITEMS.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
+  sarees=[...remote,...extras];
+  saveLocal();
+  if(extras.length) await saveCatalog();
+  render();return true
 }
 }catch(e){console.warn("Cloud catalogue unavailable",e)}
 saveLocal();render();return false
