@@ -54,10 +54,7 @@ function render(){
    pager.innerHTML=totalPages>1?'<button class="btn" '+(catalogPage===1?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage-1)+')">Previous</button><span>Page '+catalogPage+' of '+totalPages+'</span><button class="btn" '+(catalogPage===totalPages?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage+1)+')">Next</button>':'';
    pager.classList.toggle("hidden",totalPages<=1);
  }
- const categoryCards=document.getElementById("categoryCards");
- if(categoryCards){
-   categoryCards.innerHTML=cats.slice(0,6).map(c=>'<button type="button" onclick="selectCatalogCategory('+JSON.stringify(c)+');document.getElementById("catalog").scrollIntoView({behavior:"smooth"})"><span>'+esc(c)+'</span><small>Shop '+esc(c)+' →</small></button>').join("");
- }
+ 
  document.getElementById("shopName").textContent=settings.shopName;document.title=settings.shopName;document.getElementById("footerName").textContent=settings.shopName;document.getElementById("heroShopName").textContent=settings.shopName;
  const aboutInfo=document.getElementById("aboutInfo");if(aboutInfo)aboutInfo.textContent=settings.about||"";
  document.getElementById("mainWa").href=whatsappLink("Hi, I'd like to see your collection.");
