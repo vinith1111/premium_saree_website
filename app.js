@@ -110,7 +110,7 @@ function applyTheme(){
  const root=document.documentElement;
  root.dataset.theme=theme;
  const themeSheet=document.getElementById("themeStylesheet");
- if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v="+(theme==="light"?"7":"1");
+ if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v="+(theme==="light"?"8":"2");
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme) siteTheme.value=theme;
 }
@@ -151,7 +151,8 @@ function render(){
      '<button type="button" class="btn" '+(catalogPage===1?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage-1)+')">Previous</button><span>Page '+catalogPage+' of '+totalPages+'</span><button type="button" class="btn" '+(catalogPage===totalPages?'disabled':'')+' onclick="changeCatalogPage('+(catalogPage+1)+')">Next</button>':'';
    pager.classList.toggle("hidden",totalPages<=1);
  }
- const shopName=settings.shopName||"SRI SAI VANI";
+ const rawShopName=String(settings.shopName||"SRI SAI VANI").trim();
+ const shopName=/\\bcollections\\b/i.test(rawShopName)?rawShopName:rawShopName+" COLLECTIONS";
  ["shopName","footerName","heroShopName"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopName});
  document.title=shopName;
  const aboutInfo=document.getElementById("aboutInfo"); if(aboutInfo) aboutInfo.textContent=settings.about||"";
