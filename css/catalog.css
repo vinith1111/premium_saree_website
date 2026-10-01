@@ -7,7 +7,7 @@
 .catalog-category-tabs::-webkit-scrollbar{display:none}
 .catalog-category-tabs button{flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:10px 16px;cursor:pointer;white-space:nowrap;font-size:12px}
 .catalog-category-tabs button:hover{border-color:var(--rose);color:var(--rose)}
-.catalog-category-tabs button.active{background:var(--wine);border-color:var(--wine-2);color:#fff}
+.catalog-category-tabs button.active{background:var(--wine);border-color:var(--wine-2);color:var(--white)}
 .toolbar{margin-bottom:24px}
 .premium-search{display:flex;align-items:center;min-height:48px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:0 13px}
 .premium-search:focus-within{border-color:var(--rose);box-shadow:0 0 0 2px rgba(154,106,118,.12)}
@@ -32,4 +32,4 @@
 .catalog-pagination span{font-size:12px;color:var(--muted)}
 .btn{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:9px 14px;cursor:pointer}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-.btn.dark{background:var(--wine);border-color:var(--wine);color:#fff}
+.btn.dark{background:var(--wine);border-color:var(--wine);color:var(--white)}

@@ -7,4 +7,4 @@
 .contact{padding:48px max(24px,7vw);background:var(--bg);border-top:1px solid var(--line)}
 .contact h2{margin:10px 0 10px}
 .contact-wa-button{margin-top:20px}
-.whatsapp-icon{background:var(--green);color:#fff}
+.whatsapp-icon{background:var(--green);color:var(--white)}
