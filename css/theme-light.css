@@ -1,26 +1,149 @@
-/* LIGHT THEME - explicit white storefront */
+/* =========================================================
+   SRI SAI VANI | TRUE LIGHT THEME
+   This file is intentionally loaded last.
+   ========================================================= */
 html[data-theme="light"]{
-  --bg:#fffdf9;--surface:#ffffff;--surface-2:#f7f1ea;--text:#241d1b;--muted:#6b625e;
-  --wine:#6b1020;--wine-2:#4e0714;--rose:#9b6874;--line:#ded5cc;--gold:#b08a57;
-  --green:#25d366;--white:#ffffff;color-scheme:light!important;
+  color-scheme:light!important;
+  background:#fffdf9!important;
+  --bg:#fffdf9;
+  --surface:#ffffff;
+  --surface-2:#f7f1ea;
+  --text:#241d1b;
+  --muted:#6b625e;
+  --wine:#6b1020;
+  --wine-2:#4e0714;
+  --rose:#9b6874;
+  --line:#ded5cc;
+  --gold:#b08a57;
+  --green:#25d366;
+  --white:#ffffff;
 }
-html[data-theme="light"] body{background:#fffdf9!important;color:#241d1b!important}
-html[data-theme="light"] .header,html[data-theme="light"] main,html[data-theme="light"] .hero,html[data-theme="light"] .hero-simple,html[data-theme="light"] .products,html[data-theme="light"] .section,html[data-theme="light"] .contact{background:#fffdf9!important;color:#241d1b!important}
-html[data-theme="light"] .header{border-bottom:1px solid #ded5cc!important;box-shadow:0 2px 16px rgba(36,29,27,.06)!important}
-html[data-theme="light"] .product-card,html[data-theme="light"] .product-image,html[data-theme="light"] .product-body,html[data-theme="light"] .premium-search,html[data-theme="light"] .location-card,html[data-theme="light"] #mainNav.mobile-open{background:#fff!important;color:#241d1b!important}
-html[data-theme="light"] .location-section,html[data-theme="light"] footer{background:#f7f1ea!important;color:#241d1b!important}
-html[data-theme="light"] h1,html[data-theme="light"] h2,html[data-theme="light"] h3,html[data-theme="light"] .brand,html[data-theme="light"] .brand strong,html[data-theme="light"] .product-body h3,html[data-theme="light"] .price{color:#241d1b!important}
-html[data-theme="light"] p,html[data-theme="light"] .subline,html[data-theme="light"] .muted,html[data-theme="light"] .location-card p,html[data-theme="light"] .contact p,html[data-theme="light"] footer a{color:#6b625e!important}
-html[data-theme="light"] a{color:#6b1020}
-html[data-theme="light"] .catalog-category-tabs button,html[data-theme="light"] .category-btn,html[data-theme="light"] .btn{background:#fff!important;color:#241d1b!important;border-color:#ded5cc!important}
-html[data-theme="light"] .catalog-category-tabs button.active,html[data-theme="light"] .category-btn.active,html[data-theme="light"] .primary{background:#6b1020!important;color:#fff!important;border-color:#6b1020!important}
-html[data-theme="light"] .primary:hover{background:#4e0714!important}
-html[data-theme="light"] .badge{background:#6b1020!important;color:#fff!important}
-html[data-theme="light"] .mobile-menu{color:#241d1b!important}
-html[data-theme="light"] .mobile-menu span{background:#241d1b!important}
-html[data-theme="light"] .premium-search{border-color:#ded5cc!important;box-shadow:none!important}
-html[data-theme="light"] .premium-search input{background:#fff!important;color:#241d1b!important}
-html[data-theme="light"] .premium-search input::placeholder{color:#8a817d!important}
-html[data-theme="light"] .location-card{border-color:#ded5cc!important;box-shadow:0 8px 26px rgba(36,29,27,.05)!important}
-html[data-theme="light"] footer{border-top:1px solid #ded5cc!important}
-html[data-theme="light"] .image-modal{background:rgba(15,12,13,.9)!important}
+html[data-theme="light"] body{
+  background:#fffdf9!important;
+  color:#241d1b!important;
+  color-scheme:light!important;
+}
+html[data-theme="light"] .header,
+html[data-theme="light"] main,
+html[data-theme="light"] .hero,
+html[data-theme="light"] .hero-simple,
+html[data-theme="light"] .products,
+html[data-theme="light"] .section,
+html[data-theme="light"] .contact,
+html[data-theme="light"] footer,
+html[data-theme="light"] .location-section{
+  background:#fffdf9!important;
+  color:#241d1b!important;
+}
+html[data-theme="light"] footer,
+html[data-theme="light"] .location-section{
+  background:#f7f1ea!important;
+}
+html[data-theme="light"] .header{
+  background:#ffffff!important;
+  border-bottom:1px solid #ded5cc!important;
+  box-shadow:0 2px 16px rgba(36,29,27,.06)!important;
+}
+html[data-theme="light"] .brand,
+html[data-theme="light"] .brand strong,
+html[data-theme="light"] #mainNav a,
+html[data-theme="light"] .admin-link,
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] .section-title h2,
+html[data-theme="light"] .product-body h3,
+html[data-theme="light"] .price{
+  color:#241d1b!important;
+}
+html[data-theme="light"] p,
+html[data-theme="light"] .subline,
+html[data-theme="light"] .muted,
+html[data-theme="light"] .location-card p,
+html[data-theme="light"] .contact p,
+html[data-theme="light"] footer a{
+  color:#6b625e!important;
+}
+html[data-theme="light"] .brand-mark{
+  color:#6b1020!important;
+  border-color:#b08a57!important;
+}
+html[data-theme="light"] .mobile-menu,
+html[data-theme="light"] .mobile-menu span{
+  color:#241d1b!important;
+  background-color:#241d1b!important;
+}
+html[data-theme="light"] .mobile-menu{
+  background:transparent!important;
+}
+html[data-theme="light"] #mainNav.mobile-open{
+  background:#ffffff!important;
+  color:#241d1b!important;
+  border-color:#ded5cc!important;
+  box-shadow:0 18px 40px rgba(36,29,27,.12)!important;
+}
+html[data-theme="light"] #mainNav.mobile-open a{
+  color:#241d1b!important;
+  border-color:#ded5cc!important;
+}
+html[data-theme="light"] .premium-search,
+html[data-theme="light"] .premium-search input,
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .product-image,
+html[data-theme="light"] .product-body,
+html[data-theme="light"] .location-card{
+  background:#ffffff!important;
+  color:#241d1b!important;
+}
+html[data-theme="light"] .premium-search{
+  border:1px solid #ded5cc!important;
+  box-shadow:none!important;
+}
+html[data-theme="light"] .premium-search input{
+  border:0!important;
+}
+html[data-theme="light"] .catalog-category-tabs button,
+html[data-theme="light"] .category-btn,
+html[data-theme="light"] .catalog-pagination .btn{
+  background:#ffffff!important;
+  color:#4d4541!important;
+  border:1px solid #ded5cc!important;
+}
+html[data-theme="light"] .catalog-category-tabs button.active,
+html[data-theme="light"] .category-btn.active,
+html[data-theme="light"] .primary,
+html[data-theme="light"] .btn.dark{
+  background:#6b1020!important;
+  color:#ffffff!important;
+  border-color:#6b1020!important;
+}
+html[data-theme="light"] .product-card,
+html[data-theme="light"] .location-card{
+  border:1px solid #e4ddd7!important;
+  box-shadow:0 8px 26px rgba(36,29,27,.06)!important;
+}
+html[data-theme="light"] .product-image{
+  background:#f7f1ea!important;
+}
+html[data-theme="light"] .badge{
+  background:#6b1020!important;
+  color:#ffffff!important;
+}
+html[data-theme="light"] footer{
+  border-top:1px solid #ded5cc!important;
+}
+html[data-theme="light"] footer a:hover{
+  color:#6b1020!important;
+}
+html[data-theme="light"] .eyebrow{
+  color:#9b6874!important;
+}
+html[data-theme="light"] .image-modal{
+  background:rgba(15,12,13,.9)!important;
+}
+
+/* Admin is always readable and independent of public theme */
+html[data-theme="light"] #adminModal .panel{
+  background:#f8f4f1!important;
+  color:#302a2d!important;
+}
