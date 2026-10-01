@@ -68,12 +68,12 @@ const r=await fetch("/.netlify/functions/settings",{cache:"no-store"});
 if(r.ok){
 const remote=await r.json();
 if(remote && Object.keys(remote).length){
- const localThemeChanged=window.__themeChangedLocally===true;
+ const savedTheme=localStorage.getItem(SETTINGS);
+ let localTheme="";
+ try{ if(savedTheme){ const local=JSON.parse(savedTheme); localTheme=local.theme==="light"?"light":local.theme==="dark"?"dark":""; } }catch(e){}
  settings={...settings,...remote};
- if(localThemeChanged){
-   const savedTheme=localStorage.getItem(SETTINGS);
-   try{ if(savedTheme){ const local=JSON.parse(savedTheme); if(local.theme) settings.theme=local.theme; } }catch(e){}
- }
+ // Theme selection is a local UI preference and must not be overwritten by stale cloud settings.
+ if(localTheme) settings.theme=localTheme;
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 }
 }
@@ -100,10 +100,27 @@ function setAdminTheme(theme){
 }
 function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
- document.documentElement.dataset.theme=theme;
- document.documentElement.style.colorScheme=theme;
+ const root=document.documentElement;
+ root.dataset.theme=theme;
+ root.style.colorScheme=theme;
+ document.body?.setAttribute("data-theme",theme);
  document.body?.classList.toggle("theme-light",theme==="light");
  document.body?.classList.toggle("theme-dark",theme==="dark");
+
+ // Explicit variables make the theme deterministic even if a cached stylesheet is present.
+ const vars=theme==="light" ? {
+   "--bg":"#ffffff","--surface":"#ffffff","--surface-2":"#faf8f6",
+   "--text":"#211b1d","--muted":"#6f6668","--wine":"#74152f",
+   "--wine-2":"#8e304b","--rose":"#a65c72","--line":"#e3ddda",
+   "--gold":"#967546","--green":"#25d366","--white":"#ffffff"
+ } : {
+   "--bg":"#171310","--surface":"#211a18","--surface-2":"#281e1d",
+   "--text":"#f3e9e8","--muted":"#b9abad","--wine":"#680018",
+   "--wine-2":"#8a2340","--rose":"#d9a9b7","--line":"#4b403d",
+   "--gold":"#b99a6a","--green":"#25d366","--white":"#ffffff"
+ };
+ Object.entries(vars).forEach(([key,value])=>root.style.setProperty(key,value));
+
  const adminTheme=document.getElementById("adminTheme");
  const siteTheme=document.getElementById("siteTheme");
  if(adminTheme)adminTheme.value=theme;
