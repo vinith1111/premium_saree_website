@@ -1,5 +1,4 @@
-/* Location and WhatsApp */
-/* Location and WhatsApp */
+/* Location, contact and WhatsApp */
 .location-section{padding-top:36px;padding-bottom:36px}
 .location-card{max-width:1192px;margin:auto;padding:32px 34px;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:28px}
 .location-card h2{margin:9px 0 12px}
@@ -9,4 +8,3 @@
 .contact h2{margin:10px 0 10px}
 .contact-wa-button{margin-top:20px}
 .whatsapp-icon{background:var(--green);color:#fff}
-
