@@ -15,51 +15,18 @@
 <link rel="stylesheet" href="css/admin.css?v=4">
 <link rel="stylesheet" href="css/modal.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/light-theme.css?v=7">
-<style id="theme-critical">
-html[data-theme="light"] body,
-html[data-theme="light"] body main,
-html[data-theme="light"] body .hero,
-html[data-theme="light"] body .products,
-html[data-theme="light"] body .section,
-html[data-theme="light"] body .location-section,
-html[data-theme="light"] body .contact,
-html[data-theme="light"] body footer{background:#fffdf9!important;color:#241d1b!important}
-html[data-theme="light"] body .header,
-html[data-theme="light"] body #mainNav.mobile-open,
-html[data-theme="light"] body .premium-search,
-html[data-theme="light"] body .product-card,
-html[data-theme="light"] body .product-image,
-html[data-theme="light"] body .product-body,
-html[data-theme="light"] body .location-card,
-html[data-theme="light"] body footer{background:#fff!important}
-html[data-theme="light"] body h1,
-html[data-theme="light"] body h2,
-html[data-theme="light"] body h3,
-html[data-theme="light"] body .brand,
-html[data-theme="light"] body .brand strong,
-html[data-theme="light"] body #mainNav a,
-html[data-theme="light"] body .product-body h3,
-html[data-theme="light"] body .price{color:#241d1b!important}
-html[data-theme="light"] body p,
-html[data-theme="light"] body .subline,
-html[data-theme="light"] body .muted{color:#6b625e!important}
-html[data-theme="light"] body .primary,
-html[data-theme="light"] body .catalog-category-tabs button.active{background:#6b1020!important;color:#fff!important;border-color:#6b1020!important}
-html[data-theme="light"] body .location-section,
-html[data-theme="light"] body footer{background:#f7f1ea!important}
-</style>
-<style id="theme-final">
-html[data-theme="light"],html[data-theme="light"] body{background:#fff!important;color:#211b1d!important}
-html[data-theme="light"] .header,html[data-theme="light"] main,html[data-theme="light"] .hero,html[data-theme="light"] .hero-simple,html[data-theme="light"] .products,html[data-theme="light"] .section,html[data-theme="light"] .location-section,html[data-theme="light"] .contact,html[data-theme="light"] footer{background:#fff!important;color:#211b1d!important}
-html[data-theme="light"] .location-section,html[data-theme="light"] .contact{background:#faf7f4!important}
-html[data-theme="light"] .product-card,html[data-theme="light"] .product-image,html[data-theme="light"] .product-body,html[data-theme="light"] .location-card,html[data-theme="light"] .premium-search{background:#fff!important;color:#211b1d!important;border-color:#e3ddda!important}
-html[data-theme="light"] .hero-simple h1,html[data-theme="light"] h2,html[data-theme="light"] h3,html[data-theme="light"] .brand,html[data-theme="light"] .brand strong,html[data-theme="light"] .price{color:#211b1d!important}
-html[data-theme="light"] p,html[data-theme="light"] .subline,html[data-theme="light"] .muted,html[data-theme="light"] footer a{color:#6f6668!important}
-html[data-theme="light"] .mobile-menu span{background:#211b1d!important}
-html[data-theme="light"] .primary,html[data-theme="light"] .catalog-category-tabs button.active{background:#74152f!important;color:#fff!important}
-html[data-theme="light"] #mainNav.mobile-open{background:#fff!important;color:#211b1d!important}
-</style></head>
+<link id="theme-dark" rel="stylesheet" href="css/dark.css?v=1">
+<link id="theme-light" rel="stylesheet" href="css/light.css?v=1" disabled><script>
+(function(){
+ try{
+  var t=localStorage.getItem("srisai_vani_theme");
+  if(t!=="light"&&t!=="dark"){var s=JSON.parse(localStorage.getItem("srisai_vani_settings_v2")||"null");t=s&&s.theme==="light"?"light":"dark"}
+  var d=document.getElementById("theme-dark"),l=document.getElementById("theme-light");
+  if(d&&l){d.disabled=t==="light";l.disabled=t!=="light"}
+ }catch(e){}
+})();
+</script>
+</head>
 <body>
 
 <header class="header"><div class="nav">
@@ -92,5 +59,5 @@ html[data-theme="light"] #mainNav.mobile-open{background:#fff!important;color:#2
 
 <div id="imageModal" class="image-modal hidden" onclick="closeImageViewer(event)"><button class="image-close" onclick="closeImageViewer()">×</button><img id="largeImage" alt="Product image"></div>
 <div id="adminModal" class="modal hidden"><div class="panel"><div class="panel-head"><div><span class="eyebrow">PRIVATE AREA</span><h2>Admin Studio</h2></div><button class="close" onclick="hideAdmin()">×</button></div><div id="loginBox"><p class="muted">Enter your admin password to continue.</p><input id="adminPassword" type="password" placeholder="Password"><button class="primary dark full" onclick="login()">Sign in</button><div id="loginStatus" class="settings-status" aria-live="polite"></div></div><div id="adminBox" class="hidden"><div class="admin-tabs"><button onclick="openSareeForm()">+ Add Item</button><button onclick="openSareeList()">Manage Items</button><button onclick="openSettings()">Shop settings</button></div><div id="adminContent"></div></div></div></div>
-<script src="app.js?v=999"></script>
+<script src="app.js?v=1000"></script>
 </body></html>
