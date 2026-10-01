@@ -164,7 +164,7 @@ async function saveItem(id){
 async function deleteItem(id){if(confirm("Delete this item?")){const previous=[...sarees];sarees=sarees.filter(s=>s.id!==id);if(await saveCatalog()){render();await openSareeList()}else{sarees=previous}}}
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
-document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name or WhatsApp number, then tap Save Changes.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
+document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name or WhatsApp number. You can save either one independently.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
 async function saveSettings(){
 const name=document.getElementById("setName");
 const wa=document.getElementById("setWa");
@@ -172,11 +172,11 @@ const country=document.getElementById("setCountry");
 const status=document.getElementById("settingsStatus");
 const phone=(wa?.value||"").replace(/\D/g,"");
 const existing=String(settings.whatsapp||"").replace(/\D/g,"");
-if(phone.length!==10 && !(existing.length===12 && existing.startsWith("91"))){
-if(status){status.textContent="Please enter your 10-digit WhatsApp number.";status.className="settings-status error"}
+if(phone.length!==0 && phone.length!==10){
+if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it blank.";status.className="settings-status error"}
 wa?.focus();return
 }
-const whatsapp=phone.length===10?(country?.value||"91")+phone:existing;
+const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
 settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
