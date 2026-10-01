@@ -1,3 +1,42 @@
+/* FINAL LIGHT MODE OVERRIDES */
+html[data-theme="light"],
+html[data-theme="light"] body,
+html[data-theme="light"] body main,
+html[data-theme="light"] body header,
+html[data-theme="light"] body footer{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  color:#241d1b!important;
+}
+html[data-theme="light"] body .header,
+html[data-theme="light"] body .hero,
+html[data-theme="light"] body .hero-simple,
+html[data-theme="light"] body .products,
+html[data-theme="light"] body .location-section,
+html[data-theme="light"] body .contact,
+html[data-theme="light"] body footer,
+html[data-theme="light"] body #mainNav.mobile-open{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  color:#241d1b!important;
+}
+html[data-theme="light"] body .product-card,
+html[data-theme="light"] body .product-body,
+html[data-theme="light"] body .product-image,
+html[data-theme="light"] body .location-card,
+html[data-theme="light"] body .premium-search{
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+}
+html[data-theme="light"] body h1,
+html[data-theme="light"] body h2,
+html[data-theme="light"] body h3,
+html[data-theme="light"] body p,
+html[data-theme="light"] body a,
+html[data-theme="light"] body .price{
+  color:#241d1b!important;
+}
+
 /* LIGHT THEME - full white storefront */
 /* SRI SAI VANI COLLECTIONS - LIGHT LUXURY THEME */
 html[data-theme="light"]{
