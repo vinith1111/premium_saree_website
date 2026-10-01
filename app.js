@@ -59,13 +59,23 @@ function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
 document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SHOP SETTINGS</span><h3>Store details</h3><p>Update the information customers see on the website.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp enquiry number<span class="field-help">Customers will contact this number when they tap the WhatsApp icon.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter 10-digit Indian mobile number.</span></label><label>About your shop<textarea id="setAbout" rows="4" placeholder="Tell customers about your collection...">'+esc(settings.about)+'</textarea></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
 async function saveSettings(){
-const phone=setWa.value.replace(/\D/g,"");
-if(phone.length!==10){document.getElementById("settingsStatus").textContent="Please enter a valid 10-digit WhatsApp number.";document.getElementById("settingsStatus").className="settings-status error";setWa.focus();return}
-settings={...settings,shopName:setName.value.trim()||"SRI SAI VANI",whatsapp:setCountry.value+phone,about:setAbout.value.trim(),footer:""};
-save();
-try{const r=await fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});if(!r.ok)throw new Error("Could not save shared settings");settings=await r.json();try{localStorage.setItem(SETTINGS,JSON.stringify(settings));}catch(e){} }catch(e){document.getElementById("settingsStatus").textContent="Saved on this device, but shared sync failed.";document.getElementById("settingsStatus").className="settings-status error";return}
+const name=document.getElementById("setName");
+const wa=document.getElementById("setWa");
+const country=document.getElementById("setCountry");
+const status=document.getElementById("settingsStatus");
+const phone=(wa?.value||"").replace(/\D/g,"");
+if(phone.length!==10){if(status){status.textContent="Please enter a valid 10-digit WhatsApp number.";status.className="settings-status error"};wa?.focus();return}
+settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp:(country?.value||"91")+phone,about:(document.getElementById("setAbout")?.value||"").trim(),footer:""};
+if(!save()){if(status){status.textContent="Could not save settings on this device.";status.className="settings-status error"};return}
 render();
-document.getElementById("settingsStatus").textContent="Settings saved successfully.";
-document.getElementById("settingsStatus").className="settings-status success";
+if(status){status.textContent="Saving...";status.className="settings-status"}
+try{
+ const r=await fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
+ if(!r.ok)throw new Error("Shared settings endpoint unavailable");
+ const remote=await r.json();
+ if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
+ if(status){status.textContent="Settings saved successfully.";status.className="settings-status success"}
+}catch(e){
+ if(status){status.textContent="Saved on this device. Shared sync is unavailable.";status.className="settings-status error"}
 }
 syncSharedSettings();
