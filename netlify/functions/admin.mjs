@@ -8,4 +8,3 @@ export default async (req)=>{
   if(String(body.password||"")!==password) return Response.json({error:"Incorrect password"},{status:401});
   return new Response(JSON.stringify({ok:true}),{headers:{"Content-Type":"application/json","Set-Cookie":"sri_admin="+createAdminToken(password)+"; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=28800"}});
 };
-export {validToken};
