@@ -1,264 +1,263 @@
 /* =========================================================
-   LIGHT THEME
-   Loaded after the core component styles.
-   Activated only when body has .theme-light.
+   PURE WHITE THEME
+   The Light option is intentionally a true white theme.
    ========================================================= */
 
+html[data-theme="light"],
 body.theme-light{
-  background:#ffffff;
-  color:#211b1d;
+  background:#ffffff!important;
+  color:#211b1d!important;
+  color-scheme:light;
 }
 
-/* Page surfaces */
-body.theme-light .header,
+/* Global page surfaces */
+body.theme-light,
 body.theme-light main,
 body.theme-light .hero,
 body.theme-light .products,
+body.theme-light .section,
 body.theme-light .location-section,
 body.theme-light .contact,
 body.theme-light footer{
-  background:#ffffff;
-  color:#211b1d;
+  background:#ffffff!important;
+  color:#211b1d!important;
 }
 
-body.theme-light .hero{
-  background:#ffffff;
-}
-
-body.theme-light .location-section{
-  background:#faf8f6;
-}
-
-body.theme-light .contact{
-  background:#ffffff;
-}
-
-body.theme-light footer{
-  background:#f8f5f3;
-  border-top:1px solid #e3ddda;
-}
-
-/* Typography */
-body.theme-light h1,
-body.theme-light h2,
-body.theme-light h3,
-body.theme-light p,
-body.theme-light .section-title,
-body.theme-light .subline{
-  color:#211b1d;
-}
-
-body.theme-light p,
-body.theme-light .subline,
-body.theme-light .muted,
-body.theme-light .field-help{
-  color:#6f6668;
-}
-
-/* Header and navigation */
+/* Header / navigation */
 body.theme-light .header{
-  border-bottom:1px solid #e3ddda;
-  box-shadow:0 2px 12px rgba(33,27,29,.04);
+  background:#ffffff!important;
+  border-bottom:1px solid #e5e0de!important;
+  box-shadow:0 2px 14px rgba(33,27,29,.05)!important;
+  backdrop-filter:blur(10px);
 }
-
 body.theme-light .brand,
 body.theme-light .brand strong,
-body.theme-light #mainNav a{
-  color:#211b1d;
+body.theme-light #mainNav a,
+body.theme-light .admin-link{
+  color:#211b1d!important;
 }
-
 body.theme-light .brand-mark{
-  border-color:#a65c72;
-  color:#74152f;
+  border-color:#8f5267!important;
+  color:#74152f!important;
 }
-
+body.theme-light .mobile-menu{
+  color:#211b1d!important;
+}
 body.theme-light .mobile-menu span{
-  background:#211b1d;
+  background:#211b1d!important;
 }
 
 /* Mobile menu */
 body.theme-light #mainNav.mobile-open{
-  background:#ffffff;
-  border-color:#e3ddda;
-  box-shadow:0 18px 45px rgba(33,27,29,.10);
+  background:#ffffff!important;
+  border-color:#e5e0de!important;
+  box-shadow:0 18px 45px rgba(33,27,29,.10)!important;
 }
-
 body.theme-light #mainNav.mobile-open a{
-  color:#211b1d;
-  border-color:#e3ddda;
+  color:#211b1d!important;
+  border-color:#e5e0de!important;
 }
-
-body.theme-light #mainNav.mobile-open .mobile-theme-control{
-  color:#6f6668;
-  border-color:#e3ddda;
+body.theme-light .mobile-theme-control{
+  color:#5e5658!important;
+  border-color:#e5e0de!important;
 }
-
-/* Theme selector */
-body.theme-light select,
 body.theme-light .mobile-theme-control select,
 body.theme-light #siteTheme{
-  background:#ffffff;
-  color:#211b1d;
-  border:1px solid #d8d0cc;
+  background:#ffffff!important;
+  color:#211b1d!important;
+  border:1px solid #d6cecb!important;
 }
 
-/* Category controls */
-body.theme-light .category-btn{
-  background:#ffffff;
-  color:#4d4547;
-  border-color:#d8d0cc;
+/* Hero */
+body.theme-light .hero-simple{
+  background:#ffffff!important;
+  border-bottom:1px solid #e5e0de!important;
+}
+body.theme-light .hero-simple h1,
+body.theme-light .hero-simple p{
+  color:#211b1d!important;
+}
+body.theme-light .hero-simple p{
+  color:#6c6466!important;
+}
+body.theme-light .eyebrow{
+  color:#8f5267!important;
 }
 
-body.theme-light .category-btn:hover{
-  background:#faf8f6;
-  border-color:#a65c72;
+/* Section headings */
+body.theme-light .section-title h2,
+body.theme-light .location-card h2,
+body.theme-light .contact h2{
+  color:#211b1d!important;
 }
 
-body.theme-light .category-btn.active{
-  background:#74152f;
-  color:#ffffff;
-  border-color:#74152f;
+/* Category tabs */
+body.theme-light .catalog-category-tabs button{
+  background:#ffffff!important;
+  color:#4e4749!important;
+  border-color:#d8d1ce!important;
+}
+body.theme-light .catalog-category-tabs button:hover{
+  background:#fafafa!important;
+  color:#74152f!important;
+  border-color:#a66b7d!important;
+}
+body.theme-light .catalog-category-tabs button.active{
+  background:#74152f!important;
+  color:#ffffff!important;
+  border-color:#74152f!important;
 }
 
 /* Search */
-body.theme-light .premium-search,
-body.theme-light .premium-search input,
-body.theme-light #search{
-  background:#ffffff;
-  color:#211b1d;
-  border-color:#d8d0cc;
+body.theme-light .premium-search{
+  background:#ffffff!important;
+  border-color:#d8d1ce!important;
+  box-shadow:none!important;
 }
-
-body.theme-light #search::placeholder{
-  color:#8a8082;
+body.theme-light .premium-search:focus-within{
+  background:#ffffff!important;
+  border-color:#8f5267!important;
+  box-shadow:0 0 0 2px rgba(143,82,103,.10)!important;
+}
+body.theme-light .premium-search input{
+  background:#ffffff!important;
+  color:#211b1d!important;
+}
+body.theme-light .premium-search input::placeholder{
+  color:#8a8284!important;
 }
 
 /* Product cards */
 body.theme-light .product-card{
-  background:#ffffff;
-  border-color:#e0d9d5;
-  box-shadow:0 8px 28px rgba(33,27,29,.05);
+  background:#ffffff!important;
+  border-color:#e1dbd8!important;
+  box-shadow:0 5px 20px rgba(33,27,29,.045)!important;
 }
-
+body.theme-light .product-image,
 body.theme-light .product-body{
-  background:#ffffff;
+  background:#ffffff!important;
 }
-
 body.theme-light .product-body h3,
 body.theme-light .price{
-  color:#211b1d;
+  color:#211b1d!important;
 }
-
+body.theme-light .subline,
+body.theme-light .empty,
+body.theme-light .catalog-pagination span{
+  color:#71696b!important;
+}
 body.theme-light .badge{
-  background:#211b1d;
-  color:#ffffff;
+  background:#211b1d!important;
+  color:#ffffff!important;
 }
 
-body.theme-light .small-wa{
-  background:#25d366;
-  color:#ffffff;
+/* Location */
+body.theme-light .location-section{
+  background:#ffffff!important;
 }
-
-/* Location / contact cards */
 body.theme-light .location-card{
-  background:#ffffff;
-  border-color:#e0d9d5;
-  box-shadow:0 8px 28px rgba(33,27,29,.04);
+  background:#ffffff!important;
+  border-color:#ded7d4!important;
+  box-shadow:0 5px 22px rgba(33,27,29,.045)!important;
+}
+body.theme-light .location-card p{
+  color:#6c6466!important;
 }
 
-body.theme-light .location-card h2,
-body.theme-light .contact h2{
-  color:#211b1d;
+/* WhatsApp/contact */
+body.theme-light .contact{
+  background:#ffffff!important;
+  border-top:1px solid #e5e0de!important;
+}
+body.theme-light .contact p{
+  color:#6c6466!important;
 }
 
-/* Primary buttons stay on-brand */
+/* Brand buttons */
 body.theme-light .primary{
-  background:#74152f;
-  color:#ffffff;
-  border-color:#74152f;
+  background:#74152f!important;
+  color:#ffffff!important;
+  border-color:#74152f!important;
 }
-
 body.theme-light .primary:hover{
-  background:#8e304b;
-  border-color:#8e304b;
+  background:#8e304b!important;
+  border-color:#8e304b!important;
 }
 
 /* Footer */
-body.theme-light footer a{
-  color:#5f5658;
+body.theme-light footer{
+  background:#ffffff!important;
+  border-top:1px solid #e5e0de!important;
 }
-
-body.theme-light footer a:hover{
-  color:#74152f;
+body.theme-light footer .brand strong,
+body.theme-light .footer-links a{
+  color:#5f5759!important;
 }
-
+body.theme-light .footer-links a:hover{
+  color:#74152f!important;
+}
 body.theme-light .instagram-link{
-  color:#5f5658;
-}
-
-/* Admin modal also follows the selected website theme */
-body.theme-light #adminModal{
-  background:rgba(33,27,29,.38);
-}
-
-body.theme-light #adminModal .panel{
-  background:#ffffff;
-  color:#211b1d;
-  border:1px solid #e0d9d5;
-  box-shadow:0 25px 70px rgba(33,27,29,.20);
-}
-
-body.theme-light #adminModal .panel-head{
-  border-color:#e0d9d5;
-}
-
-body.theme-light #adminModal input,
-body.theme-light #adminModal textarea,
-body.theme-light #adminModal select,
-body.theme-light #adminModal .admin-theme-control select{
-  background:#ffffff;
-  color:#211b1d;
-  border-color:#d8d0cc;
-}
-
-body.theme-light #adminModal .admin-tabs button,
-body.theme-light #adminModal .admin-item button{
-  background:#ffffff;
-  color:#493d40;
-  border-color:#d8d0cc;
-}
-
-body.theme-light #adminModal .admin-item,
-body.theme-light #adminModal .settings-card{
-  background:#faf8f6;
-  border-color:#e0d9d5;
-}
-
-body.theme-light #adminModal .admin-item b,
-body.theme-light #adminModal .settings-heading h3{
-  color:#211b1d;
-}
-
-body.theme-light #adminModal .arrival-toggle{
-  background:#ffffff;
-  color:#493d40;
-  border-color:#d8d0cc;
+  color:#5f5759!important;
 }
 
 /* Pagination */
-body.theme-light .catalog-pagination .btn,
-body.theme-light .admin-pagination .btn{
-  background:#ffffff;
-  color:#493d40;
-  border:1px solid #d8d0cc;
+body.theme-light .catalog-pagination .btn{
+  background:#ffffff!important;
+  color:#493d40!important;
+  border-color:#d8d1ce!important;
+}
+body.theme-light .catalog-pagination .btn:hover:not(:disabled){
+  border-color:#8f5267!important;
+  color:#74152f!important;
 }
 
-body.theme-light .catalog-pagination .btn:disabled,
-body.theme-light .admin-pagination .btn:disabled{
-  opacity:.45;
+/* Admin */
+body.theme-light #adminModal{
+  background:rgba(33,27,29,.32)!important;
+}
+body.theme-light #adminModal .panel{
+  background:#ffffff!important;
+  color:#211b1d!important;
+  border:1px solid #ded7d4!important;
+}
+body.theme-light #adminModal .panel-head,
+body.theme-light #adminModal .settings-heading{
+  border-color:#e1dbd8!important;
+}
+body.theme-light #adminModal input,
+body.theme-light #adminModal textarea,
+body.theme-light #adminModal select{
+  background:#ffffff!important;
+  color:#211b1d!important;
+  border-color:#d8d1ce!important;
+}
+body.theme-light #adminModal .admin-tabs button,
+body.theme-light #adminModal .admin-item,
+body.theme-light #adminModal .admin-item button,
+body.theme-light #adminModal .arrival-toggle,
+body.theme-light #adminModal .admin-pagination .btn{
+  background:#ffffff!important;
+  color:#493d40!important;
+  border-color:#d8d1ce!important;
+}
+body.theme-light #adminModal .admin-item,
+body.theme-light #adminModal .settings-card{
+  background:#fafafa!important;
+}
+body.theme-light #adminModal .admin-item b,
+body.theme-light #adminModal .settings-heading h3{
+  color:#211b1d!important;
+}
+body.theme-light #adminModal .admin-item .danger{
+  color:#9a2438!important;
+}
+body.theme-light #adminModal .admin-theme-control{
+  background:#ffffff!important;
+  color:#211b1d!important;
+  border-color:#d8d1ce!important;
 }
 
-/* Image viewer remains intentionally dark for image focus */
+/* Image viewer stays dark intentionally for image focus */
 body.theme-light .image-modal{
-  background:rgba(20,16,17,.88);
+  background:rgba(15,12,13,.88)!important;
 }
