@@ -102,6 +102,8 @@ function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
  document.documentElement.dataset.theme=theme;
  document.documentElement.style.colorScheme=theme;
+ document.body?.classList.toggle("theme-light",theme==="light");
+ document.body?.classList.toggle("theme-dark",theme==="dark");
  const adminTheme=document.getElementById("adminTheme");
  const siteTheme=document.getElementById("siteTheme");
  if(adminTheme)adminTheme.value=theme;
