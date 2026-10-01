@@ -9,7 +9,7 @@ const defaults=[
 ];
 function authorized(req){
  const secret=process.env.ADMIN_PASSWORD;if(!secret)return false;
- const h=req.headers.get("authorization")||"";if(!h.startsWith("Bearer "))return false;
+ const cookie=req.headers.get("cookie")||"";const match=cookie.match(/(?:^|;\\s*)sri_admin=([^;]+)/);const h=match?match[1]:"";if(!h)return false;
  const [payload,sig]=h.slice(7).split(".");if(!payload||!sig)return false;
  const expected=crypto.createHmac("sha256",secret).update(payload).digest("base64url");
  if(sig.length!==expected.length||!crypto.timingSafeEqual(Buffer.from(sig),Buffer.from(expected)))return false;
