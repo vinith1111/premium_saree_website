@@ -1,0 +1,78 @@
+/* Responsive */
+/* Desktop/mobile */
+@media(max-width:900px){
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .header nav{display:none}
+ .mobile-menu{display:flex}
+ .admin-link{display:none}
+}
+@media(max-width:600px){
+ .nav{min-height:68px;padding:7px 10px;gap:7px}
+ .brand{gap:8px}
+ .brand-mark{width:38px;height:38px;flex-basis:38px;font-size:16px}
+ .brand strong{font-size:14px;white-space:normal;overflow:visible;text-overflow:clip}
+ .hero-simple{min-height:320px}
+ .hero-simple .hero-content{padding:42px 20px}
+ .hero-simple h1{font-size:43px}
+ .hero-simple p{font-size:13px;line-height:1.7}
+ .primary{width:100%;text-align:center}
+ .section{padding:38px 15px}
+ .section-title h2{font-size:34px}
+ .catalog-category-tabs button{padding:9px 13px;font-size:11px}
+ .premium-search{min-height:46px}
+ .premium-search input{height:44px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .product-image{height:230px}
+ .product-body{padding:10px}
+ .product-body h3{font-size:16px}
+ .subline{font-size:9px}
+ .price{font-size:13px}
+ .whatsapp-mini{width:36px;height:36px}
+ .location-section{padding:30px 15px}
+ .location-card{display:block;padding:25px 20px}
+ .location-card h2{font-size:32px}
+ .location-card p,.contact p{font-size:12px}
+ .location-button{margin-top:20px}
+ .contact{padding:38px 18px}
+ .contact h2{font-size:35px}
+ footer{padding:28px 20px;display:block}
+ .footer-links{margin-top:20px;gap:20px}
+ .mobile-admin{display:block!important;color:var(--rose)!important;border-top:1px solid #ddd2cd;margin-top:5px;padding-top:13px}
+ #adminModal .panel{width:calc(100% - 4px);max-height:94vh;margin:3px auto;padding:15px}
+ #adminModal .admin-tabs{gap:5px}
+ #adminModal .admin-tabs button{padding:8px 7px;font-size:11px}
+ #adminModal .form .row{grid-template-columns:1fr;gap:8px}
+ #adminModal .admin-item{align-items:flex-start}
+ #adminModal .admin-item img{width:46px;height:56px}
+}
+@media(max-width:380px){
+ .product-grid{grid-template-columns:1fr}
+ .product-image{height:300px}
+ .brand strong{font-size:13px}
+}
+
+/* Mobile menu panel must sit below header and above page content */
+@media(max-width:900px){
+ .header #mainNav.mobile-open{
+   display:flex!important;
+   position:absolute;
+   top:100%;
+   left:10px;
+   right:10px;
+   flex-direction:column;
+   align-items:stretch;
+   gap:0;
+   padding:8px 15px 12px;
+   background:#211a18;
+   border:1px solid #554846;
+   box-shadow:0 18px 40px rgba(0,0,0,.45);
+   z-index:200;
+ }
+ .header #mainNav.mobile-open a{
+   display:block;
+   padding:14px 4px;
+   border-bottom:1px solid #423734;
+   color:#e9dddf;
+ }
+ .header #mainNav.mobile-open a:last-child{border-bottom:0}
+}
