@@ -1,6 +1,6 @@
 /* Footer */
 /* Footer */
-footer{background:var(--surface-2);border-top:1px solid var(--line);padding:34px max(24px,6vw);display:flex;justify-content:space-between;align-items:center;gap:24px}
+footer{background:var(--bg);border-top:1px solid var(--line);padding:34px max(24px,6vw);display:flex;justify-content:space-between;align-items:center;gap:24px}
 .footer-brand{flex:0 1 auto}
 footer .brand strong{color:var(--text)}
 .footer-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
