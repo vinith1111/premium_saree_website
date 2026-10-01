@@ -76,7 +76,7 @@ try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
 render();
 }
 let catalogPage=1;
-function catalogPageSize(){return window.innerWidth<=600?12:24}
+function catalogPageSize(){return window.innerWidth<=600?10:24}
 function render(){
  const searchEl=document.getElementById("search");
  const q=(searchEl?.value||"").trim().toLowerCase();
