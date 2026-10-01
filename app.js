@@ -1,14 +1,14 @@
 const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
+const DEMO_ITEMS=[
+["Demo Banarasi Silk Saree","4999","Silk Sarees","Red & Gold"],["Demo Kanchipuram Silk Saree","6999","Silk Sarees","Royal Blue"],["Demo Cotton Saree","1999","Cotton Sarees","Sky Blue"],["Demo Linen Saree","2499","Linen Sarees","Peach"],["Demo Organza Saree","3299","Organza Sarees","Lavender"],["Demo Printed Saree","1799","Printed Sarees","Green"],["Demo Festive Saree","2899","Festive Sarees","Maroon"],["Demo Soft Silk Saree","3999","Silk Sarees","Wine"],["Demo Anarkali Dress","2999","Dresses","Pink"],["Demo Casual Dress","1799","Dresses","Green"],["Demo Party Dress","3499","Dresses","Black"],["Demo Floral Dress","2199","Dresses","Yellow"],["Demo Maxi Dress","2699","Dresses","Blue"],["Demo Embroidered Dress","3299","Dresses","Peach"],["Demo Straight Kurti","1299","Kurtis","Mustard"],["Demo Printed Kurti","1499","Kurtis","Teal"],["Demo Festive Kurti","1899","Kurtis","Wine"],["Demo Lehenga Set","5499","Lehengas","Pink"],["Demo Bridal Lehenga","8999","Lehengas","Red"],["Demo Palazzo Dress Set","2499","Dress Sets","Beige"]
+];
 let sarees=[
 {id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-banarasi-saree.svg",featured:true},
 {id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-cotton-saree.svg",featured:false},
 {id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-party-dress.svg",featured:true},
 {id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false}
-,
-...DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<4}))]
-const DEMO_ITEMS=[
-["Demo Banarasi Silk Saree","4999","Silk Sarees","Red & Gold"],["Demo Kanchipuram Silk Saree","6999","Silk Sarees","Royal Blue"],["Demo Cotton Saree","1999","Cotton Sarees","Sky Blue"],["Demo Linen Saree","2499","Linen Sarees","Peach"],["Demo Organza Saree","3299","Organza Sarees","Lavender"],["Demo Printed Saree","1799","Printed Sarees","Green"],["Demo Festive Saree","2899","Festive Sarees","Maroon"],["Demo Soft Silk Saree","3999","Silk Sarees","Wine"],["Demo Anarkali Dress","2999","Dresses","Pink"],["Demo Casual Dress","1799","Dresses","Green"],["Demo Party Dress","3499","Dresses","Black"],["Demo Floral Dress","2199","Dresses","Yellow"],["Demo Maxi Dress","2699","Dresses","Blue"],["Demo Embroidered Dress","3299","Dresses","Peach"],["Demo Straight Kurti","1299","Kurtis","Mustard"],["Demo Printed Kurti","1499","Kurtis","Teal"],["Demo Festive Kurti","1899","Kurtis","Wine"],["Demo Lehenga Set","5499","Lehengas","Pink"],["Demo Bridal Lehenga","8999","Lehengas","Red"],["Demo Palazzo Dress Set","2499","Dress Sets","Beige"]
-];
+]
+
 let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:""};
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings));return true}catch(e){console.error("Local storage error",e);return false}}
@@ -40,16 +40,20 @@ async function login(){
  const p=document.getElementById("adminPassword"),status=document.getElementById("loginStatus");
  try{const r=await fetch("/.netlify/functions/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:p.value})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not sign in");p.value="";document.getElementById("loginBox").classList.add("hidden");document.getElementById("adminBox").classList.remove("hidden");await loadCatalog();openSareeList()}catch(e){p.value="";p.focus();if(status)status.textContent=e.message}}
 async function apiCatalog(method="GET",body=null){const opt={method,headers:{}};if(body){opt.headers["Content-Type"]="application/json";opt.body=JSON.stringify(body)}const r=await fetch("/.netlify/functions/catalog",opt);if(!r.ok)throw new Error("Could not save catalogue");return r.json()}
-async function loadCatalog(){try{const remote=await apiCatalog();if(Array.isArray(remote)){sarees=remote;saveLocal();render();return true}}catch(e){console.warn("Cloud catalogue unavailable",e)}return false}
-async function saveCatalog(){try{sarees=await apiCatalog("PUT",sarees);saveLocal();return true}catch(e){alert(e.message);return false}}
-let adminPage=1;
-const ADMIN_PAGE_SIZE=10;
-function openSareeList(page=1){
- adminPage=Math.max(1,Math.min(page,Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1));
- const start=(adminPage-1)*ADMIN_PAGE_SIZE;
- const items=sarees.slice(start,start+ADMIN_PAGE_SIZE);
- const totalPages=Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1;
- document.getElementById("adminContent").innerHTML='<div class="admin-list">'+items.map(s=>'<div class="admin-item"><img src="'+esc(s.image)+'"><div class="grow"><b>'+esc(s.name)+'</b><br>₹'+Number(s.price).toLocaleString("en-IN")+' · '+esc(s.category)+'</div><button onclick="openSareeForm('+s.id+')">Edit</button><button class="danger" onclick="deleteItem('+s.id+')">Delete</button></div>').join("")+'</div><div class="admin-pagination"><button class="btn" '+(adminPage===1?'disabled':'')+' onclick="openSareeList('+Math.max(1,adminPage-1)+')">Previous</button><span>Page '+adminPage+' of '+totalPages+' · '+sarees.length+' items</span><button class="btn" '+(adminPage===totalPages?'disabled':'')+' onclick="openSareeList('+Math.min(totalPages,adminPage+1)+')">Next</button></div>';
+async function loadCatalog(){
+try{
+const remote=await apiCatalog();
+if(Array.isArray(remote)){
+sarees=remote;
+const existing=new Set(sarees.map(s=>s.id));
+const demos=DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<4}));
+sarees=[...sarees,...demos.filter(d=>!existing.has(d.id))];
+saveLocal();render();return true
+}
+}catch(e){console.warn("Cloud catalogue unavailable",e)}
+const existing=new Set(sarees.map(s=>s.id));
+const demos=DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<4}));
+sarees=[...sarees,...demos.filter(d=>!existing.has(d.id))];saveLocal();render();return false
 }
 function openSareeForm(id=null){const s=id?sarees.find(x=>x.id===id):{name:"",price:"",category:"",color:"",description:"",image:"",featured:false};document.getElementById("adminContent").innerHTML='<div class="form"><label>Name<input id="fName" value="'+esc(s.name)+'"></label><div class="row"><label>Price<input id="fPrice" type="number" value="'+esc(s.price)+'"></label><label>Category<input id="fCategory" value="'+esc(s.category)+'"></label></div><label>Colour<input id="fColor" value="'+esc(s.color)+'"></label><label>Description<textarea id="fDesc">'+esc(s.description)+'</textarea></label><label>Image URL<input id="fImage" value="'+esc(s.image)+'"></label><label>Upload image<input id="fFile" type="file" accept="image/*" onchange="previewFile(this)"></label><img id="fPreview" class="preview '+(s.image?'':'hidden')+'" src="'+esc(s.image)+'"><label><input id="fFeatured" type="checkbox" '+(s.featured?'checked':'')+'> Show as new arrival</label><div><button class="btn dark" onclick="saveItem('+(id||"null")+')">Save Item</button> <button class="btn" onclick="openSareeList()">Cancel</button></div></div>'}
 function previewFile(input){
