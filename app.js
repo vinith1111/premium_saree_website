@@ -73,6 +73,17 @@ async function login(){
  const p=document.getElementById("adminPassword"),status=document.getElementById("loginStatus");
  try{const r=await fetch("/.netlify/functions/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:p.value})});const d=await r.json();if(!r.ok)throw new Error(d.error||"Could not sign in");p.value="";document.getElementById("loginBox").classList.add("hidden");document.getElementById("adminBox").classList.remove("hidden");await loadCatalog();openSareeList()}catch(e){p.value="";p.focus();if(status)status.textContent=e.message}}
 async function apiCatalog(method="GET",body=null){const opt={method,headers:{}};if(body){opt.headers["Content-Type"]="application/json";opt.body=JSON.stringify(body)}const r=await fetch("/.netlify/functions/catalog",opt);if(!r.ok)throw new Error("Could not save catalogue");return r.json()}
+async function saveCatalog(){
+ try{
+  const data=await apiCatalog("PUT",sarees);
+  if(!Array.isArray(data))throw new Error("Invalid catalogue response");
+  sarees=data; saveLocal(); return true;
+ }catch(e){
+  console.error("Catalogue save failed",e);
+  alert(e.message||"Could not save catalogue. Please try again.");
+  return false;
+ }
+}
 async function loadCatalog(){
 try{
 const remote=await apiCatalog();
@@ -111,7 +122,20 @@ img.src=reader.result;
 };
 reader.readAsDataURL(file);
 }
-async function saveItem(id){const d={name:document.getElementById("fName").value.trim(),price:document.getElementById("fPrice").value,category:document.getElementById("fCategory").value.trim(),color:document.getElementById("fColor").value.trim(),description:document.getElementById("fDesc").value.trim(),image:document.getElementById("fImage").value.trim(),featured:document.getElementById("fFeatured").checked};if(!d.name||!d.price||!d.image)return alert("Please enter the item name, price and add an image.");if(id)Object.assign(sarees.find(x=>x.id===id),d);else sarees.unshift({id:Date.now(),...d});if(await saveCatalog()){render();await openSareeList()}}
+async function saveItem(id){
+ const d={name:document.getElementById("fName").value.trim(),price:document.getElementById("fPrice").value,category:document.getElementById("fCategory").value.trim(),color:document.getElementById("fColor").value.trim(),description:document.getElementById("fDesc").value.trim(),image:document.getElementById("fImage").value.trim(),featured:document.getElementById("fFeatured").checked};
+ const price=Number(d.price);
+ if(!d.name)return alert("Please enter the item name.");
+ if(!Number.isFinite(price)||price<=0)return alert("Please enter a valid price greater than 0.");
+ if(!d.category)return alert("Please enter a category, for example Sarees or Dresses.");
+ if(!d.image)return alert("Please add an image URL or upload an image.");
+ if(id){
+  const existing=sarees.find(x=>x.id===id);
+  if(!existing)return alert("This item could not be found. Please refresh and try again.");
+  Object.assign(existing,d);
+ }else sarees.unshift({id:Date.now(),...d});
+ if(await saveCatalog()){render();await openSareeList()}
+}
 async function deleteItem(id){if(confirm("Delete this item?")){const previous=[...sarees];sarees=sarees.filter(s=>s.id!==id);if(await saveCatalog()){render();await openSareeList()}else{sarees=previous}}}
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
