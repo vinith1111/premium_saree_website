@@ -9,7 +9,7 @@ Premium static saree boutique site with:
 - Image URL or local upload
 - Shop + WhatsApp settings
 
-Demo admin password: admin123
+Admin password: configure `ADMIN_PASSWORD` in Netlify environment variables. Do not store the password in this repository.
 
 ## Netlify
 Connect this GitHub repository to your Netlify site. Netlify will deploy automatically whenever main changes.
