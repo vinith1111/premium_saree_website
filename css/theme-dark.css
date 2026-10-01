@@ -1,17 +1,17 @@
 /* DARK THEME - standalone */
-:root{
+html[data-theme="dark"]{
   --bg:#171310;--surface:#211a18;--surface-2:#281e1d;--text:#f3e9e8;--muted:#b9abad;
   --wine:#680018;--wine-2:#8a2340;--rose:#d9a9b7;--line:#4b403d;--gold:#b99a6a;
   --green:#25d366;--white:#fff;
   color-scheme:dark;
 }
-html,body{background:#171310!important;color:#f3e9e8!important}
-.header,main,.hero,.hero-simple,.products,.section,.contact{background:#171310!important;color:#f3e9e8!important}
-.product-card,.product-image,.product-body,.premium-search,.location-card,#mainNav.mobile-open{background:#211a18!important;color:#f3e9e8!important}
-.location-section,footer{background:#281e1d!important;color:#f3e9e8!important}
+html[data-theme="dark"] body,html[data-theme="dark"]{background:#171310!important;color:#f3e9e8!important}
+html[data-theme="dark"] .header,main,.hero,.hero-simple,.products,.section,.contact{background:#171310!important;color:#f3e9e8!important}
+html[data-theme="dark"] .product-card,.product-image,.product-body,.premium-search,.location-card,#mainNav.mobile-open{background:#211a18!important;color:#f3e9e8!important}
+html[data-theme="dark"] .location-section,footer{background:#281e1d!important;color:#f3e9e8!important}
 h1,h2,h3,p,a,.brand,.brand strong,.product-body h3,.price{color:#f3e9e8!important}
-.subline,.muted,.location-card p,.contact p,footer a{color:#b9abad!important}
-.catalog-category-tabs button,.category-btn,.btn{background:#211a18!important;color:#f3e9e8!important;border-color:#4b403d!important}
-.catalog-category-tabs button.active,.category-btn.active,.primary,.badge{background:#680018!important;color:#fff!important;border-color:#680018!important}
-.mobile-menu span{background:#f3e9e8!important}
-.premium-search input{background:#211a18!important;color:#f3e9e8!important}
+html[data-theme="dark"] .subline,.muted,.location-card p,.contact p,footer a{color:#b9abad!important}
+html[data-theme="dark"] .catalog-category-tabs button,.category-btn,.btn{background:#211a18!important;color:#f3e9e8!important;border-color:#4b403d!important}
+html[data-theme="dark"] .catalog-category-tabs button.active,.category-btn.active,.primary,.badge{background:#680018!important;color:#fff!important;border-color:#680018!important}
+html[data-theme="dark"] .mobile-menu span{background:#f3e9e8!important}
+html[data-theme="dark"] .premium-search input{background:#211a18!important;color:#f3e9e8!important}
