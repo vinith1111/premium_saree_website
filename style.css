@@ -34,3 +34,26 @@
 .settings-status.success{color:#2d7a4b}.settings-status.error{color:#b33a3a}
 .phone-field select{height:42px;margin:7px 0 0;width:88px;border:1px solid #ddd8d4;background:#f5f1ee;padding:0 10px;font:13px inherit;outline:none;cursor:pointer}.phone-field select:focus{border-color:var(--wine)}.phone-field input{height:42px}
 .mobile-admin{display:none!important}@media(max-width:600px){.mobile-admin{display:block!important;font-weight:700;color:var(--wine)!important;border-top:1px solid var(--line);margin-top:8px;padding-top:12px}}
+
+/* Compact admin panel */
+.adminModal .panel{}
+#adminModal .panel{max-height:92vh;overflow:auto}
+#adminModal .form{gap:8px}
+#adminModal .form label{margin-bottom:2px}
+#adminModal .form input,#adminModal .form textarea,#adminModal .form select{padding:8px 10px}
+#adminModal .form textarea{min-height:54px;max-height:70px}
+#adminModal .preview{max-height:90px;width:auto}
+#adminModal .form-actions{display:flex;gap:8px;margin-top:6px}
+#adminModal .form-actions .btn{padding:9px 16px}
+#adminModal .settings-form{gap:8px}
+#adminModal .settings-actions{margin-top:6px}
+@media(max-width:600px){
+ #adminModal .panel{width:calc(100% - 20px);max-height:94vh;padding:14px}
+ #adminModal .panel-head{margin-bottom:8px}
+ #adminModal .admin-tabs{gap:5px;margin-bottom:8px}
+ #adminModal .admin-tabs button{padding:8px 7px;font-size:12px}
+ #adminModal .form .row{gap:7px}
+ #adminModal .form input,#adminModal .form textarea,#adminModal .form select{padding:7px 9px;font-size:14px}
+ #adminModal .form textarea{min-height:45px}
+ #adminModal .preview{max-height:65px}
+}
