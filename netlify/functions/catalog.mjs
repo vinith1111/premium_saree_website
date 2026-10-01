@@ -21,7 +21,7 @@ export default async(req)=>{
   let data=await store.get("items",{type:"json",consistency:"strong"});
   if(!Array.isArray(data)){data=defaults;await store.setJSON("items",data)}
   else {
-   const hasOldImages=data.some(x=>/images\\.unsplash\\.com|placehold\\.co/i.test(String(x.image||"")));
+   const hasOldImages=data.some(x=>/images\.unsplash\.com|placehold\.co/i.test(String(x.image||"")));
    const hasOldDemoIds=data.some(x=>[1,2,3,4].includes(Number(x.id)));
    if(hasOldImages || hasOldDemoIds){
     data=defaults;
