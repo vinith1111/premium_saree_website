@@ -1,6 +1,6 @@
 /* Hero */
 /* Hero */
-.hero-simple{min-height:360px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,var(--surface),var(--surface-2));display:flex;align-items:center}
+.hero-simple{min-height:360px;border-bottom:1px solid var(--line);background:var(--bg);display:flex;align-items:center}
 .hero-simple .hero-content{width:100%;max-width:820px;padding:58px max(24px,7vw)}
 .eyebrow{display:block;font-size:10px;letter-spacing:.3em;font-weight:700;color:var(--rose)}
 .hero-simple h1{font:500 clamp(45px,7vw,72px)/.98 "Playfair Display";letter-spacing:-.03em;margin:20px 0 18px;color:var(--text)}
