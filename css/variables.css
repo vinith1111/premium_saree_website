@@ -18,3 +18,16 @@
   --line:#d8c8c0;
   --gold:#9a7a48;
 }
+
+:root[data-theme="light"]{
+  --bg:#faf7f4;
+  --surface:#ffffff;
+  --surface-2:#f4eeea;
+  --text:#30272a;
+  --muted:#6d6265;
+  --wine:#74152f;
+  --wine-2:#8e304b;
+  --rose:#a65c72;
+  --line:#d9cfca;
+  --gold:#967546;
+}
