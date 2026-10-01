@@ -1,3 +1,18 @@
+function setupAnchorLinks(){
+ document.querySelectorAll('a[href^="#"]').forEach(link=>{
+   if(link.dataset.anchorBound) return;
+   link.dataset.anchorBound="1";
+   link.addEventListener("click",e=>{
+     const id=link.getAttribute("href").slice(1);
+     if(!id) return;
+     const target=document.getElementById(id);
+     if(!target) return;
+     e.preventDefault();
+     target.scrollIntoView({behavior:"smooth",block:"start"});
+     history.replaceState(null,"","#"+id);
+   });
+ });
+}
 const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
 const DEMO_ITEMS=[
 ["Demo Banarasi Silk Saree","4999","Silk Sarees","Red & Gold"],["Demo Kanchipuram Silk Saree","6999","Silk Sarees","Royal Blue"],["Demo Cotton Saree","1999","Cotton Sarees","Sky Blue"],["Demo Linen Saree","2499","Linen Sarees","Peach"],["Demo Organza Saree","3299","Organza Sarees","Lavender"],["Demo Printed Saree","1799","Printed Sarees","Green"],["Demo Festive Saree","2899","Festive Sarees","Maroon"],["Demo Soft Silk Saree","3999","Silk Sarees","Wine"],["Demo Anarkali Dress","2999","Dresses","Pink"],["Demo Casual Dress","1799","Dresses","Green"],["Demo Party Dress","3499","Dresses","Black"],["Demo Floral Dress","2199","Dresses","Yellow"],["Demo Maxi Dress","2699","Dresses","Blue"],["Demo Embroidered Dress","3299","Dresses","Peach"],["Demo Straight Kurti","1299","Kurtis","Mustard"],["Demo Printed Kurti","1499","Kurtis","Teal"],["Demo Festive Kurti","1899","Kurtis","Wine"],["Demo Lehenga Set","5499","Lehengas","Pink"],["Demo Bridal Lehenga","8999","Lehengas","Red"],["Demo Palazzo Dress Set","2499","Dress Sets","Beige"]
@@ -174,7 +189,7 @@ if(status){status.textContent="✓ Changes saved successfully.";status.className
 if(status){status.textContent="Could not save online. Please try again.";status.className="settings-status error"}
 }
 }
-render();loadCatalog();syncSharedSettings();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
+render();loadCatalog();syncSharedSettings();setupAnchorLinks();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}
 
 function clearCatalogSearch(){const el=document.getElementById("search");if(el){el.value="";catalogPage=1;render();el.focus()}}
