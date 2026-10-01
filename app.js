@@ -148,7 +148,17 @@ if(Array.isArray(remote)){
   const extras=EXTRA_DEMO_ITEMS.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
   sarees=[...remote,...extras];
   saveLocal();
-  if(extras.length) await saveCatalog();
+  if(extras.length){
+    try{
+      const seeded=await apiCatalog("PUT",sarees);
+      if(Array.isArray(seeded) && seeded.length>=sarees.length){
+        sarees=seeded;
+        saveLocal();
+      }
+    }catch(e){
+      console.warn("Demo catalogue seed could not be persisted; showing the full test catalogue locally.",e);
+    }
+  }
   render();return true
 }
 }catch(e){console.warn("Cloud catalogue unavailable",e)}
