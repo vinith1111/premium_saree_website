@@ -77,12 +77,23 @@ render();
 }
 let catalogPage=1;
 function catalogPageSize(){return window.innerWidth<=600?10:24}
+function setAdminTheme(theme){
+ settings={...settings,theme:theme==="light"?"light":"dark"};
+ try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
+ applyTheme();
+ const select=document.getElementById("adminTheme");
+ if(select)select.value=settings.theme;
+ try{
+  fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
+ }catch(e){}
+}
 function applyTheme(){
  const theme=settings.theme==="light"?"light":"dark";
  document.documentElement.dataset.theme=theme;
 }
 function render(){
  applyTheme();
+ const adminTheme=document.getElementById("adminTheme"); if(adminTheme)adminTheme.value=settings.theme==="light"?"light":"dark";
  const searchEl=document.getElementById("search");
  const q=(searchEl?.value||"").trim().toLowerCase();
  const clearBtn=document.getElementById("searchClear");
