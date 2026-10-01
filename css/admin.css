@@ -92,3 +92,33 @@
   #adminModal .admin-item .danger{grid-column:2}
   #adminModal .admin-item button:not(.arrival-toggle):not(.danger){grid-column:2}
 }
+
+/* Final admin isolation: never inherit public dark-theme surfaces */
+#adminModal .panel{
+  background:#f8f4f1!important;
+  color:#302a2d!important;
+}
+#adminModal .panel-head{border-color:#ddd2cd!important}
+#adminModal .admin-tabs button{
+  background:#ffffff!important;
+  color:#493d40!important;
+}
+#adminModal .admin-item{
+  background:#ffffff!important;
+  color:#302a2d!important;
+  border-color:#ddd3ce!important;
+}
+#adminModal .admin-item button{
+  background:#ffffff!important;
+  color:#493d40!important;
+}
+#adminModal .admin-item .danger{
+  background:#ffffff!important;
+  color:#9a2438!important;
+}
+#adminModal .arrival-toggle{
+  background:#ffffff!important;
+  color:#493d40!important;
+}
+#adminModal .admin-arrival-status.is-new{color:#8a2340!important}
+#adminModal .admin-arrival-status.is-old{color:#766a6d!important}
