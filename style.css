@@ -433,3 +433,6 @@ footer .brand strong{color:#fff}
  .location-card p{font-size:12px}
  .location-button{margin-top:20px;width:100%;text-align:center}
 }
+
+.contact-wa-button{display:inline-block;margin-top:22px;text-decoration:none}
+@media(max-width:600px){.contact-wa-button{width:100%;text-align:center}}
