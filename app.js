@@ -64,19 +64,25 @@ const wa=document.getElementById("setWa");
 const country=document.getElementById("setCountry");
 const status=document.getElementById("settingsStatus");
 const phone=(wa?.value||"").replace(/\D/g,"");
-if(phone.length!==10){if(status){status.textContent="Please enter a valid 10-digit WhatsApp number.";status.className="settings-status error"};wa?.focus();return}
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp:(country?.value||"91")+phone,about:settings.about||"",footer:""};
-if(!save()){if(status){status.textContent="Could not save settings on this device.";status.className="settings-status error"};return}
+const existing=String(settings.whatsapp||"").replace(/\D/g,"");
+if(phone.length!==10 && !(existing.length===12 && existing.startsWith("91"))){
+if(status){status.textContent="Please enter your 10-digit WhatsApp number.";status.className="settings-status error"}
+wa?.focus();return
+}
+const whatsapp=phone.length===10?(country?.value||"91")+phone:existing;
+settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,about:settings.about||"",footer:""};
+if(!save()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
-if(status){status.textContent="Saving...";status.className="settings-status"}
+if(status){status.textContent="Saving changes...";status.className="settings-status"}
 try{
- const r=await fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
- if(!r.ok)throw new Error("Shared settings endpoint unavailable");
- const remote=await r.json();
- if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
- if(status){status.textContent="Settings saved successfully.";status.className="settings-status success"}
+const r=await fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
+if(!r.ok)throw new Error("Shared settings unavailable");
+const remote=await r.json();
+if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
+if(status){status.textContent="✓ Changes saved successfully.";status.className="settings-status success"}
 }catch(e){
- if(status){status.textContent="Saved on this device. Shared sync is unavailable.";status.className="settings-status error"}
+if(status){status.textContent="✓ Saved on this device. Online sync is unavailable.";status.className="settings-status error"}
 }
 }
-syncSharedSettings();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}\nfunction closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}\n
+syncSharedSettings();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
+function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}\n
