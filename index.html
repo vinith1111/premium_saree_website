@@ -10,7 +10,7 @@
 <body>
 
 <header class="header"><div class="nav">
-<button class="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false" onclick="const n=document.getElementById('mainNav');const o=n.classList.toggle('mobile-open');document.body.classList.toggle('menu-open',o);this.setAttribute('aria-expanded',o);">☰</button>
+<button id="menuToggle" class="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 <a class="brand" href="#top"><span class="brand-mark">VS</span><span><strong id="shopName">SRI SAI VANI</strong></span></a>
 <nav id="mainNav"><a href="#catalog">Collections</a><a href="#location">Visit Us</a><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav>
 <button class="admin-link" onclick="showAdmin()">Admin</button>
