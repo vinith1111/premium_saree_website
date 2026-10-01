@@ -109,11 +109,14 @@ function setSiteTheme(theme){
  render();
 }
 function applyTheme(){
- // DIAGNOSTIC: Dark theme is disabled while we verify the white storefront.
- const theme="light";
- settings.theme="light";
+ const theme=settings.theme==="light"?"light":"dark";
  document.documentElement.dataset.theme=theme;
  document.documentElement.style.colorScheme=theme;
+ document.documentElement.style.backgroundColor=theme==="light"?"#fffdf9":"#171310";
+ const dark=document.getElementById("theme-dark");
+ const light=document.getElementById("theme-light");
+ if(dark) dark.disabled=theme==="light";
+ if(light) light.disabled=theme!=="light";
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme)siteTheme.value=theme;
 }
