@@ -21,7 +21,7 @@
 <header class="header"><div class="nav">
 <button id="menuToggle" class="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
 <a class="brand" href="#top"><span class="brand-mark">VS</span><span><strong id="shopName">SRI SAI VANI</strong></span></a>
-<nav id="mainNav"><a href="#catalog">Collections</a><a href="#location">Visit Us</a><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav>
+<nav id="mainNav"><a href="#catalog">Collections</a><a href="#location">Visit Us</a><div class="mobile-theme-control"><label for="siteTheme">Theme</label><select id="siteTheme" aria-label="Website theme" onchange="setAdminTheme(this.value)"><option value="dark">Dark</option><option value="light">Light</option></select></div><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav>
 <button class="admin-link" onclick="showAdmin()">Admin</button>
 </div></header>
 
