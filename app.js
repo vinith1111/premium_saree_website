@@ -56,6 +56,12 @@ let sarees=[
 ]
 
 let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:"",theme:"dark"};
+// Theme has one authoritative browser preference. This prevents an older cached/cloud setting
+// from putting the storefront back into Dark after Light was selected.
+try{
+  const savedTheme=localStorage.getItem("srisai_vani_theme");
+  if(savedTheme==="light" || savedTheme==="dark") settings.theme=savedTheme;
+}catch(e){}
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings));return true}catch(e){console.error("Local storage error",e);return false}}
 function whatsappNumber(){const raw=String(settings.whatsapp||"").replace(/\D/g,"");return raw.length===10?"91"+raw:(raw.startsWith("91")&&raw.length===12?raw:"")}
@@ -68,11 +74,18 @@ const r=await fetch("/.netlify/functions/settings",{cache:"no-store"});
 if(r.ok){
 const remote=await r.json();
 if(remote && Object.keys(remote).length){
- const savedTheme=localStorage.getItem(SETTINGS);
+ const savedTheme=localStorage.getItem("srisai_vani_theme");
+ const settingsSnapshot=localStorage.getItem(SETTINGS);
  let localTheme="";
- try{ if(savedTheme){ const local=JSON.parse(savedTheme); localTheme=local.theme==="light"?"light":local.theme==="dark"?"dark":""; } }catch(e){}
+ try{
+   if(savedTheme==="light" || savedTheme==="dark") localTheme=savedTheme;
+   else if(settingsSnapshot){
+     const local=JSON.parse(settingsSnapshot);
+     localTheme=local.theme==="light"?"light":local.theme==="dark"?"dark":"";
+   }
+ }catch(e){}
  settings={...settings,...remote};
- // Theme selection is a local UI preference and must not be overwritten by stale cloud settings.
+ // Theme is device/browser UI preference, never a stale cloud preference.
  if(localTheme) settings.theme=localTheme;
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings));localStorage.setItem("srisai_vani_theme",settings.theme)}catch(e){}
 }
