@@ -109,8 +109,8 @@ function applyTheme(){
  const theme=settings.theme==="dark"?"dark":"light";
  const root=document.documentElement;
  root.dataset.theme=theme;
- root.style.colorScheme=theme;
- root.style.backgroundColor=theme==="light"?"#fffdf9":"#171310";
+ const themeSheet=document.getElementById("themeStylesheet");
+ if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v=1";
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme) siteTheme.value=theme;
 }
