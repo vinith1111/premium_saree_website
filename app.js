@@ -55,6 +55,17 @@ const existing=new Set(sarees.map(s=>s.id));
 const demos=DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<4}));
 sarees=[...sarees,...demos.filter(d=>!existing.has(d.id))];saveLocal();render();return false
 }
+let adminPage=1;
+const ADMIN_PAGE_SIZE=10;
+function openSareeList(page=1){
+ adminPage=Math.max(1,Math.min(Number(page)||1,Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1));
+ const start=(adminPage-1)*ADMIN_PAGE_SIZE;
+ const items=sarees.slice(start,start+ADMIN_PAGE_SIZE);
+ const totalPages=Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1;
+ const el=document.getElementById("adminContent");
+ if(!el)return;
+ el.innerHTML='<div class="admin-list">'+items.map(s=>'<div class="admin-item"><img src="'+esc(s.image)+'"><div class="grow"><b>'+esc(s.name)+'</b><br>₹'+Number(s.price).toLocaleString("en-IN")+' · '+esc(s.category)+'</div><button onclick="openSareeForm('+s.id+')">Edit</button><button class="danger" onclick="deleteItem('+s.id+')">Delete</button></div>').join("")+'</div><div class="admin-pagination"><button class="btn" '+(adminPage===1?'disabled':'')+' onclick="openSareeList('+(adminPage-1)+')">Previous</button><span>Page '+adminPage+' of '+totalPages+' · '+sarees.length+' items</span><button class="btn" '+(adminPage===totalPages?'disabled':'')+' onclick="openSareeList('+(adminPage+1)+')">Next</button></div>';
+}
 function openSareeForm(id=null){const s=id?sarees.find(x=>x.id===id):{name:"",price:"",category:"",color:"",description:"",image:"",featured:false};document.getElementById("adminContent").innerHTML='<div class="form"><label>Name<input id="fName" value="'+esc(s.name)+'"></label><div class="row"><label>Price<input id="fPrice" type="number" value="'+esc(s.price)+'"></label><label>Category<input id="fCategory" value="'+esc(s.category)+'"></label></div><label>Colour<input id="fColor" value="'+esc(s.color)+'"></label><label>Description<textarea id="fDesc">'+esc(s.description)+'</textarea></label><label>Image URL<input id="fImage" value="'+esc(s.image)+'"></label><label>Upload image<input id="fFile" type="file" accept="image/*" onchange="previewFile(this)"></label><img id="fPreview" class="preview '+(s.image?'':'hidden')+'" src="'+esc(s.image)+'"><label><input id="fFeatured" type="checkbox" '+(s.featured?'checked':'')+'> Show as new arrival</label><div><button class="btn dark" onclick="saveItem('+(id||"null")+')">Save Item</button> <button class="btn" onclick="openSareeList()">Cancel</button></div></div>'}
 function previewFile(input){
 const file=input.files[0];if(!file)return;
