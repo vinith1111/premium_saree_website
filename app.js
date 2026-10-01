@@ -120,6 +120,31 @@ function applyTheme(){
  };
  Object.entries(vars).forEach(([key,value])=>root.style.setProperty(key,value));
 
+ // Hard-apply the public theme to the actual storefront surfaces.
+ const light=theme==="light";
+ const bg=light?"#ffffff":"#171310";
+ const surface=light?"#ffffff":"#211a18";
+ const soft=light?"#faf7f4":"#281e1d";
+ const text=light?"#211b1d":"#f3e9e8";
+ const muted=light?"#6f6668":"#b9abad";
+ const line=light?"#e3ddda":"#4b403d";
+ const wine=light?"#74152f":"#680018";
+ const surfaces=[
+   document.body,document.querySelector(".header"),document.querySelector("main"),
+   document.querySelector(".hero"),document.querySelector(".hero-simple"),
+   document.querySelector(".products"),document.querySelector(".location-section"),
+   document.querySelector(".contact"),document.querySelector("footer"),
+   document.querySelector("#mainNav.mobile-open")
+ ].filter(Boolean);
+ surfaces.forEach(el=>{el.style.setProperty("background-color",el===document.querySelector(".location-section")||el===document.querySelector(".contact")&&light?soft:bg,"important");el.style.setProperty("color",text,"important");});
+ document.querySelectorAll(".product-card,.product-image,.product-body,.location-card,.premium-search").forEach(el=>{
+   el.style.setProperty("background-color",surface,"important");
+   el.style.setProperty("color",text,"important");
+   el.style.setProperty("border-color",line,"important");
+ });
+ document.querySelectorAll(".hero-simple h1,.section-title h2,.location-card h2,.contact h2,.product-body h3,.price,.brand,.brand strong").forEach(el=>el.style.setProperty("color",text,"important"));
+ document.querySelectorAll(".hero-simple p,.subline,.location-card p,.contact p,.footer-links a,.muted").forEach(el=>el.style.setProperty("color",muted,"important"));
+ document.querySelectorAll(".primary,.catalog-category-tabs button.active").forEach(el=>{el.style.setProperty("background-color",wine,"important");el.style.setProperty("color","#fff","important");});
  const adminTheme=document.getElementById("adminTheme");
  const siteTheme=document.getElementById("siteTheme");
  if(adminTheme)adminTheme.value=theme;
