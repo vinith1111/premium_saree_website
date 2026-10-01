@@ -95,30 +95,19 @@ render();
 }
 let catalogPage=1;
 function catalogPageSize(){return 10}
-function setSiteTheme(theme){
- const selected=theme==="light"?"light":"dark";
- settings={...settings,theme:selected};
- const dark=document.getElementById("theme-dark");
- const light=document.getElementById("theme-light");
- if(dark&&light){dark.disabled=selected==="light";light.disabled=selected!=="light";}
- document.documentElement.dataset.theme=selected;
- try{localStorage.setItem("srisai_vani_theme",selected);localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
- const siteTheme=document.getElementById("siteTheme");
- if(siteTheme)siteTheme.value=selected;
- fetch("/.netlify/functions/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)}).catch(e=>console.warn("Theme sync unavailable",e));
- render();
-}
+function setSiteTheme(){ settings={...settings,theme:"light"}; applyTheme(); }
 function applyTheme(){
- const theme=settings.theme==="light"?"light":"dark";
- document.documentElement.dataset.theme=theme;
- document.documentElement.style.colorScheme=theme;
- document.documentElement.style.backgroundColor=theme==="light"?"#fffdf9":"#171310";
+ const theme="light";
+ settings={...settings,theme:"light"};
+ document.documentElement.dataset.theme="light";
+ document.documentElement.style.colorScheme="light";
+ document.documentElement.style.backgroundColor="#ffffff";
  const dark=document.getElementById("theme-dark");
  const light=document.getElementById("theme-light");
- if(dark) dark.disabled=theme==="light";
- if(light) light.disabled=theme!=="light";
+ if(dark) dark.disabled=true;
+ if(light) light.disabled=false;
  const siteTheme=document.getElementById("siteTheme");
- if(siteTheme)siteTheme.value=theme;
+ if(siteTheme) siteTheme.remove();
 }
 function render(){
  applyTheme();
@@ -279,7 +268,7 @@ if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it bla
 wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:settings.theme==="light"?"light":"dark",about:settings.about||"",footer:""};
+settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:"light",about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
