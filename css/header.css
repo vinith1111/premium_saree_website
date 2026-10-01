@@ -1,6 +1,6 @@
 /* Header and navigation */
 /* Header */
-.header{position:sticky;top:0;z-index:100;background:rgba(23,19,16,.97);border-bottom:1px solid #302824;backdrop-filter:blur(12px)}
+.header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 96%, transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
 .nav{max-width:1240px;min-height:72px;margin:auto;padding:8px 24px;display:flex;align-items:center;gap:16px;position:relative}
 .mobile-menu{display:none;width:44px;height:44px;border:0;background:transparent;color:var(--text);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:8px;flex:0 0 44px}
 .mobile-menu span{width:26px;height:2px;background:currentColor;border-radius:2px;transition:.2s}
@@ -8,11 +8,11 @@
 .mobile-menu[aria-expanded="true"] span:nth-child(2){opacity:0}
 .mobile-menu[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;color:var(--text);flex:1}
-.brand-mark{width:42px;height:42px;flex:0 0 42px;border:1px solid #754052;border-radius:50%;display:grid;place-items:center;font:18px "Playfair Display";color:var(--rose)}
+.brand-mark{width:42px;height:42px;flex:0 0 42px;border:1px solid var(--rose);border-radius:50%;display:grid;place-items:center;font:18px "Playfair Display";color:var(--rose)}
 .brand strong{font:19px/1.15 "Playfair Display";letter-spacing:.01em;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .header nav{display:flex;align-items:center;justify-content:flex-end;gap:24px}
 .header nav a,.admin-link{font-size:12px;color:var(--muted);text-decoration:none;border:0;background:none;cursor:pointer;padding:9px 4px}
 .header nav a:hover,.admin-link:hover{color:var(--text)}
-.admin-link{border:1px solid #5b4a48;border-radius:999px;padding:8px 14px}
+.admin-link{border:1px solid var(--line);border-radius:999px;padding:8px 14px}
 .mobile-admin{display:none}
 
