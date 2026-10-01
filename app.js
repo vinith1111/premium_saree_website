@@ -80,7 +80,7 @@ function card(s){return '<article class="product-card"><div class="product-image
 async function syncSharedSettings(){
 try{
 const r=await window.SriSaiApi.settings({cache:"no-store"});
-if(r.ok){
+if(r && typeof r==="object" && Object.keys(r).length){
 const remote=r;
 if(remote && Object.keys(remote).length){
  const savedTheme=localStorage.getItem("srisai_vani_theme");
