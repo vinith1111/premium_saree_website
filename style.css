@@ -445,3 +445,6 @@ footer .brand strong{color:#fff}
  .contact{padding:38px 18px}
  .contact-wa-button{margin-top:18px}
 }
+
+.instagram-link{display:inline-flex;align-items:center;gap:8px}
+.instagram-icon{width:18px;height:18px;flex:none}
