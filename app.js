@@ -146,6 +146,7 @@ const remote=await apiCatalog();
 if(Array.isArray(remote)){
   const existingIds=new Set(remote.map(x=>Number(x.id)));
   const extras=EXTRA_DEMO_ITEMS.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
+  // Keep the temporary 20-item test catalogue available until real products replace it.
   sarees=[...remote,...extras];
   saveLocal();
   if(extras.length){
