@@ -86,7 +86,9 @@ function render(){
  ["shopName","footerName","heroShopName"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopName});
  document.title=shopName;
  const aboutInfo=document.getElementById("aboutInfo"); if(aboutInfo) aboutInfo.textContent=settings.about||"";
- const mainWa=document.getElementById("mainWa"); if(mainWa) mainWa.href=whatsappLink("Hi, I'd like to see your collection.");
+ const mainWaLink=whatsappLink("Hi, I'd like to see your collection.");
+ const mainWa=document.getElementById("mainWa"); if(mainWa) mainWa.href=mainWaLink;
+ const mainWaButton=document.getElementById("mainWaButton"); if(mainWaButton) mainWaButton.href=mainWaLink;
 }
 function escAttr(value){return String(value??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function selectCatalogCategory(category){window.selectedCategory=String(category||"").trim();catalogPage=1;const search=document.getElementById("search");if(search)search.value="";render()}
