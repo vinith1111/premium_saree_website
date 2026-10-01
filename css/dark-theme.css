@@ -1,0 +1,20 @@
+/* SRI SAI VANI COLLECTIONS | DARK THEME */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#171310;
+  --surface:#211a18;
+  --surface-2:#281e1d;
+  --text:#f3e9e8;
+  --muted:#b9abad;
+  --wine:#680018;
+  --wine-2:#8a2340;
+  --rose:#d9a9b7;
+  --line:#4b403d;
+  --gold:#b99a6a;
+  --green:#25d366;
+  --white:#ffffff;
+}
+html[data-theme="dark"],html[data-theme="dark"] body{
+  background:#171310;
+  color:#f3e9e8;
+}
