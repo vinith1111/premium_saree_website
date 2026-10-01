@@ -1,4 +1,4 @@
-const KEY="srisai_vani_items_v1", SETTINGS="srisai_vani_settings_v1";
+const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
 let sarees=JSON.parse(localStorage.getItem(KEY)||"null")||[
 {id:1,name:"Banarasi Silk Saree",price:"4999",category:"Silk",color:"Ruby & Gold",description:"Lustrous silk with classic zari detailing.",image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85",featured:true},
 {id:2,name:"Kanchipuram Heritage",price:"6999",category:"Silk",color:"Blush Pink",description:"A festive silk drape with traditional character.",image:"https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85",featured:true},
