@@ -448,3 +448,11 @@ footer .brand strong{color:#fff}
 
 .instagram-link{display:inline-flex;align-items:center;gap:8px}
 .instagram-icon{width:18px;height:18px;flex:none}
+
+.footer-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.instagram-link{display:inline-flex!important;align-items:center;gap:7px}
+.instagram-icon{width:18px!important;height:18px!important}
+@media(max-width:600px){
+ .footer-links{gap:20px}
+ .instagram-link{display:inline-flex!important}
+}
