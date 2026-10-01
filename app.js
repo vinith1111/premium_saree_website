@@ -1,11 +1,11 @@
 const KEY="srisai_vani_items_v2", SETTINGS="srisai_vani_settings_v2";
-let sarees=(()=>{try{const v=JSON.parse(localStorage.getItem(KEY)||"null");return Array.isArray(v)?v:null}catch(e){console.warn("Invalid saved catalogue; using defaults.",e);return null}})()||[
-{id:1,name:"Banarasi Silk Saree",price:"4999",category:"Silk",color:"Ruby & Gold",description:"Lustrous silk with classic zari detailing.",image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:2,name:"Kanchipuram Heritage",price:"6999",category:"Silk",color:"Blush Pink",description:"A festive silk drape with traditional character.",image:"https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:3,name:"Handloom Cotton",price:"1799",category:"Cotton",color:"Indigo Blue",description:"Easy, breathable and beautifully textured.",image:"https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85",featured:true},
-{id:4,name:"Festive Tissue Saree",price:"3299",category:"Festive",color:"Rose Gold",description:"Light-catching festive texture for evenings.",image:"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85",featured:true}
+let sarees=[
+{id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-banarasi-saree.svg",featured:true},
+{id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-cotton-saree.svg",featured:false},
+{id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-party-dress.svg",featured:true},
+{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false}
 ];
-sarees.forEach((s,i)=>{if(!s.image){s.image=["https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1610189012906-1b89d7b2f4f5?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1583391733981-8498406f7f0c?auto=format&fit=crop&w=900&q=85","https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=85"][i%4]}});let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:""};
+let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:""};
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings));return true}catch(e){console.error("Local storage error",e);return false}}
 function whatsappNumber(){const raw=String(settings.whatsapp||"").replace(/\D/g,"");return raw.length===10?"91"+raw:(raw.startsWith("91")&&raw.length===12?raw:"")}
