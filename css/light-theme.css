@@ -1,263 +1,301 @@
+/* Hard override: Light mode is driven by the root theme attribute.
+   This avoids any dependency on body class timing or cached theme state. */
+html[data-theme="light"] body,
+html[data-theme="light"] body main,
+html[data-theme="light"] body .hero,
+html[data-theme="light"] body .products,
+html[data-theme="light"] body .section,
+html[data-theme="light"] body .location-section,
+html[data-theme="light"] body .contact,
+html[data-theme="light"] body footer{
+  background:#ffffff!important;
+  color:#211b1d!important;
+}
+html[data-theme="light"] body .header,
+html[data-theme="light"] body #mainNav.mobile-open,
+html[data-theme="light"] body .premium-search,
+html[data-theme="light"] body .product-card,
+html[data-theme="light"] body .product-image,
+html[data-theme="light"] body .product-body,
+html[data-theme="light"] body .location-card,
+html[data-theme="light"] body .contact,
+html[data-theme="light"] body footer{
+  background:#ffffff!important;
+}
+html[data-theme="light"] body .section-title h2,
+html[data-theme="light"] body .location-card h2,
+html[data-theme="light"] body .contact h2,
+html[data-theme="light"] body .product-body h3,
+html[data-theme="light"] body .price{
+  color:#211b1d!important;
+}
+html[data-theme="light"] body .subline,
+html[data-theme="light"] body .location-card p,
+html[data-theme="light"] body .contact p,
+html[data-theme="light"] body .footer-links a{
+  color:#6c6466!important;
+}
+
 /* =========================================================
    PURE WHITE THEME
    The Light option is intentionally a true white theme.
    ========================================================= */
 
 html[data-theme="light"],
-body.theme-light{
+html[data-theme="light"] body{
   background:#ffffff!important;
   color:#211b1d!important;
   color-scheme:light;
 }
 
 /* Global page surfaces */
-body.theme-light,
-body.theme-light main,
-body.theme-light .hero,
-body.theme-light .products,
-body.theme-light .section,
-body.theme-light .location-section,
-body.theme-light .contact,
-body.theme-light footer{
+html[data-theme="light"] body,
+html[data-theme="light"] body main,
+html[data-theme="light"] body .hero,
+html[data-theme="light"] body .products,
+html[data-theme="light"] body .section,
+html[data-theme="light"] body .location-section,
+html[data-theme="light"] body .contact,
+html[data-theme="light"] body footer{
   background:#ffffff!important;
   color:#211b1d!important;
 }
 
 /* Header / navigation */
-body.theme-light .header{
+html[data-theme="light"] body .header{
   background:#ffffff!important;
   border-bottom:1px solid #e5e0de!important;
   box-shadow:0 2px 14px rgba(33,27,29,.05)!important;
   backdrop-filter:blur(10px);
 }
-body.theme-light .brand,
-body.theme-light .brand strong,
-body.theme-light #mainNav a,
-body.theme-light .admin-link{
+html[data-theme="light"] body .brand,
+html[data-theme="light"] body .brand strong,
+html[data-theme="light"] body #mainNav a,
+html[data-theme="light"] body .admin-link{
   color:#211b1d!important;
 }
-body.theme-light .brand-mark{
+html[data-theme="light"] body .brand-mark{
   border-color:#8f5267!important;
   color:#74152f!important;
 }
-body.theme-light .mobile-menu{
+html[data-theme="light"] body .mobile-menu{
   color:#211b1d!important;
 }
-body.theme-light .mobile-menu span{
+html[data-theme="light"] body .mobile-menu span{
   background:#211b1d!important;
 }
 
 /* Mobile menu */
-body.theme-light #mainNav.mobile-open{
+html[data-theme="light"] body #mainNav.mobile-open{
   background:#ffffff!important;
   border-color:#e5e0de!important;
   box-shadow:0 18px 45px rgba(33,27,29,.10)!important;
 }
-body.theme-light #mainNav.mobile-open a{
+html[data-theme="light"] body #mainNav.mobile-open a{
   color:#211b1d!important;
   border-color:#e5e0de!important;
 }
-body.theme-light .mobile-theme-control{
+html[data-theme="light"] body .mobile-theme-control{
   color:#5e5658!important;
   border-color:#e5e0de!important;
 }
-body.theme-light .mobile-theme-control select,
-body.theme-light #siteTheme{
+html[data-theme="light"] body .mobile-theme-control select,
+html[data-theme="light"] body #siteTheme{
   background:#ffffff!important;
   color:#211b1d!important;
   border:1px solid #d6cecb!important;
 }
 
 /* Hero */
-body.theme-light .hero-simple{
+html[data-theme="light"] body .hero-simple{
   background:#ffffff!important;
   border-bottom:1px solid #e5e0de!important;
 }
-body.theme-light .hero-simple h1,
-body.theme-light .hero-simple p{
+html[data-theme="light"] body .hero-simple h1,
+html[data-theme="light"] body .hero-simple p{
   color:#211b1d!important;
 }
-body.theme-light .hero-simple p{
+html[data-theme="light"] body .hero-simple p{
   color:#6c6466!important;
 }
-body.theme-light .eyebrow{
+html[data-theme="light"] body .eyebrow{
   color:#8f5267!important;
 }
 
 /* Section headings */
-body.theme-light .section-title h2,
-body.theme-light .location-card h2,
-body.theme-light .contact h2{
+html[data-theme="light"] body .section-title h2,
+html[data-theme="light"] body .location-card h2,
+html[data-theme="light"] body .contact h2{
   color:#211b1d!important;
 }
 
 /* Category tabs */
-body.theme-light .catalog-category-tabs button{
+html[data-theme="light"] body .catalog-category-tabs button{
   background:#ffffff!important;
   color:#4e4749!important;
   border-color:#d8d1ce!important;
 }
-body.theme-light .catalog-category-tabs button:hover{
+html[data-theme="light"] body .catalog-category-tabs button:hover{
   background:#fafafa!important;
   color:#74152f!important;
   border-color:#a66b7d!important;
 }
-body.theme-light .catalog-category-tabs button.active{
+html[data-theme="light"] body .catalog-category-tabs button.active{
   background:#74152f!important;
   color:#ffffff!important;
   border-color:#74152f!important;
 }
 
 /* Search */
-body.theme-light .premium-search{
+html[data-theme="light"] body .premium-search{
   background:#ffffff!important;
   border-color:#d8d1ce!important;
   box-shadow:none!important;
 }
-body.theme-light .premium-search:focus-within{
+html[data-theme="light"] body .premium-search:focus-within{
   background:#ffffff!important;
   border-color:#8f5267!important;
   box-shadow:0 0 0 2px rgba(143,82,103,.10)!important;
 }
-body.theme-light .premium-search input{
+html[data-theme="light"] body .premium-search input{
   background:#ffffff!important;
   color:#211b1d!important;
 }
-body.theme-light .premium-search input::placeholder{
+html[data-theme="light"] body .premium-search input::placeholder{
   color:#8a8284!important;
 }
 
 /* Product cards */
-body.theme-light .product-card{
+html[data-theme="light"] body .product-card{
   background:#ffffff!important;
   border-color:#e1dbd8!important;
   box-shadow:0 5px 20px rgba(33,27,29,.045)!important;
 }
-body.theme-light .product-image,
-body.theme-light .product-body{
+html[data-theme="light"] body .product-image,
+html[data-theme="light"] body .product-body{
   background:#ffffff!important;
 }
-body.theme-light .product-body h3,
-body.theme-light .price{
+html[data-theme="light"] body .product-body h3,
+html[data-theme="light"] body .price{
   color:#211b1d!important;
 }
-body.theme-light .subline,
-body.theme-light .empty,
-body.theme-light .catalog-pagination span{
+html[data-theme="light"] body .subline,
+html[data-theme="light"] body .empty,
+html[data-theme="light"] body .catalog-pagination span{
   color:#71696b!important;
 }
-body.theme-light .badge{
+html[data-theme="light"] body .badge{
   background:#211b1d!important;
   color:#ffffff!important;
 }
 
 /* Location */
-body.theme-light .location-section{
+html[data-theme="light"] body .location-section{
   background:#ffffff!important;
 }
-body.theme-light .location-card{
+html[data-theme="light"] body .location-card{
   background:#ffffff!important;
   border-color:#ded7d4!important;
   box-shadow:0 5px 22px rgba(33,27,29,.045)!important;
 }
-body.theme-light .location-card p{
+html[data-theme="light"] body .location-card p{
   color:#6c6466!important;
 }
 
 /* WhatsApp/contact */
-body.theme-light .contact{
+html[data-theme="light"] body .contact{
   background:#ffffff!important;
   border-top:1px solid #e5e0de!important;
 }
-body.theme-light .contact p{
+html[data-theme="light"] body .contact p{
   color:#6c6466!important;
 }
 
 /* Brand buttons */
-body.theme-light .primary{
+html[data-theme="light"] body .primary{
   background:#74152f!important;
   color:#ffffff!important;
   border-color:#74152f!important;
 }
-body.theme-light .primary:hover{
+html[data-theme="light"] body .primary:hover{
   background:#8e304b!important;
   border-color:#8e304b!important;
 }
 
 /* Footer */
-body.theme-light footer{
+html[data-theme="light"] body footer{
   background:#ffffff!important;
   border-top:1px solid #e5e0de!important;
 }
-body.theme-light footer .brand strong,
-body.theme-light .footer-links a{
+html[data-theme="light"] body footer .brand strong,
+html[data-theme="light"] body .footer-links a{
   color:#5f5759!important;
 }
-body.theme-light .footer-links a:hover{
+html[data-theme="light"] body .footer-links a:hover{
   color:#74152f!important;
 }
-body.theme-light .instagram-link{
+html[data-theme="light"] body .instagram-link{
   color:#5f5759!important;
 }
 
 /* Pagination */
-body.theme-light .catalog-pagination .btn{
+html[data-theme="light"] body .catalog-pagination .btn{
   background:#ffffff!important;
   color:#493d40!important;
   border-color:#d8d1ce!important;
 }
-body.theme-light .catalog-pagination .btn:hover:not(:disabled){
+html[data-theme="light"] body .catalog-pagination .btn:hover:not(:disabled){
   border-color:#8f5267!important;
   color:#74152f!important;
 }
 
 /* Admin */
-body.theme-light #adminModal{
+html[data-theme="light"] body #adminModal{
   background:rgba(33,27,29,.32)!important;
 }
-body.theme-light #adminModal .panel{
+html[data-theme="light"] body #adminModal .panel{
   background:#ffffff!important;
   color:#211b1d!important;
   border:1px solid #ded7d4!important;
 }
-body.theme-light #adminModal .panel-head,
-body.theme-light #adminModal .settings-heading{
+html[data-theme="light"] body #adminModal .panel-head,
+html[data-theme="light"] body #adminModal .settings-heading{
   border-color:#e1dbd8!important;
 }
-body.theme-light #adminModal input,
-body.theme-light #adminModal textarea,
-body.theme-light #adminModal select{
+html[data-theme="light"] body #adminModal input,
+html[data-theme="light"] body #adminModal textarea,
+html[data-theme="light"] body #adminModal select{
   background:#ffffff!important;
   color:#211b1d!important;
   border-color:#d8d1ce!important;
 }
-body.theme-light #adminModal .admin-tabs button,
-body.theme-light #adminModal .admin-item,
-body.theme-light #adminModal .admin-item button,
-body.theme-light #adminModal .arrival-toggle,
-body.theme-light #adminModal .admin-pagination .btn{
+html[data-theme="light"] body #adminModal .admin-tabs button,
+html[data-theme="light"] body #adminModal .admin-item,
+html[data-theme="light"] body #adminModal .admin-item button,
+html[data-theme="light"] body #adminModal .arrival-toggle,
+html[data-theme="light"] body #adminModal .admin-pagination .btn{
   background:#ffffff!important;
   color:#493d40!important;
   border-color:#d8d1ce!important;
 }
-body.theme-light #adminModal .admin-item,
-body.theme-light #adminModal .settings-card{
+html[data-theme="light"] body #adminModal .admin-item,
+html[data-theme="light"] body #adminModal .settings-card{
   background:#fafafa!important;
 }
-body.theme-light #adminModal .admin-item b,
-body.theme-light #adminModal .settings-heading h3{
+html[data-theme="light"] body #adminModal .admin-item b,
+html[data-theme="light"] body #adminModal .settings-heading h3{
   color:#211b1d!important;
 }
-body.theme-light #adminModal .admin-item .danger{
+html[data-theme="light"] body #adminModal .admin-item .danger{
   color:#9a2438!important;
 }
-body.theme-light #adminModal .admin-theme-control{
+html[data-theme="light"] body #adminModal .admin-theme-control{
   background:#ffffff!important;
   color:#211b1d!important;
   border-color:#d8d1ce!important;
 }
 
 /* Image viewer stays dark intentionally for image focus */
-body.theme-light .image-modal{
+html[data-theme="light"] body .image-modal{
   background:rgba(15,12,13,.88)!important;
 }
