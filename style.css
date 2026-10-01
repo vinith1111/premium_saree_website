@@ -420,3 +420,16 @@ footer .brand strong{color:#fff}
  .contact{padding:40px 18px}
  footer{padding-top:26px;padding-bottom:26px}
 }
+
+.location-section{padding-top:42px;padding-bottom:42px}
+.location-card{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px 36px;background:#f5ece9;border:1px solid #e5d8d3}
+.location-card h2{font-size:38px;margin:8px 0}
+.location-card p{max-width:540px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.location-button{white-space:nowrap}
+@media(max-width:600px){
+ .location-section{padding:34px 15px}
+ .location-card{display:block;padding:26px 20px}
+ .location-card h2{font-size:32px}
+ .location-card p{font-size:12px}
+ .location-button{margin-top:20px;width:100%;text-align:center}
+}
