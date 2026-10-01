@@ -22,6 +22,16 @@ function openSareeForm(id=null){const s=id?sarees.find(x=>x.id===id):{name:"",pr
 function previewFile(input){if(input.files[0]){const r=new FileReader();r.onload=()=>{fImage.value=r.result;fPreview.src=r.result;fPreview.classList.remove("hidden")};r.readAsDataURL(input.files[0])}}
 function saveItem(id){const d={name:fName.value.trim(),price:fPrice.value,category:fCategory.value.trim(),color:fColor.value.trim(),description:fDesc.value.trim(),image:fImage.value.trim(),featured:fFeatured.checked};if(!d.name||!d.price||!d.image)return alert("Name, price and image are required.");if(id)Object.assign(sarees.find(x=>x.id===id),d);else sarees.unshift({id:Date.now(),...d});save();render();openSareeList()}
 function deleteItem(id){if(confirm("Delete this item?")){sarees=sarees.filter(s=>s.id!==id);save();render();openSareeList()}}
-function openSettings(){document.getElementById("adminContent").innerHTML='<div class="form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'"></label><label>WhatsApp number<input id="setWa" value="'+esc(settings.whatsapp)+'" placeholder="9198..."></label><label>Our story<textarea id="setAbout">'+esc(settings.about)+'</textarea></label><label>Footer line<input id="setFooter" value="'+esc(settings.footer)+'"></label><button class="btn dark" onclick="saveSettings()">Save settings</button></div>'}
-function saveSettings(){settings={shopName:setName.value.trim()||"SRI SAI VANI",whatsapp:setWa.value.replace(/\D/g,""),about:setAbout.value.trim(),footer:setFooter.value.trim()};save();render();alert("Settings saved")}
+function openSettings(){
+const mobile=settings.whatsapp.replace(/^91/,"").slice(-10);
+document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SHOP SETTINGS</span><h3>Store details</h3><p>Update the information customers see on the website.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp enquiry number<span class="field-help">Customers will contact this number when they tap the WhatsApp icon.</span><div class="phone-field"><span class="country-code">+91</span><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210"></div><span class="field-help">Enter 10-digit Indian mobile number.</span></label><label>About your shop<textarea id="setAbout" rows="4" placeholder="Tell customers about your collection...">'+esc(settings.about)+'</textarea></label><label>Footer message<input id="setFooter" value="'+esc(settings.footer)+'" placeholder="Beautiful sarees, personal service."></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
+function saveSettings(){
+const phone=setWa.value.replace(/\D/g,"");
+if(phone.length!==10){document.getElementById("settingsStatus").textContent="Please enter a valid 10-digit WhatsApp number.";document.getElementById("settingsStatus").className="settings-status error";setWa.focus();return}
+settings={shopName:setName.value.trim()||"SRI SAI VANI",whatsapp:"91"+phone,about:setAbout.value.trim(),footer:setFooter.value.trim()};
+save();render();
+document.getElementById("settingsStatus").textContent="Settings saved successfully.";
+document.getElementById("settingsStatus").className="settings-status success";
+}
+render();alert("Settings saved")}
 render();
