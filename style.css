@@ -118,3 +118,5 @@
   .product-grid{grid-template-columns:1fr}
   .product-image{height:300px}
 }
+
+.admin-pagination{display:flex;align-items:center;justify-content:center;gap:12px;margin:16px 0;font-size:13px}.admin-pagination button:disabled{opacity:.45;cursor:not-allowed}
