@@ -20,16 +20,18 @@
 }
 
 :root[data-theme="light"]{
-  --bg:#faf7f4;
+  --bg:#ffffff;
   --surface:#ffffff;
-  --surface-2:#f4eeea;
-  --text:#30272a;
-  --muted:#6d6265;
+  --surface-2:#faf8f6;
+  --text:#211b1d;
+  --muted:#6f6668;
   --wine:#74152f;
   --wine-2:#8e304b;
   --rose:#a65c72;
-  --line:#d9cfca;
+  --line:#e3ddda;
   --gold:#967546;
+  --green:#25d366;
+  --white:#fff;
 }
 
 :root[data-theme="dark"]{color-scheme:dark}
