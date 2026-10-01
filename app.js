@@ -110,7 +110,7 @@ function applyTheme(){
  const root=document.documentElement;
  root.dataset.theme=theme;
  const themeSheet=document.getElementById("themeStylesheet");
- if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v=1";
+ if(themeSheet) themeSheet.href="css/"+theme+"-theme.css?v=6";
  const siteTheme=document.getElementById("siteTheme");
  if(siteTheme) siteTheme.value=theme;
 }
@@ -273,7 +273,7 @@ if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it bla
 wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:"light",about:settings.about||"",footer:""};
+settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
