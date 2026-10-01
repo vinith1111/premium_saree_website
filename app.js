@@ -159,7 +159,8 @@ function render(){
    pager.classList.toggle("hidden",totalPages<=1);
  }
  const rawShopName=String(settings.shopName||"SRI SAI VANI").trim();
- const shopName=/\bcollections\b/i.test(rawShopName)?rawShopName:rawShopName+" COLLECTIONS";
+ const baseShopName=rawShopName.replace(/(?:\s+collections)+\s*$/i,"").trim();
+ const shopName=baseShopName?baseShopName+" COLLECTIONS":"SRI SAI VANI COLLECTIONS";
  ["shopName","footerName","heroShopName"].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=shopName});
  document.title=shopName;
  const aboutInfo=document.getElementById("aboutInfo"); if(aboutInfo) aboutInfo.textContent=settings.about||"";
@@ -282,7 +283,9 @@ if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it bla
 wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
+const enteredShopName=(name?.value||"").trim()||"SRI SAI VANI";
+const normalizedShopName=enteredShopName.replace(/(?:\s+collections)+\s*$/i,"").trim()||"SRI SAI VANI";
+settings={...settings,shopName:normalizedShopName,whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
