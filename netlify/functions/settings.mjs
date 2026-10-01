@@ -29,7 +29,7 @@ export default async(req)=>{
   const contentLength=Number(req.headers.get("content-length")||0);
   if(contentLength>50_000)return Response.json({error:"Settings request is too large."},{status:413});
   const data=await req.json().catch(()=>({}));
-  const clean={shopName:normalizeShopName(data.shopName),whatsapp:String(data.whatsapp||"").replace(/\D/g,""),about:String(data.about||"").trim(),footer:String(data.footer||"").trim()};
+  const clean={shopName:normalizeShopName(data.shopName).slice(0,100),whatsapp:String(data.whatsapp||"").replace(/\D/g,""),about:String(data.about||"").trim().slice(0,2000),footer:String(data.footer||"").trim().slice(0,1000)};
   if(clean.whatsapp && !/^91\d{10}$/.test(clean.whatsapp))return Response.json({error:"Invalid WhatsApp number"},{status:400});
   await store.setJSON("settings",clean);return Response.json(clean);
  }
