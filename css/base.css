@@ -8,5 +8,5 @@ button,input,textarea,select{font:inherit}
 button{touch-action:manipulation}
 img{display:block;max-width:100%}
 .hidden{display:none!important}
-.muted{color:#766a6d}
+.muted{color:var(--muted)}
 .full{width:100%}
