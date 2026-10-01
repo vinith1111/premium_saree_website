@@ -1,5 +1,4 @@
 /* Admin */
-/* Admin */
 .modal{position:fixed;inset:0;z-index:300;background:rgba(8,5,5,.78);padding:16px;overflow:auto}
 .panel{width:min(820px,100%);margin:20px auto;background:#f8f4f1;color:#302a2d;padding:22px;border-radius:8px;box-shadow:0 25px 70px rgba(0,0,0,.45)}
 .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;border-bottom:1px solid #ddd2cd;padding-bottom:14px;margin-bottom:14px}
@@ -36,3 +35,60 @@
 .admin-arrival-status.is-new{color:#8a2340}
 .admin-arrival-status.is-old{color:#766a6d}
 .arrival-toggle{border:1px solid #cdbfc0;background:#faf7f5;color:#493d40;padding:7px 9px;cursor:pointer;font-size:11px}
+
+/* Admin is intentionally light and isolated from the public dark theme */
+#adminModal{color-scheme:light}
+#adminModal .panel{color:#302a2d}
+#adminModal button{font-family:"DM Sans",sans-serif}
+#adminModal .admin-item button,
+#adminModal .arrival-toggle,
+#adminModal .admin-tabs button,
+#adminModal .admin-pagination .btn{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  background:#fff!important;
+  color:#493d40!important;
+  border:1px solid #d5c9c4!important;
+  box-shadow:none!important;
+  text-shadow:none!important;
+}
+#adminModal .admin-item button:hover,
+#adminModal .arrival-toggle:hover,
+#adminModal .admin-tabs button:hover{
+  background:#f3ece8!important;
+  color:#302a2d!important;
+  border-color:#bcaeaa!important;
+}
+#adminModal .admin-item .danger{
+  color:#9a2438!important;
+}
+#adminModal .arrival-toggle{
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:600;
+}
+#adminModal .admin-item{
+  color:#302a2d;
+}
+#adminModal .admin-item b{color:#302a2d}
+#adminModal .btn.dark{
+  background:#680018!important;
+  color:#fff!important;
+  border-color:#680018!important;
+}
+@media(max-width:600px){
+  #adminModal .admin-item{
+    display:grid;
+    grid-template-columns:46px minmax(0,1fr);
+    align-items:start;
+  }
+  #adminModal .admin-item img{grid-row:1 / span 2}
+  #adminModal .admin-item .grow{min-width:0}
+  #adminModal .admin-item button{
+    min-height:40px;
+    font-size:11px;
+  }
+  #adminModal .arrival-toggle{grid-column:2}
+  #adminModal .admin-item .danger{grid-column:2}
+  #adminModal .admin-item button:not(.arrival-toggle):not(.danger){grid-column:2}
+}
