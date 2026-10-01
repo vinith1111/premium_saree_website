@@ -1,17 +1,87 @@
-/* LIGHT THEME - standalone */
+/* TRUE LIGHT LUXURY THEME */
 :root{
-  --bg:#fffdf9;--surface:#fff;--surface-2:#f7f1ea;--text:#241d1b;--muted:#6b625e;
-  --wine:#6b1020;--wine-2:#4e0714;--rose:#9b6874;--line:#ded5cc;--gold:#b08a57;
-  --green:#25d366;--white:#fff;
-  color-scheme:light;
+  --bg:#fffdf9;
+  --surface:#ffffff;
+  --surface-2:#f7f1ea;
+  --text:#241d1b;
+  --muted:#6b625e;
+  --wine:#6b1020;
+  --wine-2:#4e0714;
+  --rose:#9b6874;
+  --line:#ded5cc;
+  --gold:#b08a57;
+  --green:#25d366;
+  --white:#ffffff;
+  color-scheme:light!important;
 }
-html,body{background:#fffdf9!important;color:#241d1b!important}
-.header,main,.hero,.hero-simple,.products,.section,.contact{background:#fffdf9!important;color:#241d1b!important}
-.product-card,.product-image,.product-body,.premium-search,.location-card,#mainNav.mobile-open{background:#fff!important;color:#241d1b!important}
-.location-section,footer{background:#f7f1ea!important;color:#241d1b!important}
-h1,h2,h3,p,a,.brand,.brand strong,.product-body h3,.price{color:#241d1b!important}
-.subline,.muted,.location-card p,.contact p,footer a{color:#6b625e!important}
-.catalog-category-tabs button,.category-btn,.btn{background:#fff!important;color:#241d1b!important;border-color:#ded5cc!important}
-.catalog-category-tabs button.active,.category-btn.active,.primary,.badge{background:#6b1020!important;color:#fff!important;border-color:#6b1020!important}
-.mobile-menu span{background:#241d1b!important}
-.premium-search input{background:#fff!important;color:#241d1b!important}
+html,body{
+  background:#fffdf9!important;
+  color:#241d1b!important;
+}
+.header,main,.hero,.hero-simple,.products,.section,.contact{
+  background:#fffdf9!important;
+  color:#241d1b!important;
+}
+.header{
+  border-bottom:1px solid #ded5cc!important;
+  box-shadow:0 2px 16px rgba(36,29,27,.06)!important;
+}
+.product-card,.product-image,.product-body,.premium-search,.location-card,#mainNav.mobile-open{
+  background:#ffffff!important;
+  color:#241d1b!important;
+}
+.location-section,footer{
+  background:#f7f1ea!important;
+  color:#241d1b!important;
+}
+h1,h2,h3,.brand,.brand strong,.product-body h3,.price{
+  color:#241d1b!important;
+}
+p,.subline,.muted,.location-card p,.contact p,footer a{
+  color:#6b625e!important;
+}
+a{color:#6b1020}
+.catalog-category-tabs button,.category-btn,.btn{
+  background:#ffffff!important;
+  color:#241d1b!important;
+  border-color:#ded5cc!important;
+}
+.catalog-category-tabs button.active,.category-btn.active,.primary{
+  background:#6b1020!important;
+  color:#ffffff!important;
+  border-color:#6b1020!important;
+}
+.primary:hover{
+  background:#4e0714!important;
+}
+.badge{
+  background:#6b1020!important;
+  color:#ffffff!important;
+}
+.mobile-menu{
+  color:#241d1b!important;
+}
+.mobile-menu span{
+  background:#241d1b!important;
+}
+.premium-search{
+  border-color:#ded5cc!important;
+  box-shadow:none!important;
+}
+.premium-search input{
+  background:#ffffff!important;
+  color:#241d1b!important;
+}
+.premium-search input::placeholder{
+  color:#8a817d!important;
+}
+.location-card{
+  border-color:#ded5cc!important;
+  box-shadow:0 8px 26px rgba(36,29,27,.05)!important;
+}
+footer{
+  border-top:1px solid #ded5cc!important;
+}
+.image-modal{
+  background:rgba(15,12,13,.9)!important;
+}
