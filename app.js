@@ -283,7 +283,9 @@ if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it bla
 wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
+const enteredShopName=(name?.value||"").trim()||"SRI SAI VANI";
+const normalizedShopName=enteredShopName.replace(/(?:\s+collections)+\s*$/i,"").trim()||"SRI SAI VANI";
+settings={...settings,shopName:normalizedShopName,whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
