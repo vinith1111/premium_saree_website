@@ -67,15 +67,10 @@ try{
 const remote=await apiCatalog();
 if(Array.isArray(remote)){
 sarees=remote;
-const existing=new Set(sarees.map(s=>s.id));
-const demos=DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<8}));
-sarees=[...sarees,...demos.filter(d=>!existing.has(d.id))];
 saveLocal();render();return true
 }
 }catch(e){console.warn("Cloud catalogue unavailable",e)}
-const existing=new Set(sarees.map(s=>s.id));
-const demos=DEMO_ITEMS.map((d,i)=>({id:2001+i,name:d[0],price:d[1],category:d[2],color:d[3],description:"DEMO ITEM - temporary product for layout testing.",image:(d[2].includes("Saree")?"images/demo-saree.svg":d[2]==="Dresses"?"images/demo-dress.svg":d[2]==="Kurtis"?"images/demo-kurti.svg":d[2]==="Lehengas"?"images/demo-lehenga.svg":"images/demo-set.svg"),featured:i<4}));
-sarees=[...sarees,...demos.filter(d=>!existing.has(d.id))];saveLocal();render();return false
+saveLocal();render();return false
 }
 let adminPage=1;
 const ADMIN_PAGE_SIZE=10;
