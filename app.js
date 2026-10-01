@@ -55,7 +55,7 @@ let sarees=[
 ...EXTRA_DEMO_ITEMS
 ]
 
-let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:""};
+let settings=(()=>{try{return JSON.parse(localStorage.getItem(SETTINGS)||"null")}catch(e){return null}})()||{shopName:"SRI SAI VANI",whatsapp:"",about:"Explore our collection and contact us on WhatsApp for product details and availability.",footer:"",theme:"dark"};
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(sarees));localStorage.setItem(SETTINGS,JSON.stringify(settings));return true}catch(e){console.error("Local storage error",e);return false}}
 function whatsappNumber(){const raw=String(settings.whatsapp||"").replace(/\D/g,"");return raw.length===10?"91"+raw:(raw.startsWith("91")&&raw.length===12?raw:"")}
@@ -77,7 +77,12 @@ render();
 }
 let catalogPage=1;
 function catalogPageSize(){return window.innerWidth<=600?10:24}
+function applyTheme(){
+ const theme=settings.theme==="color"?"color":"dark";
+ document.documentElement.dataset.theme=theme;
+}
 function render(){
+ applyTheme();
  const searchEl=document.getElementById("search");
  const q=(searchEl?.value||"").trim().toLowerCase();
  const clearBtn=document.getElementById("searchClear");
@@ -222,7 +227,7 @@ async function toggleNewArrival(id){
 async function deleteItem(id){if(confirm("Delete this item?")){const previous=[...sarees];sarees=sarees.filter(s=>s.id!==id);if(await saveCatalog()){render();await openSareeList()}else{sarees=previous}}}
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
-document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name or WhatsApp number. You can save either one independently.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
+document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name, WhatsApp number, or website theme.</p></div><div class="form settings-form"><label>Website theme<select id="setTheme"><option value="dark" >Dark</option><option value="color">Color</option></select></label><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
 async function saveSettings(){
 const name=document.getElementById("setName");
 const wa=document.getElementById("setWa");
@@ -235,7 +240,7 @@ if(status){status.textContent="Enter a 10-digit WhatsApp number, or leave it bla
 wa?.focus();return
 }
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
-settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,about:settings.about||"",footer:""};
+settings={...settings,shopName:(name?.value||"").trim()||"SRI SAI VANI",whatsapp,theme:(document.getElementById("setTheme")?.value==="color"?"color":"dark"),about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
