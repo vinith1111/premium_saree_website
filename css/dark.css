@@ -1,0 +1,6 @@
+/* Shared theme tokens. This file is intentionally tiny. */
+:root{
+--bg:#171310;--surface:#211a18;--surface-2:#281e1d;--text:#f3e9e8;--muted:#b9abad;
+--wine:#680018;--wine-2:#8a2340;--rose:#d9a9b7;--line:#4b403d;--gold:#b99a6a;--green:#25d366;--white:#fff;
+}
+html,body{background:#171310;color:#f3e9e8;color-scheme:dark}
