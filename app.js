@@ -136,7 +136,7 @@ function applyTheme(){
    document.querySelector(".contact"),document.querySelector("footer"),
    document.querySelector("#mainNav.mobile-open")
  ].filter(Boolean);
- surfaces.forEach(el=>{el.style.setProperty("background-color",el===document.querySelector(".location-section")||el===document.querySelector(".contact")&&light?soft:bg,"important");el.style.setProperty("color",text,"important");});
+ surfaces.forEach(el=>{el.style.setProperty("background-color",light && (el===document.querySelector(".location-section")||el===document.querySelector(".contact"))?soft:bg,"important");el.style.setProperty("color",text,"important");});
  document.querySelectorAll(".product-card,.product-image,.product-body,.location-card,.premium-search").forEach(el=>{
    el.style.setProperty("background-color",surface,"important");
    el.style.setProperty("color",text,"important");
