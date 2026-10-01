@@ -1,0 +1,12 @@
+/* Base and shared primitives */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}
+body.menu-open{overflow:hidden}
+a{color:inherit}
+button,input,textarea,select{font:inherit}
+button{touch-action:manipulation}
+img{display:block;max-width:100%}
+.hidden{display:none!important}
+.muted{color:#766a6d}
+.full{width:100%}
