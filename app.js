@@ -174,7 +174,7 @@ function openSareeList(page=1){
  const totalPages=Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1;
  const el=document.getElementById("adminContent");
  if(!el)return;
- el.innerHTML='<div class="admin-list">'+items.map(s=>'<div class="admin-item"><img src="'+esc(s.image)+'"><div class="grow"><b>'+esc(s.name)+'</b><br>₹'+Number(s.price).toLocaleString("en-IN")+' · '+esc(s.category)+'</div><button onclick="openSareeForm('+s.id+')">Edit</button><button class="danger" onclick="deleteItem('+s.id+')">Delete</button></div>').join("")+'</div><div class="admin-pagination"><button class="btn" '+(adminPage===1?'disabled':'')+' onclick="openSareeList('+(adminPage-1)+')">Previous</button><span>Page '+adminPage+' of '+totalPages+' · '+sarees.length+' items</span><button class="btn" '+(adminPage===totalPages?'disabled':'')+' onclick="openSareeList('+(adminPage+1)+')">Next</button></div>';
+ el.innerHTML='<div class="admin-list">'+items.map(s=>'<div class="admin-item"><img src="'+esc(s.image)+'"><div class="grow"><b>'+esc(s.name)+'</b><br>₹'+Number(s.price).toLocaleString("en-IN")+' · '+esc(s.category)+'<br><span class="admin-arrival-status '+(s.featured?'is-new':'is-old')+'">'+(s.featured?'New Arrival':'Regular Item')+'</span></div><button class="arrival-toggle" onclick="toggleNewArrival('+s.id+')">'+(s.featured?'Mark as Old':'Make New Arrival')+'</button><button onclick="openSareeForm('+s.id+')">Edit</button><button class="danger" onclick="deleteItem('+s.id+')">Delete</button></div>').join("")+'</div><div class="admin-pagination"><button class="btn" '+(adminPage===1?'disabled':'')+' onclick="openSareeList('+(adminPage-1)+')">Previous</button><span>Page '+adminPage+' of '+totalPages+' · '+sarees.length+' items</span><button class="btn" '+(adminPage===totalPages?'disabled':'')+' onclick="openSareeList('+(adminPage+1)+')">Next</button></div>';
 }
 function openSareeForm(id=null){const s=id?sarees.find(x=>x.id===id):{name:"",price:"",category:"",color:"",description:"",image:"",featured:false};document.getElementById("adminContent").innerHTML='<div class="form"><label>Name<input id="fName" value="'+esc(s.name)+'"></label><div class="row"><label>Price<input id="fPrice" type="number" value="'+esc(s.price)+'"></label><label>Category<input id="fCategory" value="'+esc(s.category)+'"></label></div><label>Colour<input id="fColor" value="'+esc(s.color)+'"></label><label>Description<textarea id="fDesc">'+esc(s.description)+'</textarea></label><label>Image URL<input id="fImage" value="'+esc(s.image)+'"></label><label>Upload image<input id="fFile" type="file" accept="image/*" onchange="previewFile(this)"></label><img id="fPreview" class="preview '+(s.image?'':'hidden')+'" src="'+esc(s.image)+'"><label><input id="fFeatured" type="checkbox" '+(s.featured?'checked':'')+'> Show as new arrival</label><div><button class="btn dark" onclick="saveItem('+(id||"null")+')">Save Item</button> <button class="btn" onclick="openSareeList()">Cancel</button></div></div>'}
 function previewFile(input){
@@ -206,6 +206,18 @@ async function saveItem(id){
   Object.assign(existing,d);
  }else sarees.unshift({id:Date.now(),...d});
  if(await saveCatalog()){render();await openSareeList()}
+}
+async function toggleNewArrival(id){
+ const item=sarees.find(x=>x.id===id);
+ if(!item)return;
+ const previous=Boolean(item.featured);
+ item.featured=!previous;
+ if(await saveCatalog()){
+   render();
+   await openSareeList(adminPage);
+ }else{
+   item.featured=previous;
+ }
 }
 async function deleteItem(id){if(confirm("Delete this item?")){const previous=[...sarees];sarees=sarees.filter(s=>s.id!==id);if(await saveCatalog()){render();await openSareeList()}else{sarees=previous}}}
 function openSettings(){
