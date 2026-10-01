@@ -486,3 +486,5 @@ footer .brand strong{color:#fff}
   .mobile-menu{position:relative;z-index:60;display:block;min-width:44px;min-height:44px}
   .header #mainNav.mobile-open{display:flex!important}
 }
+
+.mobile-menu{align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:10px}.mobile-menu span{display:block;width:25px;height:2px;background:currentColor;border-radius:2px}@media(max-width:600px){.mobile-menu{display:flex!important;flex:0 0 44px}.header .nav{position:relative}.header #mainNav.mobile-open{display:flex!important;position:absolute;top:calc(100% + 1px);left:0;right:0;z-index:70}}
