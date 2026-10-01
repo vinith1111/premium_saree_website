@@ -195,3 +195,7 @@ html[data-theme="light"] #adminModal .settings-card{
 html[data-theme="light"] .image-modal{
   background:rgba(15,12,13,.90)!important;
 }
+
+/* Final white storefront surfaces */
+html[data-theme="light"] body,html[data-theme="light"] body .header,html[data-theme="light"] body main,html[data-theme="light"] body .hero,html[data-theme="light"] body .hero-simple,html[data-theme="light"] body .products,html[data-theme="light"] body .product-grid,html[data-theme="light"] body .product-card,html[data-theme="light"] body .product-body,html[data-theme="light"] body .contact,html[data-theme="light"] body #mainNav.mobile-open{background:#fff!important;color:#241d1b!important}
+html[data-theme="light"] body .location-section,html[data-theme="light"] body footer{background:#f7f1ea!important}
