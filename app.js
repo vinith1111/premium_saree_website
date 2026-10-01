@@ -81,16 +81,14 @@ if(remote && Object.keys(remote).length){
 render();
 }
 let catalogPage=1;
-function catalogPageSize(){return window.innerWidth<=600?10:24}
-function setAdminTheme(theme){
+function catalogPageSize(){return 10}
+function setSiteTheme(theme){
  const selected=theme==="light"?"light":"dark";
  settings={...settings,theme:selected};
  window.__themeChangedLocally=true;
  try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
  applyTheme();
- const adminTheme=document.getElementById("adminTheme");
  const siteTheme=document.getElementById("siteTheme");
- if(adminTheme)adminTheme.value=selected;
  if(siteTheme)siteTheme.value=selected;
  fetch("/.netlify/functions/settings",{
    method:"PUT",
@@ -128,7 +126,6 @@ function applyTheme(){
 }
 function render(){
  applyTheme();
- const adminTheme=document.getElementById("adminTheme"); if(adminTheme)adminTheme.value=settings.theme==="light"?"light":"dark";
  const searchEl=document.getElementById("search");
  const q=(searchEl?.value||"").trim().toLowerCase();
  const clearBtn=document.getElementById("searchClear");
