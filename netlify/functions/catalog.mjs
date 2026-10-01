@@ -2,10 +2,10 @@ import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 
 const defaults=[
-{id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Banarasi+Saree",featured:true},
-{id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Cotton+Saree",featured:false},
-{id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Party+Dress",featured:true},
-{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"https://placehold.co/900x1200/png?text=Test+Casual+Dress",featured:false}
+{id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-banarasi-saree.svg",featured:true},
+{id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-cotton-saree.svg",featured:false},
+{id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-party-dress.svg",featured:true},
+{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false}
 ];
 function authorized(req){
  const secret=process.env.ADMIN_PASSWORD;if(!secret)return false;
@@ -20,6 +20,13 @@ export default async(req)=>{
  if(req.method==="GET"){
   let data=await store.get("items",{type:"json",consistency:"strong"});
   if(!Array.isArray(data)){data=defaults;await store.setJSON("items",data)}
+  else {
+   const demoImages={1001:"/images/test-banarasi-saree.svg",1002:"/images/test-cotton-saree.svg",1003:"/images/test-party-dress.svg",1004:"/images/test-casual-dress.svg"};
+   let changed=false;
+   data=data.map(x=>demoImages[x.id] && String(x.name||"").startsWith("Test ") && x.image!==demoImages[x.id] ? {...x,image:demoImages[x.id]} : x);
+   changed=data.some(x=>demoImages[x.id] && String(x.name||"").startsWith("Test ") && x.image===demoImages[x.id]);
+   if(changed) await store.setJSON("items",data);
+  }
   return Response.json(data);
  }
  if(!authorized(req))return Response.json({error:"Admin login required"},{status:401});
