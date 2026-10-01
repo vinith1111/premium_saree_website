@@ -1,0 +1,12 @@
+/*
+  Netlify cache policy
+  Versioned CSS/JS assets can be cached safely. The HTML entry point is revalidated.
+*/
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/
+  Cache-Control: no-cache, must-revalidate
