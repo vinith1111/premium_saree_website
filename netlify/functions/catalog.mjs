@@ -29,7 +29,7 @@ async function legacy(){
  try{const s=getStore("sri-sai-vani-catalog");const d=await s.get("items",{type:"json",consistency:"strong"});return Array.isArray(d)?d:[]}catch{return []}
 }
 function valid(x,i){
- const a={id:Number(x?.id)||Date.now()+i,name:String(x?.name||"").trim(),price:String(x?.price||"").trim(),category:String(x?.category||"").trim(),color:String(x?.color||"").trim(),description:String(x?.description||"").trim(),image:String(x?.image||"").trim(),featured:Boolean(x?.featured)};
+ const a={id:Number(x?.id)||Date.now()+i,name:String(x?.name||"").trim(),price:String(x?.price||"").trim(),category:(()=>{const v=String(x?.category||"").trim().toLowerCase();return v==="saree"||v==="sarees"?"Sarees":v==="dress"||v==="dresses"?"Dresses":""})(),color:String(x?.color||"").trim(),description:String(x?.description||"").trim(),image:String(x?.image||"").trim(),featured:Boolean(x?.featured),bestSeller:Boolean(x?.bestSeller)};
  if(!a.name||a.name.length>100||!a.price||!Number.isFinite(Number(a.price))||Number(a.price)<=0||a.price.length>20||!a.category||a.category.length>50||a.color.length>50||a.description.length>1000||!a.image||a.image.length>3000000)return null;
  if(!/^(https?:\/\/|\/|data:image\/)/i.test(a.image))return null;
  if(/^data:image\//i.test(a.image)&&a.image.length>2500000)return null;
