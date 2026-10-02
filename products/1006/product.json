@@ -1,0 +1,11 @@
+{
+  "id": 1006,
+  "name": "Festive Anarkali Dress",
+  "price": "4499",
+  "category": "Dresses",
+  "color": "Lavender",
+  "description": "Demo catalogue item. Replace with the real product details from Admin.",
+  "image": "/images/demo-dress.svg",
+  "featured": true,
+  "imagePath": null
+}

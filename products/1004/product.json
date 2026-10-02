@@ -1,0 +1,11 @@
+{
+  "id": 1004,
+  "name": "Party Wear Georgette",
+  "price": "2799",
+  "category": "Sarees",
+  "color": "Teal",
+  "description": "Demo catalogue item. Replace with the real product details from Admin.",
+  "image": "/images/demo-08.svg",
+  "featured": false,
+  "imagePath": null
+}

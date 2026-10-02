@@ -1,0 +1,11 @@
+{
+  "id": 1003,
+  "name": "Organza Floral Saree",
+  "price": "3299",
+  "category": "Sarees",
+  "color": "Blush Pink",
+  "description": "Demo catalogue item. Replace with the real product details from Admin.",
+  "image": "/images/demo-07.svg",
+  "featured": false,
+  "imagePath": null
+}
