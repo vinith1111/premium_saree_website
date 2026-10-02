@@ -324,7 +324,7 @@ img.onload=()=>{
 const max=1400,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement("canvas");
 canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
 canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);
-const data=canvas.toDataURL("image/jpeg",0.82);
+let data=canvas.toDataURL("image/jpeg",0.78);let quality=0.78;while(data.length>1800000&&quality>0.45){quality-=0.06;data=canvas.toDataURL("image/jpeg",quality)}if(data.length>1800000){input.value="";return alert("Image could not be optimized enough. Please choose a smaller image.");}
 document.getElementById("fImage").value=data;document.getElementById("fPreview").src=data;document.getElementById("fPreview").classList.remove("hidden");
 };
 img.src=reader.result;
