@@ -1,17 +1,1 @@
-/* Base and shared primitives */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}
-body.menu-open{overflow:hidden}
-a{color:inherit}
-button,input,textarea,select{font:inherit}
-button{touch-action:manipulation}
-img{display:block;max-width:100%}
-.hidden{display:none!important}
-.muted{color:var(--muted)}
-.full{width:100%}
-
-/* Shared typography: one calm, readable family across the storefront. */
-body,button,input,textarea,select{font-family:"DM Sans",sans-serif}
-
-section[id]{scroll-margin-top:92px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;-webkit-font-smoothing:antialiased}body.menu-open{overflow:hidden}a{color:inherit}button,input,textarea,select{font:inherit}button{touch-action:manipulation}img{display:block;max-width:100%}.hidden{display:none!important}.muted{color:var(--muted)}.full{width:100%}section[id]{scroll-margin-top:92px}.eyebrow{font-size:10px;line-height:1;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:700}.primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--wine);color:#fff;border:1px solid var(--wine);padding:13px 20px;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:700;transition:transform .2s ease,background .2s ease}.primary:hover{background:var(--wine-2);transform:translateY(-1px)}
