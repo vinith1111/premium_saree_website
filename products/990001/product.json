@@ -1,0 +1,11 @@
+{
+  "id": 990001,
+  "name": "REGRESSION TEST Saree A",
+  "price": "1999",
+  "category": "Test Sarees",
+  "color": "Red",
+  "description": "Temporary regression test item A",
+  "image": "https://example.com/test-a.jpg",
+  "featured": false,
+  "imagePath": null
+}
