@@ -3,12 +3,13 @@
     "id": 1790969017797,
     "name": "orange dress",
     "price": "3000",
-    "category": "dress",
+    "category": "Dresses",
     "color": "orange",
     "description": "",
     "image": "products/1790969017797/image.jpg",
     "featured": true,
-    "imagePath": "products/1790969017797/image.jpg"
+    "imagePath": "products/1790969017797/image.jpg",
+    "bestSeller": false
   },
   {
     "id": 1001,
@@ -19,7 +20,8 @@
     "description": "Rich Banarasi-inspired festive saree for weddings and celebrations.",
     "image": "/images/test-banarasi-saree.svg",
     "featured": true,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   },
   {
     "id": 1002,
@@ -30,7 +32,8 @@
     "description": "Classic pattu-inspired silk look with a traditional festive finish.",
     "image": "/images/demo-06.svg",
     "featured": true,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   },
   {
     "id": 1003,
@@ -41,7 +44,8 @@
     "description": "Lightweight organza-inspired floral style for daytime occasions.",
     "image": "/images/demo-07.svg",
     "featured": false,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   },
   {
     "id": 1004,
@@ -52,7 +56,8 @@
     "description": "Easy-drape party saree with a soft contemporary finish.",
     "image": "/images/demo-08.svg",
     "featured": false,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   },
   {
     "id": 1005,
@@ -63,7 +68,8 @@
     "description": "Elegant soft-silk inspired saree for festive gatherings.",
     "image": "/images/demo-09.svg",
     "featured": false,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   },
   {
     "id": 1006,
@@ -74,6 +80,7 @@
     "description": "Flowing festive dress for family functions and celebrations.",
     "image": "/images/demo-dress.svg",
     "featured": true,
-    "imagePath": null
+    "imagePath": null,
+    "bestSeller": false
   }
 ]

@@ -5,12 +5,24 @@
  .mobile-menu{display:flex}
  .admin-link{display:none}
 }
+@media(max-width:900px){
+ .hero-inner{min-height:460px;padding:72px 24px 64px;grid-template-columns:1fr;gap:24px}
+ .hero-note{display:none}
+}
 @media(max-width:600px){
  .nav{min-height:68px;padding:7px 10px;gap:7px}
  .brand{gap:8px}
  .brand-mark{width:38px;height:38px;flex-basis:38px;font-size:16px}
  .brand strong{font-size:14px;white-space:normal;overflow:visible;text-overflow:clip}
  .hero-simple{min-height:320px}
+ .hero-inner{min-height:430px;padding:58px 18px 52px}
+ .hero-copy h1{font-size:48px;line-height:.98;margin-bottom:18px}
+ .hero-copy p{font-size:14px}
+ .hero-actions{align-items:flex-start;flex-direction:column;gap:18px;margin-top:26px}
+ .hero-actions .primary{width:auto;padding-left:20px;padding-right:20px}
+ .instagram-review-grid{grid-template-columns:minmax(0,330px);justify-content:center}
+ .instagram-embed-wrap{border-radius:14px}
+ .instagram-card-link{padding-top:11px}
  .hero-simple .hero-content{padding:42px 20px}
  .hero-simple h1{font-size:43px}
  .hero-simple p{font-size:13px;line-height:1.7}
