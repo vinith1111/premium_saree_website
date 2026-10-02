@@ -141,7 +141,6 @@ function render(){
    tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+
      cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>{
-     if(btn.dataset.arrivals){arrivalOnly=!arrivalOnly;render();return}
      arrivalOnly=false;selectCatalogCategory(btn.dataset.category);
    }));
  }
