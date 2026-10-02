@@ -81,8 +81,9 @@ async function save(x,isNew){
  if(!isNew&&idx<0)throw new Error("Product not found.");
  const old=idx>=0?items[idx]:null,next=[...items];if(isNew)next.unshift(x);else next[idx]=x;
  if(next.length>500)throw new Error("Catalogue cannot contain more than 500 products.");
- const changes=[],img=dataImage(x.image);let imagePath=old?.imagePath||null;
- if(img){imagePath="products/"+id(x.id)+"/image."+img.ext;changes.push({path:imagePath,sha:await blob(img.base64,"base64")});if(old?.imagePath&&old.imagePath!==imagePath)changes.push({path:old.imagePath,delete:true})}
+ const changes=[],img=dataImage(x.image);let imagePath=img?"products/"+id(x.id)+"/image."+img.ext:null;
+ if(img){changes.push({path:imagePath,sha:await blob(img.base64,"base64")})}
+ if(old?.imagePath&&old.imagePath!==imagePath)changes.push({path:old.imagePath,delete:true})
  const stored={...x,image:img?imagePath:x.image,imagePath:img?imagePath:null};next[isNew?0:idx]=stored;
  changes.push({path:"products/"+id(x.id)+"/product.json",sha:await blob(Buffer.from(JSON.stringify(stored,null,2)+"\n").toString("base64"),"base64")});
  await putIndex(next,changes);await commit(changes,(isNew?"Add product: ":"Update product: ")+x.name);return stored;
