@@ -36,22 +36,8 @@ function validateProduct(x,i){
 export default async(req)=>{
  const store=getStore("sri-sai-vani-catalog");
  if(req.method==="GET"){
-  let data=await store.get("items",{type:"json",consistency:"strong"});
-  if(!Array.isArray(data)){data=defaults;await store.setJSON("items",data)}
-  else {
-   const hasOldImages=data.some(x=>/images\.unsplash\.com|placehold\.co/i.test(String(x.image||"")));
-   const hasOldDemoIds=data.some(x=>[1,2,3,4].includes(Number(x.id)));
-   if(hasOldImages || hasOldDemoIds){
-    data=defaults;
-    await store.setJSON("items",data);
-   } else {
-    const demoImages={1001:"/images/test-banarasi-saree.svg",1002:"/images/test-cotton-saree.svg",1003:"/images/test-party-dress.svg",1004:"/images/test-casual-dress.svg"};
-    const updated=data.map(x=>demoImages[x.id] && String(x.name||"").startsWith("Test ") && x.image!==demoImages[x.id] ? {...x,image:demoImages[x.id]} : x);
-    if(updated.some((x,i)=>x.image!==data[i].image)) await store.setJSON("items",updated);
-    data=updated;
-   }
-  }
-  return Response.json(data);
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  return Response.json(Array.isArray(data)?data:[]);
  }
  if(!authorized(req))return Response.json({error:"Admin login required"},{status:401});
  if(req.method==="PUT"){
