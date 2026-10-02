@@ -66,5 +66,47 @@ export default async(req)=>{
   if(new Set(ids).size!==ids.length)return Response.json({error:"Product IDs must be unique."},{status:400});
   await store.setJSON("items",clean);return Response.json(clean);
  }
+ if(req.method==="POST"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>3_000_000)return Response.json({error:"Product image/request is too large."},{status:413});
+  const body=await req.json().catch(()=>null);
+  const item=validateProduct(body,0);
+  if(!item)return Response.json({error:"Invalid or oversized product."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  if(items.length>=500)return Response.json({error:"Catalogue cannot contain more than 500 products."},{status:400});
+  if(items.some(x=>String(x.id)===String(item.id)))return Response.json({error:"A product with this ID already exists."},{status:409});
+  const updated=[item,...items];
+  await store.setJSON("items",updated);
+  return Response.json(item,{status:201});
+ }
+ if(req.method==="PATCH"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>3_000_000)return Response.json({error:"Product image/request is too large."},{status:413});
+  const body=await req.json().catch(()=>null);
+  const item=validateProduct(body,0);
+  if(!item)return Response.json({error:"Invalid or oversized product."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  const index=items.findIndex(x=>String(x.id)===String(item.id));
+  if(index<0)return Response.json({error:"Product not found."},{status:404});
+  const updated=[...items];
+  updated[index]=item;
+  await store.setJSON("items",updated);
+  return Response.json(item);
+ }
+ if(req.method==="DELETE"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>1000)return Response.json({error:"Invalid request."},{status:400});
+  const body=await req.json().catch(()=>null);
+  const id=body?.id;
+  if(id===undefined||id===null||String(id).trim()==="")return Response.json({error:"Product ID is required."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  const updated=items.filter(x=>String(x.id)!==String(id));
+  if(updated.length===items.length)return Response.json({error:"Product not found."},{status:404});
+  await store.setJSON("items",updated);
+  return Response.json({id});
+ }
  return new Response("Method not allowed",{status:405});
 };
