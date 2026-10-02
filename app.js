@@ -94,7 +94,6 @@ render();
 }
 let catalogPage=1;
 let selectedPriceFilter="";
-let arrivalOnly=false;
 function catalogPageSize(){return 10}
 function setSiteTheme(selected){
  const theme=selected==="dark"?"dark":"light";
@@ -130,7 +129,7 @@ function render(){
    else if(selectedPriceFilter==="2000-4000") priceOk=price>=2000&&price<=4000;
    else if(selectedPriceFilter==="4000-7000") priceOk=price>4000&&price<=7000;
    else if(selectedPriceFilter==="7000+") priceOk=price>7000;
-   return (!current||category.toLowerCase()===current.toLowerCase())&&(!arrivalOnly||Boolean(s.featured))&&priceOk&&(!q||text.includes(q));
+   return (!current||category.toLowerCase()===current.toLowerCase())&&priceOk&&(!q||text.includes(q));
  });
  const list=[...filtered].sort((a,b)=>Number(Boolean(b.featured))-Number(Boolean(a.featured)));
  const size=catalogPageSize();
@@ -139,9 +138,8 @@ function render(){
  const pageItems=list.slice((catalogPage-1)*size,catalogPage*size);
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
-   tabs.innerHTML='<button type="button" class="category-btn '+(!current&&!arrivalOnly?'active':'')+'" data-category="">All</button>'+
-     '<button type="button" class="category-btn '+(arrivalOnly?'active':'')+'" data-arrivals="1">New Arrivals</button>'+
-     cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()&&!arrivalOnly?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
+   tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+
+     cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>{
      if(btn.dataset.arrivals){arrivalOnly=!arrivalOnly;render();return}
      arrivalOnly=false;selectCatalogCategory(btn.dataset.category);
@@ -154,7 +152,7 @@ function render(){
  }
  const empty=document.getElementById("empty");
  if(empty){
-   empty.textContent=q||current||arrivalOnly||selectedPriceFilter?"No items found. Try another filter or search.":"No products available yet.";
+   empty.textContent=q||current||selectedPriceFilter?"No items found. Try another filter or search.":"No products available yet.";
    empty.classList.toggle("hidden",list.length>0);
  }
  const pager=document.getElementById("catalogPagination");
