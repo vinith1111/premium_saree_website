@@ -190,11 +190,91 @@ async function deleteCatalogItem(id){
   return false;
  }
 }
+let catalogSyncTimer=null;
+let settingsSyncTimer=null;
+let catalogSyncInFlight=false;
+let settingsSyncInFlight=false;
+let lastCatalogSignature="";
+let lastSettingsSignature="";
+
+function stableSignature(value){
+ try{return JSON.stringify(value)}
+ catch(e){return String(value)}
+}
+
+async function refreshCatalogSilently(){
+ if(catalogSyncInFlight || document.hidden)return;
+ // Don't replace the admin list while the user is editing or managing items.
+ const modal=document.getElementById("adminModal");
+ if(modal && !modal.classList.contains("hidden"))return;
+ catalogSyncInFlight=true;
+ try{
+   const remote=await apiCatalog("GET");
+   if(Array.isArray(remote)){
+     const signature=stableSignature(remote);
+     if(signature!==lastCatalogSignature){
+       lastCatalogSignature=signature;
+       sarees=remote;
+       saveLocal();
+       render();
+     }
+   }
+ }catch(e){
+   console.warn("Background catalogue refresh skipped.",e);
+ }finally{
+   catalogSyncInFlight=false;
+ }
+}
+
+async function refreshSettingsSilently(){
+ if(settingsSyncInFlight || document.hidden)return;
+ const modal=document.getElementById("adminModal");
+ if(modal && !modal.classList.contains("hidden"))return;
+ settingsSyncInFlight=true;
+ try{
+   const remote=await window.SriSaiApi.settings({cache:"no-store"});
+   if(remote && typeof remote==="object" && Object.keys(remote).length){
+     const signature=stableSignature(remote);
+     if(signature!==lastSettingsSignature){
+       lastSettingsSignature=signature;
+       const savedTheme=localStorage.getItem("srisai_vani_theme");
+       settings={...settings,...remote};
+       if(savedTheme==="light"||savedTheme==="dark")settings.theme=savedTheme;
+       try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){}
+       render();
+     }
+   }
+ }catch(e){
+   console.warn("Background settings refresh skipped.",e);
+ }finally{
+   settingsSyncInFlight=false;
+ }
+}
+
+function startBackgroundRefresh(){
+ if(catalogSyncTimer)clearInterval(catalogSyncTimer);
+ if(settingsSyncTimer)clearInterval(settingsSyncTimer);
+ // Lightweight polling instead of a full page reload. Only changed data causes a render.
+ catalogSyncTimer=setInterval(refreshCatalogSilently,30000);
+ settingsSyncTimer=setInterval(refreshSettingsSilently,60000);
+ document.addEventListener("visibilitychange",()=>{
+   if(!document.hidden){
+     refreshCatalogSilently();
+     refreshSettingsSilently();
+   }
+ });
+ window.addEventListener("focus",()=>{
+   refreshCatalogSilently();
+   refreshSettingsSilently();
+ });
+}
+
 async function loadCatalog(){
  try{
   const remote=await apiCatalog();
   if(Array.isArray(remote)){
     sarees=remote;
+    lastCatalogSignature=stableSignature(remote);
     saveLocal();
     render();
     return true;
@@ -311,7 +391,7 @@ if(status){status.textContent="✓ Changes saved successfully.";status.className
 if(status){status.textContent="Could not save online. Please try again.";status.className="settings-status error"}
 }
 }
-render();loadCatalog();syncSharedSettings();setupAnchorLinks();initMobileMenu();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
+render();loadCatalog();syncSharedSettings();setupAnchorLinks();initMobileMenu();startBackgroundRefresh();function showImage(src){const m=document.getElementById("imageModal"),img=document.getElementById("largeImage");if(!m||!img)return;img.src=src;m.classList.remove("hidden");document.body.style.overflow="hidden"}
 function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}
 
 function clearCatalogSearch(){const el=document.getElementById("search");if(el){el.value="";catalogPage=1;render();el.focus()}}
