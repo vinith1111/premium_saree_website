@@ -143,7 +143,7 @@ function render(){
      '<button type="button" class="category-btn '+(arrivalOnly?'active':'')+'" data-arrivals="1">New Arrivals</button>'+
      cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()&&!arrivalOnly?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>{
-     if(btn.dataset.arrivals){arrivalOnly=!arrivalOnly;render();return}
+     if(btn.dataset.arrivals){arrivalOnly=!arrivalOnly;window.selectedCategory="";catalogPage=1;render();return}
      arrivalOnly=false;selectCatalogCategory(btn.dataset.category);
    }));
  }
