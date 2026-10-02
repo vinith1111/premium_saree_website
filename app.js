@@ -302,6 +302,9 @@ function openSareeList(page=1){
 function openSareeForm(id=null){const s=id?sarees.find(x=>x.id===id):{name:"",price:"",category:"",color:"",description:"",image:"",featured:false};document.getElementById("adminContent").innerHTML='<div class="form"><label>Name<input id="fName" value="'+esc(s.name)+'"></label><div class="row"><label>Price<input id="fPrice" type="number" value="'+esc(s.price)+'"></label><label>Category<input id="fCategory" value="'+esc(s.category)+'"></label></div><label>Colour<input id="fColor" value="'+esc(s.color)+'"></label><label>Description<textarea id="fDesc">'+esc(s.description)+'</textarea></label><label>Image URL<input id="fImage" value="'+esc(s.image)+'"></label><label>Upload image<input id="fFile" type="file" accept="image/*" onchange="previewFile(this)"></label><img id="fPreview" class="preview '+(s.image?'':'hidden')+'" src="'+esc(s.image)+'"><label><input id="fFeatured" type="checkbox" '+(s.featured?'checked':'')+'> Show as new arrival</label><div><button class="btn dark" onclick="saveItem('+(id||"null")+')">Save Item</button> <button class="btn" onclick="openSareeList()">Cancel</button></div></div>'}
 function previewFile(input){
 const file=input.files[0];if(!file)return;
+const maxUpload=8*1024*1024;
+if(!/^image\/(jpeg|png|webp)$/i.test(file.type)){input.value="";return alert("Please choose a JPG, PNG, or WebP image.");}
+if(file.size>maxUpload){input.value="";return alert("Image is too large. Please choose an image under 8 MB.");}
 const reader=new FileReader();
 reader.onload=()=>{
 const img=new Image();
@@ -317,6 +320,10 @@ img.src=reader.result;
 reader.readAsDataURL(file);
 }
 async function saveItem(id){
+ const saveButton=document.querySelector('#adminContent .form .btn.dark');
+ if(saveButton?.dataset.saving==="1")return;
+ if(saveButton){saveButton.dataset.saving="1";saveButton.disabled=true;saveButton.textContent="Saving...";}
+ try{
  const d={name:document.getElementById("fName").value.trim(),price:document.getElementById("fPrice").value,category:document.getElementById("fCategory").value.trim(),color:document.getElementById("fColor").value.trim(),description:document.getElementById("fDesc").value.trim(),image:document.getElementById("fImage").value.trim(),featured:document.getElementById("fFeatured").checked};
  const price=Number(d.price);
  if(!d.name)return alert("Please enter the item name.");
@@ -336,6 +343,9 @@ async function saveItem(id){
    saveLocal();
    render();
    await openSareeList(id?adminPage:1);
+ }
+ }finally{
+   if(saveButton){saveButton.disabled=false;saveButton.dataset.saving="";saveButton.textContent="Save Item";}
  }
 }
 async function toggleNewArrival(id){
