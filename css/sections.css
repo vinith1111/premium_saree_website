@@ -31,3 +31,24 @@
  .review-card{min-height:0;padding:20px}
  .review-card blockquote{font-size:19px}
 }
+
+
+/* Instagram video reviews */
+.video-reviews-section{border-top:1px solid var(--line);background:var(--surface-2)}
+.video-reviews-heading{max-width:760px;margin-bottom:24px}
+.video-reviews-heading h2{font:500 clamp(34px,5vw,50px)/1.05 "Playfair Display";letter-spacing:-.02em;margin:9px 0 10px;color:var(--text)}
+.video-reviews-heading p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+.video-reviews-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1040px}
+.video-review-card{background:var(--surface);border:1px solid var(--line);padding:10px}
+.instagram-frame{width:100%;aspect-ratio:4/5;overflow:hidden;background:#111}
+.instagram-frame iframe{display:block;width:100%;height:100%;border:0}
+.instagram-watch-link{display:block;padding:14px 8px 5px;color:var(--wine);font-size:11px;font-weight:700;letter-spacing:.14em;text-decoration:none;text-align:center}
+.instagram-watch-link:hover{color:var(--wine-2);text-decoration:underline}
+.instagram-follow-link{margin-top:24px}
+
+@media(max-width:700px){
+ .video-reviews-section{padding-top:42px;padding-bottom:42px}
+ .video-reviews-grid{grid-template-columns:1fr;gap:12px}
+ .video-review-card{padding:8px}
+ .instagram-frame{aspect-ratio:4/5}
+}
