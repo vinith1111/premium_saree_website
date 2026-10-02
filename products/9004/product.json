@@ -1,0 +1,11 @@
+{
+  "id": 9004,
+  "name": "Test Party Wear Georgette",
+  "price": "2799",
+  "category": "Sarees",
+  "color": "Blue",
+  "description": "Dummy product for testing delete action.",
+  "image": "https://images.unsplash.com/photo-1610189029034-5d2c0d3d7e5d?auto=format&fit=crop&w=900&q=80",
+  "featured": false,
+  "imagePath": null
+}
