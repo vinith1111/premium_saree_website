@@ -198,31 +198,22 @@ async function deleteCatalogItem(id){
  }
 }
 async function loadCatalog(){
-try{
-const remote=await apiCatalog();
-if(Array.isArray(remote)){
-  const existingIds=new Set(remote.map(x=>Number(x.id)));
-  const fallback=DEMO_ITEMS.map((x,i)=>({id:1001+i,name:x[0],price:x[1],category:x[2],color:x[3],description:"TEST ITEM - temporary product for catalogue testing.",image:"",featured:i<6}));
-  const extras=fallback.filter(x=>!existingIds.has(Number(x.id))).slice(0,Math.max(0,20-remote.length));
-  // Always keep a complete test catalogue visible when the cloud catalogue has fewer than 20 items.
-  sarees=[...remote,...extras].slice(0,20);
-  saveLocal();
-  if(extras.length){
-    try{
-      const seeded=await apiCatalog("PUT",sarees);
-      if(Array.isArray(seeded) && seeded.length>=sarees.length){
-        sarees=seeded;
-        saveLocal();
-      }
-    }catch(e){
-      console.warn("Demo catalogue seed could not be persisted; showing the full test catalogue locally.",e);
-    }
+ try{
+  const remote=await apiCatalog();
+  if(Array.isArray(remote)){
+    sarees=remote;
+    saveLocal();
+    render();
+    return true;
   }
-  render();return true
+ }catch(e){
+  console.warn("Cloud catalogue unavailable",e);
+ }
+ saveLocal();
+ render();
+ return false;
 }
-}catch(e){console.warn("Cloud catalogue unavailable",e)}
-saveLocal();render();return false
-}
+
 let adminPage=1;
 const ADMIN_PAGE_SIZE=10;
 function openSareeList(page=1){
