@@ -140,9 +140,7 @@ function render(){
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
    tabs.innerHTML=cats.map(c=>"<button type=\"button\" class=\"category-btn "+(current.toLowerCase()===c.toLowerCase()?"active":"")+" \" data-category=\""+c+"\">"+c+"</button>").join("");
-   tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>{
-     arrivalOnly=false;selectCatalogCategory(btn.dataset.category);
-   }));
+   tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>selectCatalogCategory(btn.dataset.category)));
  }
  const grid=document.getElementById("catalogGrid");
  if(grid){
