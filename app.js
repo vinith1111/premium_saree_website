@@ -176,14 +176,24 @@ async function login(){
  const p=document.getElementById("adminPassword"),status=document.getElementById("loginStatus");
  try{const d=await window.SriSaiApi.login(p.value);p.value="";document.getElementById("loginBox").classList.add("hidden");document.getElementById("adminBox").classList.remove("hidden");await loadCatalog();openSareeList()}catch(e){p.value="";p.focus();if(status)status.textContent=e.message}}
 async function apiCatalog(method="GET",body=null){return window.SriSaiApi.catalog(method,body)}
-async function saveCatalog(){
+async function saveCatalogItem(item,isNew=false){
  try{
-  const data=await apiCatalog("PUT",sarees);
-  if(!Array.isArray(data))throw new Error("Invalid catalogue response");
-  sarees=data; saveLocal(); return true;
+  const saved=isNew?await window.SriSaiApi.addProduct(item):await window.SriSaiApi.updateProduct(item);
+  if(!saved||typeof saved!=="object")throw new Error("Invalid product response");
+  return saved;
  }catch(e){
-  console.error("Catalogue save failed",e);
-  alert(e.message||"Could not save catalogue. Please try again.");
+  console.error("Product save failed",e);
+  alert(e.message||"Could not save this product. Please try again.");
+  return null;
+ }
+}
+async function deleteCatalogItem(id){
+ try{
+  await window.SriSaiApi.deleteProduct(id);
+  return true;
+ }catch(e){
+  console.error("Product delete failed",e);
+  alert(e.message||"Could not delete this product. Please try again.");
   return false;
  }
 }
@@ -249,26 +259,44 @@ async function saveItem(id){
  if(!d.category)return alert("Please enter a category, for example Sarees or Dresses.");
  if(!d.image)return alert("Please add an image URL or upload an image.");
  if(d.image.length>2_500_000)return alert("Image is too large. Please choose a smaller image.");
- if(id){
-  const existing=sarees.find(x=>x.id===id);
-  if(!existing)return alert("This item could not be found. Please refresh and try again.");
-  Object.assign(existing,d);
- }else sarees.unshift({id:Date.now(),...d});
- if(await saveCatalog()){render();await openSareeList()}
+ const item={id:id||Date.now(),...d};
+ const saved=await saveCatalogItem(item,!id);
+ if(saved){
+   if(id){
+     const index=sarees.findIndex(x=>x.id===id);
+     if(index>=0)sarees[index]=saved;
+   }else{
+     sarees=[saved,...sarees];
+   }
+   saveLocal();
+   render();
+   await openSareeList(id?adminPage:1);
+ }
 }
 async function toggleNewArrival(id){
  const item=sarees.find(x=>x.id===id);
  if(!item)return;
  const previous=Boolean(item.featured);
  item.featured=!previous;
- if(await saveCatalog()){
+ const saved=await saveCatalogItem(item,false);
+ if(saved){
+   Object.assign(item,saved);
+   saveLocal();
    render();
    await openSareeList(adminPage);
  }else{
    item.featured=previous;
  }
 }
-async function deleteItem(id){if(confirm("Delete this item?")){const previous=[...sarees];sarees=sarees.filter(s=>s.id!==id);if(await saveCatalog()){render();await openSareeList()}else{sarees=previous}}}
+async function deleteItem(id){
+ if(!confirm("Delete this item?"))return;
+ if(await deleteCatalogItem(id)){
+   sarees=sarees.filter(s=>String(s.id)!==String(id));
+   saveLocal();
+   render();
+   await openSareeList(Math.min(adminPage,Math.ceil(sarees.length/ADMIN_PAGE_SIZE)||1));
+ }
+}
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
 document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name or WhatsApp number.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSettings()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
