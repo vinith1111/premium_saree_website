@@ -13,7 +13,7 @@
 .premium-search:focus-within{border-color:var(--rose);box-shadow:0 0 0 2px rgba(154,106,118,.12)}
 .premium-search input{width:100%;height:46px;border:0;outline:0;background:transparent;color:var(--text);font-size:14px}
 .premium-search input::placeholder{color:var(--muted)}
-.search-clear{border:0;background:none;color:var(--muted);cursor:pointer;width:30px;height:30px}
+.search-clear{border:0;background:none;color:var(--muted);cursor:pointer;width:30px;height:30px;border-radius:50%;font-size:20px;line-height:1;display:grid;place-items:center}.search-clear:hover{background:var(--surface-2);color:var(--text)}
 .product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
 .product-card{background:var(--surface);border:1px solid var(--line);overflow:hidden;border-radius:14px;box-shadow:0 8px 24px rgba(36,29,27,.045);transition:transform .22s ease,box-shadow .22s ease}.product-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(36,29,27,.09)}
 .product-image{height:330px;background:var(--surface-2);position:relative;overflow:hidden;cursor:pointer}
