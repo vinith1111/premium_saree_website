@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": 1001,
+    "name": "Banarasi Silk Saree",
+    "price": "4999",
+    "category": "Sarees",
+    "color": "Wine",
+    "description": "Rich Banarasi-inspired festive saree for weddings and celebrations.",
+    "image": "/images/test-banarasi-saree.svg",
+    "featured": true,
+    "imagePath": null
+  },
+  {
+    "id": 1002,
+    "name": "Kanjeevaram Pattu",
+    "price": "6499",
+    "category": "Sarees",
+    "color": "Gold",
+    "description": "Classic pattu-inspired silk look with a traditional festive finish.",
+    "image": "/images/demo-06.svg",
+    "featured": true,
+    "imagePath": null
+  },
+  {
+    "id": 1003,
+    "name": "Organza Floral Saree",
+    "price": "3299",
+    "category": "Sarees",
+    "color": "Blush Pink",
+    "description": "Lightweight organza-inspired floral style for daytime occasions.",
+    "image": "/images/demo-07.svg",
+    "featured": false,
+    "imagePath": null
+  },
+  {
+    "id": 1004,
+    "name": "Party Wear Georgette",
+    "price": "2799",
+    "category": "Sarees",
+    "color": "Teal",
+    "description": "Easy-drape party saree with a soft contemporary finish.",
+    "image": "/images/demo-08.svg",
+    "featured": false,
+    "imagePath": null
+  },
+  {
+    "id": 1005,
+    "name": "Designer Soft Silk",
+    "price": "3999",
+    "category": "Sarees",
+    "color": "Rust",
+    "description": "Elegant soft-silk inspired saree for festive gatherings.",
+    "image": "/images/demo-09.svg",
+    "featured": false,
+    "imagePath": null
+  },
+  {
+    "id": 1006,
+    "name": "Festive Anarkali Dress",
+    "price": "4499",
+    "category": "Dresses",
+    "color": "Lavender",
+    "description": "Flowing festive dress for family functions and celebrations.",
+    "image": "/images/demo-dress.svg",
+    "featured": true,
+    "imagePath": null
+  }
+]
