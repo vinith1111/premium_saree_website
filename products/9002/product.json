@@ -1,0 +1,11 @@
+{
+  "id": 9002,
+  "name": "Test Kanjeevaram Pattu",
+  "price": "6499",
+  "category": "Sarees",
+  "color": "Gold",
+  "description": "Dummy product for testing catalogue deletion.",
+  "image": "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=80",
+  "featured": false,
+  "imagePath": null
+}
