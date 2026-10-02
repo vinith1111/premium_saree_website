@@ -1,5 +1,16 @@
 [
   {
+    "id": 1790969017797,
+    "name": "orange dress",
+    "price": "3000",
+    "category": "dress",
+    "color": "orange",
+    "description": "",
+    "image": "products/1790969017797/image.jpg",
+    "featured": true,
+    "imagePath": "products/1790969017797/image.jpg"
+  },
+  {
     "id": 1001,
     "name": "Banarasi Silk Saree",
     "price": "4999",
