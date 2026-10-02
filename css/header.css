@@ -10,8 +10,8 @@
 .brand-mark{width:42px;height:42px;flex:0 0 42px;border:1px solid var(--rose);border-radius:50%;display:grid;place-items:center;font:18px "Playfair Display";color:var(--rose)}
 .brand strong{font:19px/1.15 "Playfair Display";letter-spacing:.01em;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .header nav{display:flex;align-items:center;justify-content:flex-end;gap:24px}
-.header nav a,.admin-link{font-size:12px;color:var(--muted);text-decoration:none;border:0;background:none;cursor:pointer;padding:9px 4px}
-.header nav a:hover,.admin-link:hover{color:var(--text)}
+.header nav a,.admin-link{font-size:12px;color:#1f2937;text-decoration:none;border:0;background:none;cursor:pointer;padding:9px 4px}
+.header nav a:hover,.admin-link:hover{color:#7e164b}
 .admin-link{border:1px solid var(--line);border-radius:999px;padding:8px 14px}
 .mobile-admin{display:none}
 .theme-control{display:flex;align-items:center;gap:8px;padding:0 4px}
