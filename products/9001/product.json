@@ -1,0 +1,11 @@
+{
+  "id": 9001,
+  "name": "Test Banarasi Silk",
+  "price": "4999",
+  "category": "Sarees",
+  "color": "Red",
+  "description": "Dummy product for testing add, display, edit and delete.",
+  "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80",
+  "featured": true,
+  "imagePath": null
+}
