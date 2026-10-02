@@ -1,0 +1,11 @@
+{
+  "id": 1002,
+  "name": "Kanjeevaram Pattu",
+  "price": "6499",
+  "category": "Sarees",
+  "color": "Gold",
+  "description": "Demo catalogue item. Replace with the real product details from Admin.",
+  "image": "/images/demo-06.svg",
+  "featured": true,
+  "imagePath": null
+}
