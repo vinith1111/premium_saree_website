@@ -1,0 +1,11 @@
+{
+  "id": 1001,
+  "name": "Banarasi Silk Saree",
+  "price": "4999",
+  "category": "Sarees",
+  "color": "Wine",
+  "description": "Demo catalogue item. Replace with the real product details from Admin.",
+  "image": "/images/test-banarasi-saree.svg",
+  "featured": true,
+  "imagePath": null
+}
