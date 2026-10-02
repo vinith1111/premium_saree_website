@@ -280,12 +280,30 @@ async function loadCatalog(){
     return true;
   }
  }catch(e){
-  console.warn("Cloud catalogue unavailable",e);
-  sarees=[];
-  saveLocal();
-  render();
-  return false;
+  console.warn("Cloud catalogue unavailable; trying Git-backed static catalogue.",e);
  }
+ // Public storefront fallback: the Git-backed catalogue is also published as a static file.
+ // This keeps the shop visible when Netlify function/GitHub environment variables are unavailable.
+ try{
+  const r=await fetch("/products/index.json?ts="+Date.now(),{cache:"no-store"});
+  const local=await r.json();
+  if(Array.isArray(local)){
+    sarees=local;
+    lastCatalogSignature=stableSignature(local);
+    saveLocal();
+    render();
+    return true;
+  }
+ }catch(e){
+  console.warn("Static catalogue fallback unavailable.",e);
+ }
+ // Last resort: retain a previously cached catalogue instead of blanking the storefront.
+ try{
+  const cached=JSON.parse(localStorage.getItem(KEY)||"[]");
+  if(Array.isArray(cached))sarees=cached;
+ }catch(e){}
+ render();
+ return false;
 }
 
 let adminPage=1;
