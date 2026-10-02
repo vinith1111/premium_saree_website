@@ -1,0 +1,11 @@
+{
+  "id": 9003,
+  "name": "Test Organza Floral",
+  "price": "3299",
+  "category": "Sarees",
+  "color": "Pink",
+  "description": "Dummy product for testing catalogue refresh.",
+  "image": "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=900&q=80",
+  "featured": false,
+  "imagePath": null
+}
