@@ -329,7 +329,7 @@ img.src=reader.result;
 };
 reader.readAsDataURL(file);
 }
-async function saveItem(id){
+async async function saveItem(id){
  const saveButton=document.querySelector('#adminContent .form .btn.dark');
  if(saveButton?.dataset.saving==="1")return;
  if(saveButton){saveButton.dataset.saving="1";saveButton.disabled=true;saveButton.textContent="Saving...";}
@@ -370,7 +370,7 @@ async function toggleBestSeller(id){
  const saved=await saveCatalogItem(item,false);
  if(saved){Object.assign(item,saved);saveLocal();render();await openSareeList(adminPage)}else item.bestSeller=previous;
 }
-async function deleteItem(id){
+async async function deleteItem(id){
  if(!confirm("Delete this item?"))return;
  if(await deleteCatalogItem(id)){
    sarees=sarees.filter(s=>String(s.id)!==String(id));
