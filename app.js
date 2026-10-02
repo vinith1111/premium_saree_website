@@ -198,10 +198,10 @@ async function loadCatalog(){
   }
  }catch(e){
   console.warn("Cloud catalogue unavailable",e);
- }
- saveLocal();
- render();
- return false;
+  sarees=[];
+  saveLocal();
+  render();
+  return false;
 }
 
 let adminPage=1;
