@@ -3,7 +3,7 @@ import { validToken } from "./_auth.mjs";
 
 const OWNER=process.env.GITHUB_OWNER||"vinith1111";
 const REPO=process.env.GITHUB_REPO||"premium_saree_website";
-const BRANCH=process.env.GITHUB_BRANCH||"main";
+const BRANCH=process.env.GITHUB_BRANCH||process.env.BRANCH||"main";
 const INDEX="products/index.json";
 const API="https://api.github.com";
 
