@@ -1,0 +1,10 @@
+{
+  "id": 105,
+  "name": "Designer Soft Silk",
+  "price": "3999",
+  "category": "Sarees",
+  "color": "Rust",
+  "description": "Designer soft silk sample.",
+  "image": "/images/demo-09.svg",
+  "featured": false
+}
