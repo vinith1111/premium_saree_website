@@ -60,14 +60,15 @@ async function putIndex(items,changes){
  changes.push({path:INDEX,sha:await blob(Buffer.from(JSON.stringify(items,null,2)+"\n").toString("base64"),"base64")});
 }
 async function migrate(items){
- const clean=items.map(valid).filter(Boolean),changes=[];
+ const clean=items.map(valid).filter(Boolean),storedItems=[],changes=[];
  for(const x of clean){
   const img=dataImage(x.image);let imagePath=null;
   if(img){imagePath="products/"+id(x.id)+"/image."+img.ext;changes.push({path:imagePath,sha:await blob(img.base64,"base64")})}
   const stored={...x,image:img?imagePath:x.image,imagePath};
+  storedItems.push(stored);
   changes.push({path:"products/"+id(x.id)+"/product.json",sha:await blob(Buffer.from(JSON.stringify(stored,null,2)+"\n").toString("base64"),"base64")});
  }
- await putIndex(clean,changes);await commit(changes,"Migrate catalogue to Git-backed storage");return clean;
+ await putIndex(storedItems,changes);await commit(changes,"Migrate catalogue to Git-backed storage");return storedItems;
 }
 async function ensure(){
  const i=await index();if(i)return i;
@@ -95,7 +96,17 @@ async function remove(pid){
 function auth(req){const p=process.env.ADMIN_PASSWORD;return !!p&&validToken(req,p)}
 export default async(req)=>{
  try{
-  if(req.method==="GET"){const i=await index();return Response.json(i||await legacy())}
+  if(req.method==="GET"){
+   const i=await index();
+   if(i!==null){
+    if(i.length===0&&process.env.GITHUB_TOKEN){
+     const old=await legacy();
+     if(old.length)return Response.json(await migrate(old));
+    }
+    return Response.json(i);
+   }
+   return Response.json(await legacy());
+  }
   if(!auth(req))return Response.json({error:"Admin login required"},{status:401});
   if(!process.env.GITHUB_TOKEN)return Response.json({error:"Git-backed catalogue is not configured. Add GITHUB_TOKEN in Netlify environment variables."},{status:503});
   if(req.method==="POST"||req.method==="PATCH"){
