@@ -136,7 +136,10 @@ function render(){
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>selectCatalogCategory(btn.dataset.category)));
  }
  const grid=document.getElementById("catalogGrid");
- if(grid) grid.innerHTML=pageItems.map(card).join("");
+ if(grid){
+   grid.innerHTML=pageItems.map(card).join("");
+   grid.querySelectorAll(".product-img").forEach(img=>img.addEventListener("error",()=>img.classList.add("image-load-failed"),{once:true}));
+ }
  const empty=document.getElementById("empty");
  if(empty){
    empty.textContent=q||current?"No items found. Try another search or category.":"No products available yet.";
