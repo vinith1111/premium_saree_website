@@ -1,0 +1,10 @@
+{
+  "id": 106,
+  "name": "Festive Collection",
+  "price": "5499",
+  "category": "Sarees",
+  "color": "Lavender",
+  "description": "Festive collection sample.",
+  "image": "/images/demo-10.svg",
+  "featured": true
+}
