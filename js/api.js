@@ -18,5 +18,8 @@ window.SriSaiApi={
   const data=await r.json().catch(()=>null);
   if(!r.ok)throw new Error(data?.error||"Catalogue request failed");
   return data;
- }
+ },
+ async addProduct(product){return this.catalog("POST",product)},
+ async updateProduct(product){return this.catalog("PATCH",product)},
+ async deleteProduct(id){return this.catalog("DELETE",{id})}
 };

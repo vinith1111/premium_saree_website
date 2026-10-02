@@ -1,12 +1,6 @@
 import { getStore } from "@netlify/blobs";
 import { validToken } from "./_auth.mjs";
 
-const defaults=[
-{id:1001,name:"Test Banarasi Saree",price:"4999",category:"Silk Sarees",color:"Red & Gold",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-banarasi-saree.svg",featured:true},
-{id:1002,name:"Test Cotton Saree",price:"1999",category:"Cotton Sarees",color:"Blue",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-cotton-saree.svg",featured:false},
-{id:1003,name:"Test Party Dress",price:"2999",category:"Dresses",color:"Pink",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-party-dress.svg",featured:true},
-{id:1004,name:"Test Casual Dress",price:"1799",category:"Dresses",color:"Green",description:"TEST ITEM - temporary product for website testing.",image:"/images/test-casual-dress.svg",featured:false}
-];
 function authorized(req){
  const secret=process.env.ADMIN_PASSWORD;
  return !!secret && validToken(req,secret);
@@ -36,22 +30,8 @@ function validateProduct(x,i){
 export default async(req)=>{
  const store=getStore("sri-sai-vani-catalog");
  if(req.method==="GET"){
-  let data=await store.get("items",{type:"json",consistency:"strong"});
-  if(!Array.isArray(data)){data=defaults;await store.setJSON("items",data)}
-  else {
-   const hasOldImages=data.some(x=>/images\.unsplash\.com|placehold\.co/i.test(String(x.image||"")));
-   const hasOldDemoIds=data.some(x=>[1,2,3,4].includes(Number(x.id)));
-   if(hasOldImages || hasOldDemoIds){
-    data=defaults;
-    await store.setJSON("items",data);
-   } else {
-    const demoImages={1001:"/images/test-banarasi-saree.svg",1002:"/images/test-cotton-saree.svg",1003:"/images/test-party-dress.svg",1004:"/images/test-casual-dress.svg"};
-    const updated=data.map(x=>demoImages[x.id] && String(x.name||"").startsWith("Test ") && x.image!==demoImages[x.id] ? {...x,image:demoImages[x.id]} : x);
-    if(updated.some((x,i)=>x.image!==data[i].image)) await store.setJSON("items",updated);
-    data=updated;
-   }
-  }
-  return Response.json(data);
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  return Response.json(Array.isArray(data)?data:[]);
  }
  if(!authorized(req))return Response.json({error:"Admin login required"},{status:401});
  if(req.method==="PUT"){
@@ -65,6 +45,48 @@ export default async(req)=>{
   const ids=clean.map(x=>String(x.id));
   if(new Set(ids).size!==ids.length)return Response.json({error:"Product IDs must be unique."},{status:400});
   await store.setJSON("items",clean);return Response.json(clean);
+ }
+ if(req.method==="POST"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>3_000_000)return Response.json({error:"Product image/request is too large."},{status:413});
+  const body=await req.json().catch(()=>null);
+  const item=validateProduct(body,0);
+  if(!item)return Response.json({error:"Invalid or oversized product."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  if(items.length>=500)return Response.json({error:"Catalogue cannot contain more than 500 products."},{status:400});
+  if(items.some(x=>String(x.id)===String(item.id)))return Response.json({error:"A product with this ID already exists."},{status:409});
+  const updated=[item,...items];
+  await store.setJSON("items",updated);
+  return Response.json(item,{status:201});
+ }
+ if(req.method==="PATCH"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>3_000_000)return Response.json({error:"Product image/request is too large."},{status:413});
+  const body=await req.json().catch(()=>null);
+  const item=validateProduct(body,0);
+  if(!item)return Response.json({error:"Invalid or oversized product."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  const index=items.findIndex(x=>String(x.id)===String(item.id));
+  if(index<0)return Response.json({error:"Product not found."},{status:404});
+  const updated=[...items];
+  updated[index]=item;
+  await store.setJSON("items",updated);
+  return Response.json(item);
+ }
+ if(req.method==="DELETE"){
+  const contentLength=Number(req.headers.get("content-length")||0);
+  if(contentLength>1000)return Response.json({error:"Invalid request."},{status:400});
+  const body=await req.json().catch(()=>null);
+  const id=body?.id;
+  if(id===undefined||id===null||String(id).trim()==="")return Response.json({error:"Product ID is required."},{status:400});
+  const data=await store.get("items",{type:"json",consistency:"strong"});
+  const items=Array.isArray(data)?data:[];
+  const updated=items.filter(x=>String(x.id)!==String(id));
+  if(updated.length===items.length)return Response.json({error:"Product not found."},{status:404});
+  await store.setJSON("items",updated);
+  return Response.json({id});
  }
  return new Response("Method not allowed",{status:405});
 };
