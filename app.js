@@ -119,10 +119,10 @@ function render(){
  const q=(searchEl?.value||"").trim().toLowerCase();
  const clearBtn=document.getElementById("searchClear");
  if(clearBtn) clearBtn.classList.toggle("hidden",!q);
- const cats=[...new Set((sarees||[]).map(s=>String(s.category||"").trim()).filter(Boolean))];
- const current=String(window.selectedCategory||"").trim();
+ const cats=["Sarees","Dresses"];
+ const current=canonicalCategory(window.selectedCategory||"");
  const filtered=(sarees||[]).filter(s=>{
-   const category=String(s.category||"").trim();
+   const category=canonicalCategory(s.category);
    const price=Number(s.price)||0;
    const text=[s.name,s.category,s.color,s.description].map(v=>String(v||"")).join(" ").toLowerCase();
    let priceOk=true;
@@ -139,8 +139,7 @@ function render(){
  const pageItems=list.slice((catalogPage-1)*size,catalogPage*size);
  const tabs=document.getElementById("catalogCategoryTabs");
  if(tabs){
-   tabs.innerHTML='<button type="button" class="category-btn '+(!current?'active':'')+'" data-category="">All</button>'+
-     cats.map(c=>'<button type="button" class="category-btn '+(current.toLowerCase()===c.toLowerCase()?'active':'')+'" data-category="'+escAttr(c)+'">'+esc(c)+'</button>').join("");
+   tabs.innerHTML="<button type=\"button\" class=\"category-btn \" data-category=\"Sarees\">Sarees</button><button type=\"button\" class=\"category-btn \" data-category=\"Dresses\">Dresses</button>";
    tabs.querySelectorAll(".category-btn").forEach(btn=>btn.addEventListener("click",()=>{
      arrivalOnly=false;selectCatalogCategory(btn.dataset.category);
    }));
