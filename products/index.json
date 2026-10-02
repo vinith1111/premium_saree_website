@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": 101,
+    "name": "Banarasi Silk Saree",
+    "price": "4999",
+    "category": "Sarees",
+    "color": "Wine",
+    "description": "Elegant Banarasi silk saree sample for catalogue testing.",
+    "image": "/images/test-banarasi-saree.svg",
+    "featured": true
+  },
+  {
+    "id": 102,
+    "name": "Kanjeevaram Pattu",
+    "price": "6499",
+    "category": "Sarees",
+    "color": "Gold",
+    "description": "Traditional Kanjeevaram Pattu sample.",
+    "image": "/images/demo-06.svg",
+    "featured": true
+  },
+  {
+    "id": 103,
+    "name": "Organza Floral Saree",
+    "price": "3299",
+    "category": "Sarees",
+    "color": "Blush Pink",
+    "description": "Lightweight floral organza sample.",
+    "image": "/images/demo-07.svg",
+    "featured": false
+  },
+  {
+    "id": 104,
+    "name": "Party Wear Georgette",
+    "price": "2799",
+    "category": "Sarees",
+    "color": "Teal",
+    "description": "Party wear georgette sample.",
+    "image": "/images/demo-08.svg",
+    "featured": false
+  },
+  {
+    "id": 105,
+    "name": "Designer Soft Silk",
+    "price": "3999",
+    "category": "Sarees",
+    "color": "Rust",
+    "description": "Designer soft silk sample.",
+    "image": "/images/demo-09.svg",
+    "featured": false
+  },
+  {
+    "id": 106,
+    "name": "Festive Collection",
+    "price": "5499",
+    "category": "Sarees",
+    "color": "Lavender",
+    "description": "Festive collection sample.",
+    "image": "/images/demo-10.svg",
+    "featured": true
+  }
+]
