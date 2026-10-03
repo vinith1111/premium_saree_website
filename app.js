@@ -281,24 +281,45 @@ function startBackgroundRefresh(){
 }
 
 async function loadCatalog(){
- try{
-  const remote=await apiCatalog();
-  if(Array.isArray(remote)){
-    sarees=remote.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
-    lastCatalogSignature=stableSignature(sarees);
-    saveLocal();
-    render();
-    return true;
+  try{
+    const remote=await apiCatalog();
+    if(Array.isArray(remote) && remote.length){
+      sarees=remote.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
+      lastCatalogSignature=stableSignature(sarees);
+      saveLocal();
+      render();
+      return true;
+    }
+    if(Array.isArray(remote) && remote.length===0) console.warn("Catalogue API returned an empty catalogue; trying repository fallback.");
+  }catch(e){
+    console.warn("Catalogue API unavailable; trying repository fallback.",e);
   }
- }catch(e){
-  console.warn("Cloud catalogue unavailable; keeping last known catalogue.",e);
+
+  // Customer-facing fallback: products/index.json is public and contains the same
+  // catalogue written by the admin API. This prevents a transient Netlify Function
+  // failure or a fresh browser with empty localStorage from showing zero products.
+  try{
+    const fallback=await fetch("/products/index.json?ts="+Date.now(),{cache:"no-store"});
+    if(fallback.ok){
+      const items=await fallback.json();
+      if(Array.isArray(items) && items.length){
+        sarees=items.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
+        lastCatalogSignature=stableSignature(sarees);
+        saveLocal();
+        render();
+        return true;
+      }
+    }
+  }catch(e){
+    console.warn("Repository catalogue fallback unavailable.",e);
+  }
+
   try{
     const local=JSON.parse(localStorage.getItem(KEY)||"[]");
     if(Array.isArray(local)) sarees=local;
   }catch{}
   render();
   return false;
- }
 }
 
 let adminPage=1;
