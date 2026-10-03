@@ -415,3 +415,12 @@ render();loadCatalog();syncSharedSettings();setupAnchorLinks();initMobileMenu();
 function closeImageViewer(e){if(e&&e.target&&e.target.id==="largeImage")return;const m=document.getElementById("imageModal");if(m)m.classList.add("hidden");document.body.style.overflow=""}
 
 function clearCatalogSearch(){const el=document.getElementById("search");if(el){el.value="";catalogPage=1;render();el.focus()}}
+
+function initStorefront(){
+ initMobileMenu();
+ setupAnchorLinks();
+ document.querySelectorAll(".mobile-admin").forEach(a=>a.addEventListener("click",()=>toggleMenu()));
+ loadCatalog();
+ syncSharedSettings();
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initStorefront); else initStorefront();
