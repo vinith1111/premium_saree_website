@@ -9,12 +9,9 @@ Premium static saree boutique site with:
 - Image URL or local upload
 - Shop + WhatsApp settings
 
-Admin password: configure `ADMIN_PASSWORD` in Netlify environment variables. Do not store the password in this repository.
+GitHub Pages admin: enter a fine-grained GitHub token with repository **Contents: Read and write** permission. The token is kept only in the browser and is never written to the repository.
 
-## Netlify
-Connect this GitHub repository to your Netlify site. Netlify will deploy automatically whenever main changes.
-
-## Important
+## GitHub Pages\nThe live site can run directly from GitHub Pages. Admin settings, products, and uploaded product images are written back to this repository through the GitHub REST API.\n\n## Important
 The admin/data in this prototype uses browser localStorage. For a production shop, use Supabase/Firebase for secure authentication, database and image storage.
 
 
@@ -27,14 +24,4 @@ Products are stored in the repository under `products/<product-id>/`:
 - `products/index.json` is a small catalogue index used by the storefront for fast reads.
 - Add, edit, and delete operations create Git commits, so both Netlify sites can use the same catalogue from the same repository.
 
-### Netlify environment variables
-
-In **each Netlify site** connected to this repository, configure:
-
-- `ADMIN_PASSWORD` - existing admin password.
-- `GITHUB_TOKEN` - a GitHub token with repository Contents read/write permission for this repository.
-- `GITHUB_OWNER` - `vinith1111` (optional because it is the default).
-- `GITHUB_REPO` - `premium_saree_website` (optional because it is the default).
-- `GITHUB_BRANCH` - `main` (optional because it is the default).
-
-Never put `GITHUB_TOKEN` in browser JavaScript, HTML, or the repository.
+### GitHub token\nCreate a fine-grained personal access token limited to this repository and give it **Contents: Read and write** permission. Enter it in Admin Studio. It is stored only in the browser's local storage and is not included in settings or product commits.
