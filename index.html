@@ -1,14 +1,83 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Sri Sai Vani Collections | Sarees & Dresses"><title>Sri Sai Vani Collections</title><script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("srisai_vani_theme")||"light"}catch(e){}})()</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/header.css"><link rel="stylesheet" href="css/catalog.css"><link rel="stylesheet" href="css/sections.css"><link rel="stylesheet" href="css/footer.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/admin.css"><link rel="stylesheet" href="css/modal.css"></head><body>
-<div class="announcement">SRI SAI VANI COLLECTIONS <span>•</span> CURATED SAREES & DRESSES</div>
-<header class="site-header"><div class="header-inner"><button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button><a href="#top" class="logo"><span class="logo-symbol">SV</span><span><strong id="shopName">SRI SAI VANI</strong><small>COLLECTIONS</small></span></a><nav id="mainNav"><a href="#catalog">Shop</a><a href="#catalog" data-category-link="Sarees">Sarees</a><a href="#catalog" data-category-link="Dresses">Dresses</a><a href="#instagram">Instagram</a><a href="#location">Visit Us</a><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">Admin</a></nav><div class="header-actions"><a href="#catalog" class="header-shop">Shop now</a><button class="admin-link" onclick="showAdmin()">Admin</button></div></div></header>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Sri Sai Vani Collections | Sarees & Dresses">
+<title>Sri Sai Vani Collections</title>
+<script>(function(){try{document.documentElement.dataset.theme=localStorage.getItem("srisai_vani_theme")||"light"}catch(e){}})()</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css"><link rel="stylesheet" href="css/header.css"><link rel="stylesheet" href="css/catalog.css"><link rel="stylesheet" href="css/sections.css"><link rel="stylesheet" href="css/footer.css"><link rel="stylesheet" href="css/responsive.css"><link rel="stylesheet" href="css/admin.css"><link rel="stylesheet" href="css/modal.css">
+</head>
+<body>
+<div class="announcement"><span>NEW SEASON</span><b>•</b><span>SAREES & DRESSES</span><b>•</b><span>WHATSAPP ENQUIRIES</span></div>
+<header class="site-header">
+  <div class="header-inner">
+    <button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a href="#top" class="logo"><span class="logo-symbol">SV</span><span><strong id="shopName">SRI SAI VANI</strong><small>COLLECTIONS</small></span></a>
+    <nav id="mainNav">
+      <a href="#catalog">SHOP</a><a href="#catalog" data-category-link="Sarees">SAREES</a><a href="#catalog" data-category-link="Dresses">DRESSES</a><a href="#new-arrivals">NEW ARRIVALS</a><a href="#location">VISIT US</a><a class="mobile-admin" href="#" onclick="showAdmin();toggleMenu();return false">ADMIN</a>
+    </nav>
+    <div class="header-actions"><a href="#catalog" class="header-shop">SHOP NOW</a><button class="admin-link" onclick="showAdmin()">ADMIN</button></div>
+  </div>
+</header>
+
 <main id="top">
-<section class="hero"><div class="hero-image"><div class="hero-overlay"></div><div class="hero-content"><p class="kicker">THE SRI SAI VANI EDIT</p><h1>Tradition,<br><em>beautifully styled.</em></h1><p class="hero-text">Discover sarees and dresses chosen for celebrations, everyday elegance and every moment worth dressing for.</p><div class="hero-buttons"><a href="#catalog" class="btn-primary">Shop the collection</a><a href="#instagram" class="btn-quiet">Explore our world <span>↗</span></a></div></div></div></section>
-<section class="category-strip"><div class="category-intro"><p class="kicker">SHOP BY CATEGORY</p><h2>Find your <em>signature.</em></h2></div><a href="#catalog" class="category-tile" data-category-link="Sarees"><div><span>SAREES</span><small>Elegant drapes for every occasion</small></div><b>↗</b></a><a href="#catalog" class="category-tile" data-category-link="Dresses"><div><span>DRESSES</span><small>Modern silhouettes, effortless style</small></div><b>↗</b></a></section>
-<section id="catalog" class="catalog-section"><div class="section-head"><div><p class="kicker">THE COLLECTION</p><h2>Pieces you'll want to wear <em>again.</em></h2></div><p class="section-note">A considered edit of our latest sarees and dresses.</p></div><div class="catalog-bar"><div id="catalogCategoryTabs" class="category-tabs"></div><div class="catalog-tools"><form id="catalogSearchForm" onsubmit="return false" class="search"><span>⌕</span><input id="search" type="search" placeholder="Search collection" aria-label="Search collection" oninput="render()"><button id="searchClear" class="search-clear hidden" type="button" onclick="clearCatalogSearch()">×</button></form><label class="price-select"><span>Price</span><select id="priceFilter" onchange="selectPriceFilter(this.value)" aria-label="Filter by price"><option value="">All</option><option value="0-2000">Under ₹2,000</option><option value="2000-4000">₹2,000–₹4,000</option><option value="4000-7000">₹4,000–₹7,000</option><option value="7000+">₹7,000+</option></select></label></div></div><div id="catalogGrid" class="product-grid"></div><div id="catalogPagination" class="catalog-pagination hidden"></div><div id="empty" class="empty hidden">No pieces found. Try another search.</div></section>
-<section id="instagram" class="instagram-section"><div class="section-head"><div><p class="kicker">FOLLOW ALONG</p><h2>From our <em>Instagram.</em></h2></div><p class="section-note">A glimpse of the pieces, people and moments behind Sri Sai Vani.</p></div><div class="reel-grid"><a class="reel-card" href="https://www.instagram.com/reel/Dd_N1dfToZ4/" target="_blank" rel="noopener noreferrer"><div class="reel-media"><iframe src="https://www.instagram.com/reel/Dd_N1dfToZ4/embed/?hidecaption=true" title="Sri Sai Vani Instagram reel" loading="lazy"></iframe><span class="reel-play">▶</span></div><div class="reel-meta"><span>Watch on Instagram</span><span>↗</span></div></a><a class="reel-card" href="https://www.instagram.com/reel/DdYRRPWz9lm/" target="_blank" rel="noopener noreferrer"><div class="reel-media"><iframe src="https://www.instagram.com/reel/DdYRRPWz9lm/embed/?hidecaption=true" title="Sri Sai Vani Instagram reel" loading="lazy"></iframe><span class="reel-play">▶</span></div><div class="reel-meta"><span>Watch on Instagram</span><span>↗</span></div></a></div></section>
-<section id="location" class="store-section"><div class="store-copy"><p class="kicker">VISIT SRI SAI VANI</p><h2>Come see it <em>in person.</em></h2><p>See the colours, fabrics and details up close at our store. We'd love to help you find your next favourite piece.</p><a class="btn-primary" href="https://maps.app.goo.gl/UhzgafHxq7AmQ8Ds9" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a></div><div class="store-panel"><span>STORE VISIT</span><strong>01</strong><small>Explore the collection<br>in person.</small></div></section>
-<section class="whatsapp-section"><div><p class="kicker">PERSONAL ASSISTANCE</p><h2>Need help choosing?</h2><p>Ask about availability, colours or details directly on WhatsApp.</p></div><a id="mainWaButton" class="whatsapp-button" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><span>WhatsApp us</span><b>↗</b></a></section>
-</main><footer><div class="footer-brand"><a href="#top" class="logo"><span class="logo-symbol">SV</span><span><strong id="footerName">SRI SAI VANI</strong><small>COLLECTIONS</small></span></a><p>Curated Indian fashion, thoughtfully chosen.</p></div><div class="footer-nav"><a href="#catalog">Shop</a><a href="#instagram">Instagram</a><a href="#location">Visit Us</a><a href="https://www.instagram.com/sri_sai_vani_collections/?hl=en" target="_blank" rel="noopener noreferrer">Follow us ↗</a></div></footer>
+<section class="hero">
+  <div class="hero-copy">
+    <p class="kicker">THE SRI SAI VANI EDIT</p>
+    <h1>Indian style,<br><em>made personal.</em></h1>
+    <p class="hero-text">A curated collection of sarees and dresses for festive days, everyday elegance and everything between.</p>
+    <div class="hero-buttons"><a href="#catalog" class="btn-primary">Shop sarees</a><a href="#catalog" class="btn-quiet" data-category-link="Dresses">Shop dresses <span>↗</span></a></div>
+  </div>
+  <div class="hero-gallery" aria-label="Collection preview">
+    <div class="hero-card hero-card-main"><img src="images/test-banarasi-saree.svg" alt="Banarasi saree collection"></div>
+    <div class="hero-card hero-card-top"><img src="images/demo-06.svg" alt="Silk saree collection"></div>
+    <div class="hero-card hero-card-bottom"><img src="images/demo-dress.svg" alt="Dress collection"></div>
+    <div class="hero-caption"><span>CURATED FOR YOU</span><b>01 / 03</b></div>
+  </div>
+</section>
+
+<section class="category-strip">
+  <div class="category-intro"><p class="kicker">SHOP BY CATEGORY</p><h2>Find your <em>next favourite.</em></h2><p>Explore the two collections that define Sri Sai Vani.</p></div>
+  <a href="#catalog" class="category-tile category-saree" data-category-link="Sarees"><span><small>01</small>SAREES</span><b>EXPLORE ↗</b></a>
+  <a href="#catalog" class="category-tile category-dress" data-category-link="Dresses"><span><small>02</small>DRESSES</span><b>EXPLORE ↗</b></a>
+</section>
+
+<section id="new-arrivals" class="editorial-strip">
+  <div><p class="kicker">NEW SEASON</p><h2>Fresh pieces.<br><em>Easy choices.</em></h2></div>
+  <p>Discover new arrivals first, then browse the complete collection below. Each piece is selected to feel special without feeling overdone.</p>
+  <a href="#catalog">VIEW NEW ARRIVALS ↗</a>
+</section>
+
+<section id="catalog" class="catalog-section">
+  <div class="section-head"><div><p class="kicker">THE COLLECTION</p><h2>Sarees & dresses<br><em>worth wearing.</em></h2></div><p class="section-note">Browse the latest pieces, filter by category or price, and enquire directly on WhatsApp.</p></div>
+  <div class="catalog-bar"><div id="catalogCategoryTabs" class="category-tabs"></div><div class="catalog-tools">
+    <form id="catalogSearchForm" onsubmit="return false" class="search"><span>⌕</span><input id="search" type="search" placeholder="Search collection" aria-label="Search collection" oninput="catalogPage=1;render()"><button id="searchClear" class="search-clear hidden" type="button" onclick="clearCatalogSearch()">×</button></form>
+    <label class="price-select"><span>PRICE</span><select id="priceFilter" onchange="selectPriceFilter(this.value)" aria-label="Filter by price"><option value="">All</option><option value="0-2000">Under ₹2,000</option><option value="2000-4000">₹2,000–₹4,000</option><option value="4000-7000">₹4,000–₹7,000</option><option value="7000+">₹7,000+</option></select></label>
+  </div></div>
+  <div id="catalogGrid" class="product-grid"></div><div id="catalogPagination" class="catalog-pagination hidden"></div><div id="empty" class="empty hidden">No products available yet.</div>
+</section>
+
+<section class="promise-strip">
+  <div><strong>01</strong><span>Curated collections</span><small>Thoughtfully selected pieces</small></div>
+  <div><strong>02</strong><span>WhatsApp assistance</span><small>Ask about colours & availability</small></div>
+  <div><strong>03</strong><span>In-store experience</span><small>See the collection in person</small></div>
+</section>
+
+<section id="location" class="store-section">
+  <div class="store-copy"><p class="kicker">VISIT SRI SAI VANI</p><h2>See it <em>in person.</em></h2><p>See the colours, fabrics and details up close at our store. We'd love to help you find your next favourite piece.</p><a class="btn-primary" href="https://maps.app.goo.gl/UhzgafHxq7AmQ8Ds9" target="_blank" rel="noopener noreferrer">OPEN GOOGLE MAPS ↗</a></div>
+  <div class="store-panel"><span>STORE VISIT</span><strong>SV</strong><small>Explore the collection<br>in person.</small></div>
+</section>
+
+<section class="whatsapp-section"><div><p class="kicker">PERSONAL ASSISTANCE</p><h2>Need help choosing?</h2><p>Ask about availability, colours or details directly on WhatsApp.</p></div><a id="mainWaButton" class="whatsapp-button" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp"><span>WHATSAPP US</span><b>↗</b></a></section>
+</main>
+
+<footer><div class="footer-brand"><a href="#top" class="logo"><span class="logo-symbol">SV</span><span><strong id="footerName">SRI SAI VANI</strong><small>COLLECTIONS</small></span></a><p>Curated Indian fashion, thoughtfully chosen.</p></div><div class="footer-nav"><a href="#catalog">Shop</a><a href="#new-arrivals">New Arrivals</a><a href="#location">Visit Us</a><a href="https://www.instagram.com/sri_sai_vani_collections/?hl=en" target="_blank" rel="noopener noreferrer">Instagram ↗</a></div></footer>
+
 <div id="imageModal" class="image-modal hidden" onclick="closeImageViewer(event)"><button class="image-close" onclick="closeImageViewer()">×</button><img id="largeImage" alt="Product image"></div>
 <div id="adminModal" class="modal hidden"><div class="panel"><div class="panel-head"><div><span class="eyebrow">PRIVATE AREA</span><h2>Admin Studio</h2></div><button class="close" onclick="hideAdmin()">×</button></div><div id="loginBox"><p class="muted">Enter your admin password to continue.</p><input id="adminPassword" type="password" placeholder="Password"><button class="primary dark full" onclick="login()">Sign in</button><div id="loginStatus" class="settings-status"></div></div><div id="adminBox" class="hidden"><div class="admin-tabs"><button onclick="openSareeForm()">+ Add Item</button><button onclick="openSareeList()">Manage Items</button><button onclick="openSettings()">Shop settings</button></div><div id="adminContent"></div></div></div></div>
-<script src="js/api.js"></script><script src="app.js"></script><script>document.querySelectorAll("[data-category-link]").forEach(function(a){a.addEventListener("click",function(){var c=a.dataset.categoryLink;setTimeout(function(){selectCatalogCategory(c)},0)})});</script></body></html>
+<script src="js/api.js"></script><script src="app.js"></script>
+<script>document.querySelectorAll("[data-category-link]").forEach(function(a){a.addEventListener("click",function(){var c=a.dataset.categoryLink;setTimeout(function(){selectCatalogCategory(c)},0)})});</script>
+</body></html>
