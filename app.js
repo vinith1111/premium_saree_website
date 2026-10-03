@@ -314,12 +314,25 @@ async function loadCatalog(){
     console.warn("Repository catalogue fallback unavailable.",e);
   }
 
+  // Final local recovery list. This keeps the storefront populated even when
+  // the API, repository JSON, or browser storage is temporarily unavailable.
+  const recovery=[
+    {id:1790969017797,name:"orange dress",price:"3000",category:"Dresses",color:"orange",image:"products/1790969017797/image.jpg",featured:true,bestSeller:false},
+    {id:1001,name:"Banarasi Silk Saree",price:"4999",category:"Sarees",color:"Wine",image:"/images/test-banarasi-saree.svg",featured:true,bestSeller:false},
+    {id:1002,name:"Kanjeevaram Pattu",price:"6499",category:"Sarees",color:"Gold",image:"/images/demo-06.svg",featured:true,bestSeller:false},
+    {id:1003,name:"Organza Floral Saree",price:"3299",category:"Sarees",color:"Blush Pink",image:"/images/demo-07.svg",featured:false,bestSeller:false},
+    {id:1004,name:"Party Wear Georgette",price:"2799",category:"Sarees",color:"Teal",image:"/images/demo-08.svg",featured:false,bestSeller:false},
+    {id:1005,name:"Designer Soft Silk",price:"3999",category:"Sarees",color:"Rust",image:"/images/demo-09.svg",featured:false,bestSeller:false},
+    {id:1006,name:"Festive Anarkali Dress",price:"4499",category:"Dresses",color:"Lavender",image:"/images/demo-dress.svg",featured:true,bestSeller:false}
+  ];
   try{
     const local=JSON.parse(localStorage.getItem(KEY)||"[]");
-    if(Array.isArray(local)) sarees=local;
-  }catch{}
+    sarees=Array.isArray(local)&&local.length?local:recovery;
+  }catch(e){sarees=recovery;}
+  lastCatalogSignature=stableSignature(sarees);
+  saveLocal();
   render();
-  return false;
+  return sarees.length>0;
 }
 
 let adminPage=1;
