@@ -6,14 +6,29 @@ function toggleMenu(){
  document.body.classList.toggle("menu-open",open);
  if(btn){btn.setAttribute("aria-expanded",String(open));btn.setAttribute("aria-label",open?"Close menu":"Open menu")}
 }
-function showAdmin(){
+async function showAdmin(){
  const modal=document.getElementById("adminModal");
  if(!modal)return;
  modal.classList.remove("hidden");
  document.body.style.overflow="hidden";
  const loginBox=document.getElementById("loginBox"),adminBox=document.getElementById("adminBox");
- loginBox?.classList.remove("hidden");adminBox?.classList.add("hidden");
- const p=document.getElementById("adminPassword");if(p){p.value="";setTimeout(()=>p.focus(),50)}
+ const p=document.getElementById("adminPassword");
+ const savedToken=window.SriSaiApi?.getGithubToken?.()||"";
+ if(savedToken){
+  try{
+   await window.SriSaiApi.login(savedToken);
+   loginBox?.classList.add("hidden");
+   adminBox?.classList.remove("hidden");
+   await loadCatalog();
+   openSareeList();
+   return;
+  }catch(e){
+   window.SriSaiApi?.clearGithubToken?.();
+  }
+ }
+ loginBox?.classList.remove("hidden");
+ adminBox?.classList.add("hidden");
+ if(p){p.value="";setTimeout(()=>p.focus(),50)}
 }
 function hideAdmin(){
  document.getElementById("adminModal")?.classList.add("hidden");
