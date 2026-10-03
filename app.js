@@ -231,11 +231,12 @@ async function refreshCatalogSilently(){
  catalogSyncInFlight=true;
  try{
    const remote=await apiCatalog("GET");
-   if(Array.isArray(remote)){
-     const signature=stableSignature(remote);
+   if(Array.isArray(remote) && remote.length){
+     const normalized=remote.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
+     const signature=stableSignature(normalized);
      if(signature!==lastCatalogSignature){
        lastCatalogSignature=signature;
-       sarees=remote;
+       sarees=normalized;
        saveLocal();
        render();
      }
@@ -291,6 +292,24 @@ function startBackgroundRefresh(){
 }
 
 async function loadCatalog(){
+  const onNetlify=/netlify\.app$/i.test(location.hostname);
+  const loadStatic=async()=>{
+    const fallback=await fetch("./products/index.json?ts="+Date.now(),{cache:"no-store"});
+    if(!fallback.ok)throw new Error("Static catalogue request failed");
+    const items=await fallback.json();
+    if(!Array.isArray(items)||!items.length)throw new Error("Static catalogue is empty");
+    sarees=items.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
+    lastCatalogSignature=stableSignature(sarees);
+    saveLocal();
+    render();
+    return true;
+  };
+
+  // GitHub Pages has no Netlify Functions, so use the committed catalogue first.
+  if(!onNetlify){
+    try{return await loadStatic()}catch(e){console.warn("Static catalogue unavailable; using recovery data.",e)}
+  }
+
   try{
     const remote=await apiCatalog();
     if(Array.isArray(remote) && remote.length){
@@ -300,49 +319,24 @@ async function loadCatalog(){
       render();
       return true;
     }
-    if(Array.isArray(remote) && remote.length===0) console.warn("Catalogue API returned an empty catalogue; trying repository fallback.");
-  }catch(e){
-    console.warn("Catalogue API unavailable; trying repository fallback.",e);
-  }
+  }catch(e){console.warn("Catalogue API unavailable; trying static catalogue.",e)}
 
-  // Customer-facing fallback: products/index.json is public and contains the same
-  // catalogue written by the admin API. This prevents a transient Netlify Function
-  // failure or a fresh browser with empty localStorage from showing zero products.
-  try{
-    const fallback=await fetch("./products/index.json?ts="+Date.now(),{cache:"no-store"});
-    if(fallback.ok){
-      const items=await fallback.json();
-      if(Array.isArray(items) && items.length){
-        sarees=items.map(x=>({...x,category:canonicalCategory(x.category)||x.category,bestSeller:Boolean(x.bestSeller)}));
-        lastCatalogSignature=stableSignature(sarees);
-        saveLocal();
-        render();
-        return true;
-      }
-    }
-  }catch(e){
-    console.warn("Repository catalogue fallback unavailable.",e);
-  }
+  try{return await loadStatic()}catch(e){console.warn("Repository catalogue unavailable; using recovery data.",e)}
 
-  // Final local recovery list. This keeps the storefront populated even when
-  // the API, repository JSON, or browser storage is temporarily unavailable.
   const recovery=[
     {id:1790969017797,name:"orange dress",price:"3000",category:"Dresses",color:"orange",image:"products/1790969017797/image.jpg",featured:true,bestSeller:false},
-    {id:1001,name:"Banarasi Silk Saree",price:"4999",category:"Sarees",color:"Wine",image:"/images/test-banarasi-saree.svg",featured:true,bestSeller:false},
-    {id:1002,name:"Kanjeevaram Pattu",price:"6499",category:"Sarees",color:"Gold",image:"/images/demo-06.svg",featured:true,bestSeller:false},
-    {id:1003,name:"Organza Floral Saree",price:"3299",category:"Sarees",color:"Blush Pink",image:"/images/demo-07.svg",featured:false,bestSeller:false},
-    {id:1004,name:"Party Wear Georgette",price:"2799",category:"Sarees",color:"Teal",image:"/images/demo-08.svg",featured:false,bestSeller:false},
-    {id:1005,name:"Designer Soft Silk",price:"3999",category:"Sarees",color:"Rust",image:"/images/demo-09.svg",featured:false,bestSeller:false},
-    {id:1006,name:"Festive Anarkali Dress",price:"4499",category:"Dresses",color:"Lavender",image:"/images/demo-dress.svg",featured:true,bestSeller:false}
+    {id:1001,name:"Banarasi Silk Saree",price:"4999",category:"Sarees",color:"Wine",image:"images/test-banarasi-saree.svg",featured:true,bestSeller:false},
+    {id:1002,name:"Kanjeevaram Pattu",price:"6499",category:"Sarees",color:"Gold",image:"images/demo-06.svg",featured:true,bestSeller:false},
+    {id:1003,name:"Organza Floral Saree",price:"3299",category:"Sarees",color:"Blush Pink",image:"images/demo-07.svg",featured:false,bestSeller:false},
+    {id:1004,name:"Party Wear Georgette",price:"2799",category:"Sarees",color:"Teal",image:"images/demo-08.svg",featured:false,bestSeller:false},
+    {id:1005,name:"Designer Soft Silk",price:"3999",category:"Sarees",color:"Rust",image:"images/demo-09.svg",featured:false,bestSeller:false},
+    {id:1006,name:"Festive Anarkali Dress",price:"4499",category:"Dresses",color:"Lavender",image:"images/demo-dress.svg",featured:true,bestSeller:false}
   ];
-  try{
-    const local=JSON.parse(localStorage.getItem(KEY)||"[]");
-    sarees=Array.isArray(local)&&local.length?local:recovery;
-  }catch(e){sarees=recovery;}
+  sarees=recovery;
   lastCatalogSignature=stableSignature(sarees);
   saveLocal();
   render();
-  return sarees.length>0;
+  return true;
 }
 
 let adminPage=1;
