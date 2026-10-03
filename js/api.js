@@ -143,10 +143,17 @@ window.SriSaiApi = (() => {
 
     if (image) {
       imagePath = "products/" + safeId(incoming.id) + "/image." + image.ext;
+      const currentImage = await getFile(imagePath);
+      const imageBody = {
+        message: (isNew ? "Add" : "Update") + " product image: " + incoming.name,
+        content: image.base64,
+        branch: BRANCH
+      };
+      if (currentImage?.sha) imageBody.sha = currentImage.sha;
       await request("/repos/" + OWNER + "/" + REPO + "/contents/" + imagePath, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: (isNew ? "Add" : "Update") + " product image: " + incoming.name, content: image.base64, branch: BRANCH })
+        body: JSON.stringify(imageBody)
       });
     }
 
