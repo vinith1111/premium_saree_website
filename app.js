@@ -188,7 +188,18 @@ function changeCatalogPage(page){catalogPage=Math.max(1,Number(page)||1);render(
 
 async function login(){
  const p=document.getElementById("adminPassword"),status=document.getElementById("loginStatus");
- try{const d=await window.SriSaiApi.login(p.value);p.value="";document.getElementById("loginBox").classList.add("hidden");document.getElementById("adminBox").classList.remove("hidden");await loadCatalog();openSareeList()}catch(e){p.value="";p.focus();if(status)status.textContent=e.message}}
+ try{
+  await window.SriSaiApi.login(p.value);
+  p.value="";
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("adminBox").classList.remove("hidden");
+  await loadCatalog();
+  openSareeList();
+ }catch(e){
+  if(status)status.textContent=e.message;
+  p?.focus();
+ }
+}
 async function apiCatalog(method="GET",body=null){return window.SriSaiApi.catalog(method,body)}
 async function saveCatalogItem(item,isNew=false){
  try{
@@ -422,11 +433,13 @@ async function deleteItem(id){
 }
 function openSettings(){
 const mobile=(settings.whatsapp||"").replace(/^91/,"").slice(-10);
-document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Change your shop name or WhatsApp number.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSareeList()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
+const savedToken=window.SriSaiApi.getGithubToken?window.SriSaiApi.getGithubToken():"";
+document.getElementById("adminContent").innerHTML='<div class="settings-card"><div class="settings-heading"><span class="eyebrow">SETTINGS</span><h3>Store details</h3><p>Shop details are saved to GitHub. The GitHub token is kept only in this browser and is never written to your repository.</p></div><div class="form settings-form"><label>Shop name<input id="setName" value="'+esc(settings.shopName)+'" placeholder="SRI SAI VANI"></label><label>WhatsApp number<span class="field-help">Customers will use this number when they tap WhatsApp.</span><div class="phone-field"><select id="setCountry" aria-label="Country code"><option value="91" selected>+91</option></select><input id="setWa" inputmode="numeric" maxlength="10" value="'+esc(mobile)+'" placeholder="9876543210" aria-label="WhatsApp phone number"></div><span class="field-help">Enter your 10-digit mobile number.</span></label><label>GitHub token<span class="field-help">Used only for Git-backed products, images and settings. It is not saved in GitHub.</span><input id="setGithubToken" type="password" autocomplete="off" value="'+esc(savedToken)+'" placeholder="github_pat_..."></label><div class="settings-actions"><button class="btn secondary" type="button" onclick="openSareeList()">Cancel</button><button class="btn dark" type="button" onclick="saveSettings()">Save Changes</button></div><div id="settingsStatus" class="settings-status" aria-live="polite"></div></div></div>'}
 async function saveSettings(){
 const name=document.getElementById("setName");
 const wa=document.getElementById("setWa");
 const country=document.getElementById("setCountry");
+const tokenInput=document.getElementById("setGithubToken");
 const status=document.getElementById("settingsStatus");
 const phone=(wa?.value||"").replace(/\D/g,"");
 const existing=String(settings.whatsapp||"").replace(/\D/g,"");
@@ -437,11 +450,18 @@ wa?.focus();return
 const whatsapp=phone.length===10?(country?.value||"91")+phone:"";
 const enteredShopName=(name?.value||"").trim()||"SRI SAI VANI";
 const normalizedShopName=enteredShopName.replace(/(?:\s+collections)+\s*$/i,"").trim()||"SRI SAI VANI";
+const githubToken=String(tokenInput?.value||window.SriSaiApi.getGithubToken?.()||"").trim();
+if(!githubToken){
+ if(status){status.textContent="Enter your GitHub token.";status.className="settings-status error"}
+ tokenInput?.focus();
+ return;
+}
 settings={...settings,shopName:normalizedShopName,whatsapp,theme:settings.theme==="dark"?"dark":"light",about:settings.about||"",footer:""};
 if(!saveLocal()){if(status){status.textContent="Could not save this change on this device.";status.className="settings-status error"};return}
 render();
 if(status){status.textContent="Saving changes...";status.className="settings-status"}
 try{
+await window.SriSaiApi.verifyGithubToken(githubToken);
 const remote=await window.SriSaiApi.settings({method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(settings)});
 if(remote&&typeof remote==="object"){settings={...settings,...remote};try{localStorage.setItem(SETTINGS,JSON.stringify(settings))}catch(e){};render()}
 if(status){status.textContent="✓ Changes saved successfully.";status.className="settings-status success"}
