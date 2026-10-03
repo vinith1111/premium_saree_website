@@ -14,10 +14,21 @@ window.SriSaiApi={
  async catalog(method="GET",body=null){
   const options={method,headers:{}};
   if(body!==null){options.headers["Content-Type"]="application/json";options.body=JSON.stringify(body)}
-  const r=await fetch("/.netlify/functions/catalog",options);
-  const data=await r.json().catch(()=>null);
-  if(!r.ok)throw new Error(data?.error||"Catalogue request failed");
-  return data;
+  try{
+   const r=await fetch("/.netlify/functions/catalog",options);
+   const data=await r.json().catch(()=>null);
+   if(!r.ok)throw new Error(data?.error||"Catalogue request failed");
+   return data;
+  }catch(e){
+   if(method==="GET"){
+    const local=await fetch("products/index.json",{cache:"no-store"});
+    if(local.ok){
+      const items=await local.json();
+      if(Array.isArray(items))return items;
+    }
+   }
+   throw e;
+  }
  },
  async addProduct(product){return this.catalog("POST",product)},
  async updateProduct(product){return this.catalog("PATCH",product)},
