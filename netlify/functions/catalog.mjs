@@ -98,15 +98,18 @@ function auth(req){const p=process.env.ADMIN_PASSWORD;return !!p&&validToken(req
 export default async(req)=>{
  try{
   if(req.method==="GET"){
+   // Git-backed catalogue is authoritative once products/index.json exists.
+   // In particular, an empty index is a valid state and must not resurrect
+   // products from the legacy Netlify Blobs store.
    const i=await index();
-   if(i!==null){
-    if(i.length===0&&process.env.GITHUB_TOKEN){
-     const old=await legacy();
-     if(old.length)return Response.json(await migrate(old));
-    }
-    return Response.json(i);
+   if(i!==null)return Response.json(i);
+   // One-time migration is allowed only when the Git index does not exist yet.
+   const old=await legacy();
+   if(old.length){
+    const migrated=await migrate(old);
+    return Response.json(migrated);
    }
-   return Response.json(await legacy());
+   return Response.json([]);
   }
   if(!auth(req))return Response.json({error:"Admin login required"},{status:401});
   if(!process.env.GITHUB_TOKEN)return Response.json({error:"Git-backed catalogue is not configured. Add GITHUB_TOKEN in Netlify environment variables."},{status:503});
